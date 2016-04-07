@@ -13,12 +13,7 @@ Chronological
 **April 6, 2016**
     - discussing robot tank demonstration
     - could implement neural network with memory
-    - decided to leave raw data from neural network as raw
-      - conversion to real life values or booleans depends on implementation
-    - use logistic function for fine tuning
 
-Conceptual
-==
 
 ### Software Architecture
 * synchronized calculation cycle
