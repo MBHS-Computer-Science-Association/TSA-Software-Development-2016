@@ -1,6 +1,12 @@
 Chronological
 ==
-**April 5, 2016**
+**Monday, April 4, 2016**
+	- discuss prospects of project overhaul
+	- code base redesign
+	- architecture reworking
+	- better separation between api and demonstration
+
+**Tuesday, April 5, 2016**
     - Node object
       - inputs
       - outputs
@@ -10,11 +16,15 @@ Chronological
       - reduced ability to determine effectiveness and fine tune
       - mitigated by multiple trials, but requires more computation
 
-**April 6, 2016**
+**Wednesday, April 6, 2016**
     - discussing robot tank demonstration
     - could implement neural network with memory
 
-
+**Thursday, April 7, 2016**
+	- finally implemented code base redesign on new Git branch
+	- created package divisions between demo and software package
+	- demonstration is in completely different source folder
+	- package-info.java files are present
 ### Software Architecture
 * synchronized calculation cycle
 * asynchronous transfer function
@@ -31,6 +41,10 @@ Chronological
   * functional interface to store transfer function
 
 ### Demonstration Ideas
+- mathematical formula recognition
+- numeral recognition from pixels
+- intelligent tanks
+- environmental survival
 
 ### Research
 
