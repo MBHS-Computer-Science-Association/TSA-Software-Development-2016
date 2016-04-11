@@ -25,6 +25,9 @@ Chronological
 	- created package divisions between demo and software package
 	- demonstration is in completely different source folder
 	- package-info.java files are present
+**Monday, April 11, 2016**
+    - working on creating graphics program for demonstration
+    - windows have been initialized
 ### Software Architecture
 * synchronized calculation cycle
 * asynchronous transfer function
@@ -51,5 +54,5 @@ Chronological
 - genetic algorithms vs neural networks
   - random changes vs calculated changes
 - mathematical capability of neural networks
-- transfer functional
+- transfer function
 - backward propagation
