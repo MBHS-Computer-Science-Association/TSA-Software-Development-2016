@@ -28,4 +28,12 @@ public abstract class Point implements Drawable {
 		g.setColor(color);
 		g.fillOval(x - size / 2, y - size / 2, size, size);
 	}
+	public int getX()
+	{
+		return x;
+	}
+	public int getY()
+	{
+		return y;
+	}
 }
