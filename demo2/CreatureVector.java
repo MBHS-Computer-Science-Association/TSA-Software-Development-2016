@@ -2,7 +2,9 @@
 public class CreatureVector {
 	private float x;
 	private float y;
-
+	private float deltaX;
+	private float deltaY;
+	
 	/**
 	 * Sets the x and y position of the vector
 	 * @param x
