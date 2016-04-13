@@ -10,8 +10,8 @@ public abstract class Animal extends Organism {
 		return velocity.getAngle();
 	}
 
-	public void adjustAngle(float pheta) {
-		velocity.adjustAngle(pheta);
+	public void adjustAngle(float theta) {
+		velocity.adjustAngle(theta);
 	}
 
 	public void move(boolean forwards) {

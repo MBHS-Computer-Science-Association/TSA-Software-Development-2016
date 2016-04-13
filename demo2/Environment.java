@@ -103,6 +103,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 				
 				
 				
+				
 //				if (Math.abs(dX) < clippingDistance && Math.abs(dY) < clippingDistance) {
 //					float realDistance;
 //					float currentTheta = malish.getVelocity().getAngle();
