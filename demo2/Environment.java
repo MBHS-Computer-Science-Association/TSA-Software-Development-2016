@@ -85,23 +85,24 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 
 			CreatureVector vector = new CreatureVector(0, 0);
 			
-			/*Derivative equation to check whether Malish has "eaten" a food object and sets health to full
+			/*
+			 *Derivative equation to check whether Malish has "eaten" a food object and sets health to full
 			 *inputs values of sensing into neural net toolkit 
 			 */ 
 			for (int j = foodList.size() - 1; j >= 0; j--) 
 			{
 				Food food = foodList.get(j);
-				float dX = malish.getX() - food.getX();
-				float dY = malish.getY() - food.getY();
+				float diffX = malish.getX() - food.getX();
+				float diffY = malish.getY() - food.getY();
 				
-				if (Math.abs(dX) < foodDist && Math.abs(dY) < foodDist) 
+				if (Math.abs(diffX) <= 1  && Math.abs(diffY) <= 1) 
 				{
 					foodList.remove(j);
 					malish.setHealth(1f);
 					//malishList.add(new Malish(malish));
 				}
-				
-				
+			
+								
 				
 				
 //				if (Math.abs(dX) < clippingDistance && Math.abs(dY) < clippingDistance) {
