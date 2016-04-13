@@ -5,19 +5,24 @@ public abstract class Organism {
 		position = new CreatureVector(0, 0);
 	}
 	
-	public float getX() {
+	public float getX() 
+	{
 		return position.getX();
 	}
 
-	public void setX(float x) {
+	public float getY() 
+	{
+		return position.getY();
+	}
+	
+	public void setX(float x) 
+	{
 		position.setX(x);
 	}
 
-	public float getY() {
-		return position.getY();
-	}
-
-	public void setY(float y) {
+	public void setY(float y)
+	{
 		position.setY(y);
 	}
+	
 }

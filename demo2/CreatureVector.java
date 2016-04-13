@@ -2,8 +2,6 @@
 public class CreatureVector {
 	private float x;
 	private float y;
-	private float deltaX;
-	private float deltaY;
 	
 	/**
 	 * Sets the x and y position of the vector
@@ -21,13 +19,13 @@ public class CreatureVector {
 	 * Adjusts the creature's angle from the @param theta that the neural network toolkit returned
 	 */
 	public void adjustAngle(float theta) {
-		float magnitude = this.getMagnitude();
-		theta += (float) Math.atan2(y, x);
-		if (theta > 2 * Math.PI) {
-			theta = (float) (theta - (2 * Math.PI));
-		}
-		setX(magnitude * (float) Math.cos(theta));
-		setY(magnitude * (float) Math.sin(theta));
+//		float magnitude = this.getMagnitude();
+//		theta += (float) Math.atan2(y, x);
+//		if (theta > 2 * Math.PI) {
+//			theta = (float) (theta - (2 * Math.PI));
+//		}
+//		setX(magnitude * (float) Math.cos(theta));
+//		setY(magnitude * (float) Math.sin(theta));
 	}
 
 	/**
@@ -39,7 +37,8 @@ public class CreatureVector {
 	
 // ---------Set and Get methods----------
 	public float getMagnitude() {
-		return (float) Math.sqrt(x * x + y * y);
+//		return (float) Math.sqrt(x * x + y * y);
+		return 1.0F;
 	}
 
 	public float getSquaredMagnitude() 
@@ -67,4 +66,5 @@ public class CreatureVector {
 	{
 		return y;
 	}
+
 }
