@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Point implements Drawable {
-	final static int size = 10;
-	Color color;
-	int x;
-	int y;
+	private final static int size = 10;
+	private Color color;
+	private int x;
+	private int y;
 
 	/**
 	 * Instantiates the point
