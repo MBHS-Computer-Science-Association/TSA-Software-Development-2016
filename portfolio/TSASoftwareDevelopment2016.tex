@@ -1,10 +1,11 @@
 \documentclass[letterpaper, 10pt]{article}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1.0in]{geometry}
 \usepackage{graphicx}
+\usepackage{verbatim}
 
 % Title Page
 \title{
-	\includegraphics[width=6.0cm]{res/TSA-Emblem.png} \\
+	%\includegraphics[width=6.0cm]{res/TSA-Emblem.png} \\
 	\vspace{1.15cm}
 	TSA Software Development \\
 	Texas State Conference -- Waco, Texas\\
@@ -15,6 +16,7 @@
 \date{Spring 2016}
 
 \begin{document}
+
 \maketitle
 
 \cleardoublepage
@@ -23,24 +25,31 @@
 
 \cleardoublepage
 \section{Research}
-	Our research focus was in the area of neural networks, 
-
-	\paragraph{Starting Out}
-	Several papers have already been published about artificial neural networks and work has been done almost all major universities. A significant portion or our inspiration has come from the work of the University of Klagenfurt in Austria. In a paper published by its Institute for Networked and Embedded Systems, we have examined the details of how neural networks worked abstractly and we knew the major concepts and general algorithms to implement. Further research went into discovering the art of designing genetic algorithms in order to model the entities as close to real life as possibly by emulating the way the evolution happens in populations over time yet allowing this process to be seen in real time. To view the genetic evolutionary process would be very slow as this process happens over several generations in real life, so what we have created uses generations of very short time spans and rapid mutations which would be most akin to observing a small population of bacteria. The California Institute of Technology also has an on-line lecture series covering advanced artificial intelligence projects which we also drew inspiration to create our own rendition on neural networks.
+	We focused our research on the topic of artificial neural networks (ANNs), which although relatively new grounds for our project team, ANNs is not a novel topic to academia. Several academic papers in computer science have been long since published about using ANNs in a variety of scenarios from analyzing partial derivatives to recognizing visual data. With a abstract knowledge of ANNs solved problems with software, we delved into the capabilities and limits of what ANNs could do in order to establish a deep understanding of their context in applications. We then spent the rest of our research on current implementation techniques which unsurprisingly required knowledge of mathematics beyond the scope of high school calculus. As difficult as it was rewarding, our research has culminated in a compilation of our findings below.
+	\paragraph{The Artificial Neural Network}
+		 The term artificial neural network refers to a data model which provides means to compute a set of outputs from a set of inputs which is specifically modeled after the biological neural networks present in animals. Biological neural pathways are based around impulses causing neurons to selectively fire after reaching a threshold. Whether a neuron will fire depends on multiple inputs of varying importance. When an active neuron fires, it stimulates the firing of other neurons further along the pathway. Computer scientists have likened this biological relationship to weighted digraphs, in which nodes represent neurons and are connected by unidirectional edges that have numerical weights associated with them. In ANNs, inputs are fed into one side of the digraph, and after series of abstract computations called \textbf{transfer functions}, outputs emerge on the other side. ANNs are, by nature, highly abstracted data models.
+	\paragraph{Capability}
+	ANNs are very good at 
 	
-	\paragraph{Artificial Intelligence}
+\begin{comment}
+	A significant portion or our inspiration has come from the work of the University of Klagenfurt in Austria. In a paper published by its Institute for Networked and Embedded Systems, we have examined the details of how neural networks worked abstractly and we knew the major concepts and general algorithms to implement. Further research went into discovering the art of designing genetic algorithms in order to model the entities as close to real life as possibly by emulating the way the evolution happens in populations over time yet allowing this process to be seen in real time. To view the genetic evolutionary process would be very slow as this process happens over several generations in real life, so what we have created uses generations of very short time spans and rapid mutations which would be most akin to observing a small population of bacteria. The California Institute of Technology also has an on-line lecture series covering advanced artificial intelligence projects which we also drew inspiration to create our own rendition on neural networks.
+\end{comment}
 	
-	\paragraph{Neural Networks}
+	\paragraph{Transfer Functions}
+	When all of a node's input values are available for computation, the node runs what is called a transfer function, which will calculate that specific node's output value. The transfer function takes a set of inputs and a set of corresponding weights as formal parameters and processes them with higher weighted inputs having more of an effect on the node's output. In addition to inputs, the transfer function also takes in a \textbf{threshold value} which will must be reached in order to have a signal propagate.
 	
+	\paragraph{Concurrency and Asynchronous Processing}
+	When a program runs on more than one thread and does not conform to a simple processing in sequential order, the program exhibits \textbf{concurrency}.
 	
 	\paragraph{Backward Propagation}
-	Backward propagation is how the neural network is able to improve itself over time. It includes comparing the desired outputs with the network's outputs.
+	Backward propagation is how ANNs adjust graph weights in order to improve network accuracy. The network's compares its outputs with the desired outputs in order to calculate that error. The output nodes propagate the error to their respective input nodes and the individual input nodes' error is calculated mathematically.
+	
+	
 	
 	\paragraph{Process Synchronization}
 	
 	\paragraph{Optimized Graph Data Structures}
 	
-	\paragraph{Asynchronous Processing and Concurrency}
 	
 \cleardoublepage
 \section{Description}
