@@ -8,7 +8,7 @@ import java.util.Random;
  *
  */
 public class Neuron {
-	final static float mutationChange = 0.05f;
+	final static float mutationChance = 0.05f;
 
 	private float[] weights;
 	private float input;
@@ -31,14 +31,19 @@ public class Neuron {
 	}
 
 	/**
-	 * Reproduces a Neuron based on Parent
+	 * Reproduces a Neuron based on Parent with some mutations
 	 * 
 	 * @param parent
 	 */
 	public Neuron(Neuron parent) {
+		Random random = new Random();
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
-			if
+			if (random.nextFloat() < mutationChance) {
+				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * random.nextFloat();
+				weights[i] = Math.max(weights[i], 0);
+				weights[i] = Math.min(weights[i], 1);
+			}
 		}
 	}
 
