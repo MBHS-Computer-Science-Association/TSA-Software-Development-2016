@@ -1,8 +1,4 @@
 /**
- * 
- */
-
-/**
  * @author Sammy Shin, Trevor Thai Kim Nguyen, Christian Duffee
  *
  */
