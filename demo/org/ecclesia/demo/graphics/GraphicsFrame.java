@@ -15,7 +15,7 @@ public class GraphicsFrame extends JPanel {
 	static List<Drawable> drawables = new ArrayList<>();
 
 	/**
-	 * Adds UserInput to JPanel 
+	 * Adds UserInput to JPanel
 	 */
 	public GraphicsFrame() {
 		addMouseListener(new UserInput());
@@ -26,7 +26,7 @@ public class GraphicsFrame extends JPanel {
 	 * Paints all drawables
 	 */
 	public void paint(Graphics g) {
-		g.setColor(Color.GREEN);
+		g.setColor(Color.BLACK);
 		for (int i = 0; i < drawables.size(); i++) {
 			drawables.get(i).draw(g);
 		}
@@ -35,9 +35,14 @@ public class GraphicsFrame extends JPanel {
 
 	/**
 	 * Adds Drawable d to drawables list
+	 * 
 	 * @param d
 	 */
 	public static void addDrawable(Drawable d) {
 		drawables.add(d);
+	}
+
+	public static void clearDrawables() {
+		drawables.clear();
 	}
 }
