@@ -1,5 +1,6 @@
 package org.ecclesia.neural;
 
+
 public class Network {
 	Neuron[][] network;
 
@@ -53,6 +54,9 @@ public class Network {
 	 * @return output
 	 */
 	public float[] getOutput(float[] input) {
+		
+		
+		
 		return input;
 	}
 }

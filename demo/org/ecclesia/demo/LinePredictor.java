@@ -1,13 +1,16 @@
 package org.ecclesia.demo;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.ecclesia.demo.graphics.GraphicsFrame;
 import org.ecclesia.demo.graphics.UserPoint;
+import org.ecclesia.neural.Network;
 
 public class LinePredictor {
 
+	static Network net = new Network(2,2,1,2);
+	
 	static List<Point> points = new ArrayList<>();
 
 	/**
@@ -17,6 +20,7 @@ public class LinePredictor {
 		points.add(new Point(x, y));
 		processPoints();
 		GraphicsFrame.addDrawable(new UserPoint(x, y));
+		processPoints();
 	}
 
 	/**
@@ -25,7 +29,13 @@ public class LinePredictor {
 	 */
 	private static void processPoints() {
 		if (points.size() == 1) {
-			// TODO call Neural Network Prediction Code
+			float[] pointss= new float[2];
+			for(Point o : points)
+			{
+			pointss[0] = (float)o.getX();	
+			}
+			float[] predictedOutput = net.getOutput(pointss);
+			System.out.println(Arrays.toString(predictedOutput));
 		} else {
 			// TODO Train Neural Network
 			points.clear();

@@ -16,5 +16,6 @@ public class UserPoint extends Point {
 	 */
 	public UserPoint(int x, int y) {
 		super(x, y, color);
+		
 	}
 }
