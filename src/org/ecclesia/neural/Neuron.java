@@ -9,6 +9,7 @@ import java.util.Random;
  */
 public class Neuron {
 	final static float mutationChance = 0.05f;
+	final static float changeFactor = 1.00f;
 
 	private float[] weights;
 	private float input;
@@ -23,10 +24,10 @@ public class Neuron {
 	 * @param width
 	 */
 	public Neuron(int width) {
-		Random randy = new Random();
+		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = randy.nextFloat();
+			weights[i] = random.nextFloat() * (random.nextBoolean() ? 1 : -1);
 		}
 	}
 
@@ -40,8 +41,8 @@ public class Neuron {
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
 			if (random.nextFloat() < mutationChance) {
-				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * random.nextFloat();
-				weights[i] = Math.max(weights[i], 0);
+				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * changeFactor * random.nextFloat();
+				weights[i] = Math.max(weights[i], -1);
 				weights[i] = Math.min(weights[i], 1);
 			}
 		}
@@ -84,5 +85,4 @@ public class Neuron {
 	float getSigmoidValue(float v) {
 		return (float) (1 / (1 + Math.pow(Math.E, -v)));
 	}
-
 }
