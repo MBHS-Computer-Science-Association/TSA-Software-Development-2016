@@ -1,16 +1,17 @@
 package org.ecclesia.demo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.ecclesia.demo.graphics.GraphicsFrame;
+import org.ecclesia.demo.graphics.PredictedPoint;
 import org.ecclesia.demo.graphics.UserPoint;
 import org.ecclesia.neural.Network;
 
 public class LinePredictor {
 
-	static Network net = new Network(2,2,1,2);
-	
+	static Network net = new Network(2, 2, 1, 2);
+
 	static List<Point> points = new ArrayList<>();
 
 	/**
@@ -20,7 +21,6 @@ public class LinePredictor {
 		points.add(new Point(x, y));
 		processPoints();
 		GraphicsFrame.addDrawable(new UserPoint(x, y));
-		processPoints();
 	}
 
 	/**
@@ -29,13 +29,16 @@ public class LinePredictor {
 	 */
 	private static void processPoints() {
 		if (points.size() == 1) {
-			float[] pointss= new float[2];
-			for(Point o : points)
-			{
-			pointss[0] = (float)o.getX();	
-			}
-			float[] predictedOutput = net.getOutput(pointss);
-			System.out.println(Arrays.toString(predictedOutput));
+			float[] pointer = new float[2];
+			Point o = points.get(0);
+			pointer[0] = (float)o.getX() / 750;
+			pointer[1] = (float)o.getY() / 750;
+			float[] predictedOutput = net.getOutput(pointer);
+			int preX = (int)( predictedOutput[0] * 750);
+			int preY = (int) (predictedOutput[1] * 750);
+			
+			System.out.println(Arrays.toString(pointer) + " " + Arrays.toString(predictedOutput) + " " + preX + " " + preY);
+			GraphicsFrame.addDrawable(new PredictedPoint(preX, preY));
 		} else {
 			// TODO Train Neural Network
 			points.clear();
