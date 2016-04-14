@@ -1,5 +1,7 @@
 package org.ecclesia.neural;
 
+import java.util.Arrays;
+
 public class Network {
 	Neuron[][] network;
 
@@ -12,12 +14,22 @@ public class Network {
 	 * @param outputWidth
 	 */
 	public Network(int inputWidth, int hiddenWidth, int numHidden, int outputWidth) {
-		network = new Neuron[numHidden][0];
+		network = new Neuron[numHidden+1][0];
 		network[0] = new Neuron[inputWidth];
-		for (int i = 1; i < numHidden; i++) {
+		for (int i = 1; i < numHidden+1; i++) {
 			network[i] = new Neuron[hiddenWidth];
 		}
-		network[network.length - 1] = new Neuron[outputWidth];
+		
+		for(int i=0; i < network.length-1; i++)
+		{
+			for(int n = 0; n < network[i].length; n++){
+				network[i][n] = new Neuron(hiddenWidth);
+			}
+		}
+		
+		for(int i=0; i < network[network.length-1].length; i++){
+			network[network.length-1][i] = new Neuron(outputWidth);
+		}
 	}
 
 	/**
@@ -56,7 +68,7 @@ public class Network {
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
 		}
-		for (int i = 1; i < network.length - 1; i++) {
+		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
 				float[] localOutput = network[i][n].getOutput();
 				for (int j = 0; j < localOutput.length; j++) {
@@ -72,6 +84,19 @@ public class Network {
 				output[n] += localOutputs[n];
 			}
 		}
-		return input;
+		for(int i=0; i<output.length; i++)
+		{
+			output[i] = getSigmoidValue(output[i]);
+		}
+		return output;
+	}
+	
+	/**
+	 * Gets an output based on a Sigmoid function
+	 * 
+	 * @return Sigmoid Value of v
+	 */
+	float getSigmoidValue(float v) {
+		return (float) ((Math.pow(Math.E, v) - Math.pow(Math.E, -v))/ (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
 	}
 }

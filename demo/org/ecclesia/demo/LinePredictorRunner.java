@@ -16,5 +16,7 @@ public class LinePredictorRunner {
 	 */
 	public static void main(String[] args) {
 		Window w = new Window();
+		DisplayInfo info = new DisplayInfo();
+		info.main(null);;
 	}
 }
