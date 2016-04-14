@@ -1,29 +1,33 @@
 public abstract class Animal extends Organism {
 	float health;
-	private CreatureVector velocity;
 
+	// private CreatureVector pos;
 	public Animal() {
-		velocity = new CreatureVector((float) Math.random(), (float) Math.random());
+		super(0f, 10, 10f);
+	}
+
+	public Animal(float theta, float x, float y) {
+		super(theta, x, y);
 	}
 
 	public float getAngle() {
-		return velocity.getAngle();
+		return position.getAngle();
 	}
 
 	public void adjustAngle(float theta) {
-		velocity.adjustAngle(theta);
+		position.adjustAngle(theta);
 	}
 
-	public void move(boolean forwards) {
-		super.setX((forwards ? position.getX() + velocity.getX() : position.getX() - velocity.getX()));
-		super.setY((forwards ? position.getY() + velocity.getY() : position.getY() - velocity.getY()));
+	public void move(float ammount) {
+		super.setX((float) (position.getX() + ammount * Math.cos(position.getAngle())));
+		super.setY((float) (position.getY() + ammount * Math.sin(position.getAngle())));
 
 	}
 
 	public CreatureVector getVelocity() {
-		return velocity;
+		return position;
 	}
-	
+
 	public float getHealth() {
 		return health;
 	}
