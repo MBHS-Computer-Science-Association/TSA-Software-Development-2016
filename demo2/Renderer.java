@@ -9,7 +9,7 @@ public class Renderer extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	static final int WIDTH = 16;
-	final static Color foodColor = Color.MAGENTA;
+	final static Color foodColor = Color.BLUE;
 	final static Color viewColor = Color.BLUE;
 
 	@Override
