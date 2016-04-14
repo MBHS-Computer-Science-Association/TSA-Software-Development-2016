@@ -3,7 +3,7 @@ package org.ecclesia.neural;
 import org.ecclesia.neural.util.Mathematics;
 
 /**
- * @author s201500
+ * @author Trevor Nguyen
  *
  */
 public class Network {

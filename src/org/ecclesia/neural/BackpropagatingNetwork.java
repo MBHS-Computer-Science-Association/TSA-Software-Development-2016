@@ -3,10 +3,11 @@ package org.ecclesia.neural;
 import org.ecclesia.neural.util.Mathematics;
 
 /**
- * @author Trevor Nguyen
  * 
- *         Backpropagating networks are able to correct for error within the
- *         network more accurately than a basic neural network
+ * Backpropagating networks are able to correct for error within the
+ * network more accurately than a basic neural network
+ * 
+ * @author Trevor Nguyen
  */
 public class BackpropagatingNetwork extends Network {
 

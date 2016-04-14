@@ -2,6 +2,12 @@ package org.ecclesia.neural.util;
 
 import java.util.Random;
 
+/**
+ * Creates random weights for the network to use
+ * 
+ * @author Sammy Shin
+ *
+ */
 public class WeightRandomizer {
 
 	Random random = new Random();
