@@ -15,5 +15,4 @@ public class Mathematics {
 		return (float) ((Math.pow(Math.E, v)  + Math.pow(Math.E, v))/ (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
 	}
 	
-	
 }

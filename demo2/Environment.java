@@ -48,7 +48,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 	 * 
 	 */
 	public Environment() throws InterruptedException {
-		super(title);
+		super(title);//
 		DisplayInfo.display();
 
 		for (int i = 0; i < initialFood; i++) {
