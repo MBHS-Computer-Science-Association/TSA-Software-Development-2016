@@ -1,8 +1,16 @@
 package org.ecclesia.neural;
 
-import java.util.Arrays;
+import org.ecclesia.neural.util.Mathematics;
 
+/**
+ * @author s201500
+ *
+ */
 public class Network {
+	/**
+	 * Two dimensional array that stores the perceptron neurons of a discrete network
+	 * Has package level visibility for restricted encapsulation.
+	 */
 	Neuron[][] network;
 
 	/**
@@ -85,18 +93,9 @@ public class Network {
 			}
 		}
 		for (int i = 0; i < output.length; i++) {
-			output[i] = getSigmoidValue(output[i]);
+			output[i] = Mathematics.getSigmoidValue(output[i]);
 		}
 
 		return output;
-	}
-
-	/**
-	 * Gets an output based on a Sigmoid function
-	 * 
-	 * @return Sigmoid Value of v
-	 */
-	float getSigmoidValue(float v) {
-		return (float) ((Math.pow(Math.E, v) - Math.pow(Math.E, -v)) / (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
 	}
 }

@@ -10,7 +10,13 @@ import org.ecclesia.neural.util.Mathematics;
  *
  */
 public class Neuron {
+	/**
+	 * The frequency factor that the neuron will mutate
+	 */
 	final static float mutationChance = 0.10f;
+	/**
+	 * Arbitrary magnitude by which the weights will change.
+	 */
 	final static float changeFactor = 1.00f;
 
 	private float[] weights;
@@ -47,14 +53,14 @@ public class Neuron {
 	}
 
 	/**
-	 * Resets Input
+	 * Resets input down to zero for next iterative cycle
 	 */
 	private void resetInput() {
 		input = 0;
 	}
 
 	/**
-	 * Adds value to inputs
+	 * Adds value to inputs for summation
 	 * 
 	 * @param value
 	 */
@@ -75,6 +81,9 @@ public class Neuron {
 		return output;
 	}
 
+	/**
+	 * @return The array containing the weights of the inputs in order
+	 */
 	public float[] getWeights() {
 		return weights;
 	}
