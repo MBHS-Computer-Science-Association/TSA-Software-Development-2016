@@ -73,7 +73,6 @@
 	
 	Computers have had a profound effect on the development of the human race in recent years. In fact, computers are increasingly becoming irrefutably entwined with human life. Software developers have been working on improving the interfaces between computers and humans. Improved artificial intelligence makes human interactions with computers seamless and enjoyable for humans using technology. Technological advancements are also slowly replacing jobs that don't require as much skill to perform, and technology is working toward being able to do what currently only humans are capable of doing. Although not directly shown in our demonstration, the technology of artificial neural networks is increasingly being applied to the effort of trying to replicate human creativity. This seems to be the logical progression in the human interest in computers and the emerging prominent role of computation will be focused on deep machine learning.
 	
-	\begin{comment}The software comes with toolkits in order to determine outputs from various inputs. The demonstration has educational value of teaching young people the prominence of computation in solving problems in everyday life as well as in industrial applications.\end{comment}
 \cleardoublepage
 \section{TSA Plan of Work Log}
 	
@@ -85,25 +84,28 @@
 	\begin{tabular} { l || p{1.25 in}| l| l|p{2.50in}}
 		Date 	& Task 								& Time 	& Initials 		& Comments \\
 		02/14/16 	& Plan abstract layouts 					& 50 min 	& SS, TN, CD	& This process took longer than expected. \\
-		02/23/16 	& Java class design 						& 45 min 	& TN, CJ 		& Designing object oriented fields and methods.\\
+		02/23/16 	& Java class design 						& 45 min 	& TN, CD 		& Designing object oriented fields and methods.\\
 		02/24/16 	& Begin coding framework 				& 240 min & SS, TN, CD	& Good progression in the development cycle.\\
 		02/26/16 	& Finish main project framework 			& 30 min	& TN, CJ		& Project is not complete yet.\\
 		03/01/16 	& Documentation process 				& 100 min	& SS, TN 		& Documentation was quicker than projected.\\
 		03/01/16 	& Create demonstration program 			& 125 min	& CD, SS 		& The graphics programming caused some complications.\\
 		03/03/16 	& Finalize design and make final revisions 	& 45 min 	& SS, TN, CD 	& Debugging was easy with consistent code.\\
-		03/08/16 	& 									& 55 min 	& TN, CJ 		& \\
+		03/08/16 	& 									& 55 min 	& TN, CD 		& \\
 		03/09/16 	& 					 				& 120 min & SS, TN, CD	& \\
-		03/12/16 	&  									& 30 min	& TN, CJ		& \\
+		03/12/16 	&  									& 30 min	& TN, CD		& \\
 		03/13/16 	&  									& 135 min	& SS, TN 		& \\
-		03/15/16 	&  									& 15 min 	& TN, CJ 		& \\
+		03/15/16 	&  									& 15 min 	& TN, CD 		& \\
 		03/18/16 	&  									& 25 min 	& SS, TN, CD	& \\
-		03/19/16 	&  									& 180 min	& TN, CJ		& \\
+		03/19/16 	&  									& 180 min	& TN, CD		& \\
 		03/23/16 	&  									& 135 min	& SS, TN 		& \\
 		03/25/16 	&  									& 55 min	& SS, TN 		& \\
-		03/26/16 	&  									& 80 min 	& TN, CJ 		& \\
+		03/26/16 	&  									& 80 min 	& TN, CD 		& \\
 		03/29/16 	&  									& 25 min 	& SS, TN, CD	& \\
-		04/02/16 	&  									& 170 min	& TN, CJ		& \\
+		04/02/16 	&  									& 170 min	& TN, CD		& \\
 		04/02/16 	& 					 				& 105 min	& SS, TN 		& \\
+		
+	 \begin{comment}
+	 \end{comment}
 		
 	\end{tabular}
 	\end{center}
@@ -113,9 +115,17 @@
 \cleardoublepage
 \section{Software Design Process}
 	\subsection{Project Requirements}
-		\paragraph{Usability} We knew that our software had to be usable by other programmers and software engineers. In order to fulfill this requirement, we made our code extremely logical without sacrificing our reputation for creating efficient algorithms. In addition, we were able 
+		\paragraph{Purpose}
+		Ecclesia's purpose is to provide means to extrapolate an approximated function from a map of inputs and desired outputs. The software will create and evolve a neural network by training it on inputs and respective desired outputs. The design incorporates bipartite graph data structures in order to organize neuron nodes appropriately, modeling the framework after biological neural networks. The artificial neural network must be capable of 
+		\paragraph{Usability}
+		One of the prime requirements decided upon was the usability of our software. Usability includes the clarity and conciseness of code so that people using our software would be able to develop applications quickly and effectively. Programming the components needed to be in the style of Java so that software developers would be able to use something with which they are familiar. In order to fulfill this requirement, we preferred to make our code as logical as possible without sacrificing our reputation for creating efficient code. In addition, we were able generate Javadocs from the source code markup comments.
 		
+		\paragraph{Java Conventions}
+		Going into our software development process, the team agreed upon using standard coding conventions when writing any portion of code for the project. Our project team used our best efforts to always write code with standard Java practices in mind, adhering to Java conventions. We were mindful of everything from proper use of whitespace, to maintaining object oriented principles in our design. Using conventions consistent with the programming language allows for readability of source code. Furthermore, using conventions allows for open source contributors to make contributions easily in order to grow Project Ecclesia. Writing with code conventions also allows for internal software development to occur at an increased rate because the whole team can agree on a universal style and everyone will
 		
+		\paragraph{Efficiency} 
+		A major interest in our design process was in the efficiency of our software. Having an understanding of time complexity analysis and all of the basic computer science data structures such as stacks, queues, linked lists, and heaps, we knew the difference between naive code and optimized code. During the software development process, we planned out our design in abstract terms, as as we moved along further in the project, we discussed which implementations would serve us best, offering least restrictive time complexity with asymptotic analysis.	
+	
 	\subsection{High-level Software Design}
 		\paragraph{Artificial Neural Networks}
 		The project is entirely based around artificial neural networks that add a layer of abstraction to our design process. This concept is a form of deep learning that is directly modeled off of the biological neural networks that are present in almost all Phyla of the Kingdom Animalia.
@@ -125,13 +135,17 @@
 		\paragraph{Weakly Referenced Nodes}
 		\paragraph{Optimized Graph Data Model}
 		\paragraph{Asynchronous Transfer Functions}
+	\clearpage
 	\subsection{Testing}
-		In order to test the effectiveness of our development toolkit, we wrote a simple GUI application that involves 2D point predictions. An initial 2D point would be fed into the neural network and the output would be a second 2D point. By training it on a specific pattern such as fixed translation, or line reflection, or point rotation, the neural network would slowly be able to learn a patterned relationship between an input set of points and an output set of points.
+		\paragraph{Verification of Effectiveness}
+		In order to test the effectiveness of our development toolkit, we wrote a simple GUI application that involves 2D point predictions. An initial 2D point would be fed into the neural network and the output would be a second 2D point. The user of the application would choose an arbitrary pattern to his or her liking and continuously give the network sets of two points, with one point being the input and the other being the output. By training it on a specific pattern such as a fixed translation, or line reflection, or point rotation, the neural network would slowly be able to learn a patterned relationship between an input set of points and an output set of points. If, over time, the network becomes more and more accurate to the desired results, then the artificial neural network program can be considered effective.
+		\paragraph{Visual Demonstration} We wanted to create a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't extremely technical in design, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project in order to make the experience as interactive as possible utilizing mouse input and graphics. We were able to implement graphical displays using the built-in Java swing graphics package in order to display visual information to the GUI window. The demonstration is available for exploration in our demos directory detailed below.
 	
-		In order to test the development toolkit, we created a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't completely technical, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project very nigh to the time of shipping the product. This was because in order to create the demonstration, we were required to push ourselves beyond our comfort zone in the field of video game design. We were required to implement graphical displays using the built-in Java swing graphics package in order to display information to the screen.
-		\paragraph{Demonstration} In all simplicity, our program was designed as a neural network toolkit for other developers to implement in their respective projects and ideas. We have demonstrated what a possible use could be for our toolkit by creating an environment in which many organisms (signified by the cyan colored blocks) dubbed as Malishes which is a rough Russian translation for small creature. The purpose of these creatures is to gather food (which is denoted by the green blocks) and reproduce. The longer a Malish goes without eating food, it becomes hungrier and dies. This hunger is visible through the creature changing its color from cyan to yellow, for slightly hungry, to red, about to die from hunger. Our neural network is seen in these creatures through their adaptive behavior to eat food more efficiently.  
 	\subsection{End User Product Documentation}
-		In order to make the end user experience as great as possible, we used Java documentation style as much as humanly possible in order to make the software toolkit extremely usable. From our diligently commented and annotated code, anyone who is familiar with the inner-workings of Java and experience using something like JavaDocs will be able to use the software in anything from hobby projects to industrial applications.
+		\paragraph{Overview}
+		In our source code files, we have multiple directories. The actual neural network toolkit that we designed and implemented is located in the directory \texttt{/src/} which stores Ecclesia's core functionality. Everything needed to use Ecclesia for artificial intelligence software development is contained in this folder. Included in our source files is also the source code for our demonstrations, which is included separately in the directory \texttt{/demo/}. For one to compile these files and run the simulations, one would need access to the files in this directory and the main source directory because the demonstrations have dependencies on the Ecclesia core packages. Further explanation of each package is detailed in the Javadocs provided.
+		\paragraph{Javadocs Documentation}
+		In order to make the end user experience as great as possible, we used Java documentation style as much as possible in order to make the software toolkit extremely usable. From our diligent code commenting and annotations, anyone who is familiar with the inner-workings of Java and experience using something like Javadocs will be able to use the software in anything from hobby projects to industrial applications. Using Java's built in Javadocs capability that allows HTML documentation to generated instantaneously from code, we were able to create external documentation easily. However, simply exporting our source code to Javadocs was not as simple as running a script. The content contained in the generated Javadocs originated from our code comments for every package, class, and function. The project team aimed to properly explain the logic and purpose behind every element of our software in during the development process in order to aid in the final generated documentation. In our source files, the HTML documentation is included in the folder "docs". The Javadocs can be viewed as HTML files visually in any normal web browser. For this reason, in order to save paper, we have omitted the full end user product documentation in favor of using HTML
 		
 \cleardoublepage		
 \section{Team Evaluation and Future Prospects}
@@ -145,18 +159,18 @@
 	In terms of source control, we decided on using Git, and hosted our project privately on GitHub for free with a student developer license. When we were deciding what source control solution to use, we were debating between Git and SVN. Git was a wonderful solution for us because of its distributed source control which allowed us to create different development branches to track our progress in our development cycle.
 	
 	\paragraph{March Redesign Efforts}
-	When our project team finished with the core components of Ecclesia in late February 2016, our software toolkit was functional.
-	
-	\paragraph{Software Design Innovations}
+	When our project team finished with the core components of Ecclesia in late February 2016, our software toolkit was functional. However, decided that our code needed major refactoring in order to maintain the ideals of clarity and conciseness that we so wished to have. We entered the slippery slope of code refactoring, and after much debate, we decided to do a complete redesign of our code base in favor of more consistent programming and improved organization.
 	
 	\paragraph{Coding Aesthetics}
-	
 	Our team strongly believes in the project and it has been a great time working with it to make the program function as intended. Despite our successes, we believe that it would have been even more successful if the time line of the project had been spread out over a longer period of time to allow ideas to settle and problems to be resolved with much more deliberation.
 	
 	\paragraph{Effectiveness}
+	Through extensive testing, our team has been satisfied with the effectiveness of our artificial intelligence network's performance. We are confident in the efficiency of the design due to our preparations and planning of the software architecture. One major limitation on which our team wholeheartedly agrees is the neural network's reliance on extremely large sample data sets in order to train the network and achieve desired accuracy. However, this is a known limitation of artificial neural networks in general because of the way
 	
 	\paragraph{Future Prospects}
-	We intend for Ecclesia to grow and develop as an openly-sourced project keeping in mind our original ideals of developmental beauty derived from simplicity.
+	We intend for Ecclesia to grow and develop as an openly-sourced project keeping in mind our original ideals of developmental beauty derived from simplicity. After the 2015-2016 academic school year, our team plans to make Project Ecclesia's first public release, hosting the code base on GitHub. We are interested in seeing what the community can do to improve the artificial neural network toolkit. Because Java is an extremely popular programming language in the industry right now, we anticipate that our project will become popular with many users and contributors.
+
+
 \cleardoublepage
 \section{References and Further Readings}
 	We encountered many extremely invaluable resources during our team's research which allowed us to attain a well-rounded, responsible working knowledge of artificial neural networks by the time we were finished with the project.
