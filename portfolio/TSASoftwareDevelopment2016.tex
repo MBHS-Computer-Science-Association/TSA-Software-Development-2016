@@ -138,7 +138,12 @@
 	\subsection{Testing}
 		\paragraph{Verification of Effectiveness}
 		In order to test the effectiveness of our development toolkit, we wrote a simple GUI application that involves 2D point predictions. An initial 2D point would be fed into the neural network and the output would be a second 2D point. The user of the application would choose an arbitrary pattern to his or her liking and continuously give the network sets of two points, with one point being the input and the other being the output. By training it on a specific pattern such as a fixed translation, or line reflection, or point rotation, the neural network would slowly be able to learn a patterned relationship between an input set of points and an output set of points. If, over time, the network becomes more and more accurate to the desired results, then the artificial neural network program can be considered effective.
-		\paragraph{Visual Demonstration} We wanted to create a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't extremely technical in design, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project in order to make the experience as interactive as possible utilizing mouse input and graphics. We were able to implement graphical displays using the built-in Java swing graphics package in order to display visual information to the GUI window. The demonstration is available for exploration in our demos directory detailed below.
+		
+		We discovered that for that specific application of the point prediction program, our implementation of this does learn over time, however the rate of learning was incredibly slow. In fact, it was too slow to be noticeable by a human user. Thus, we considered this inadequate for demonstrative purposes. We decided to create a second demo with a faster rate of learning.
+		
+		In this demo simulated the evolution of organisms through learning neural networks. In the environment, we spawned creatures that we decided to call Malishes. In the demonstration, Malishes are heterotrophic organisms that require a constant supply of food to survive. Malishes were only able to "see" the food particles that were in their view range. Each Malish has a neural network which took in input of whether the closest food in its view range was in the left, middle or right side of their field of view. These neural network decided whether the Malish would turn left, right, or go straight. This demonstration, unlike the previous point predictor, worked well. Visibly, users could see the demonstration working. Malishes were able to exhibit efficient searching behavior in only three generations.
+		
+		\paragraph{Visual Demonstration} We wanted to create a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't extremely technical in design, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project in order to make the experience as interactive as possible utilizing graphics. We were able to implement graphical displays using the built-in Java swing graphics package in order to display visual information to the GUI window. The demonstration is available for exploration in our demos directory detailed below.
 	
 	\subsection{End User Product Documentation}
 		\paragraph{Overview}
@@ -178,24 +183,24 @@
 	\vspace{0.65cm}
 
 	\begin{itemize}
-		\item MIT OpenCourseWare 6.034 Artificial Intelligence
-		
-			\hspace{1.5cm} Fall 2010 Video Lecture Series
-		\item Evolving Neural Network Controllers for a Team of Self-organizing Robots
-		
-			\hspace{1.5cm} University of Klagenfurt, Klagenfurt, Austria
 		\item Approximation of Functions and Their Derivatives: A Neural Network Implementation with Applications
 		
 			\hspace{1.5cm} University of Southern Queensland, Toowoomba, Australia
-		\item Derivation of Backpropagation
-		
-			\hspace{1.5cm} Swarthmore College, Swarthmore, Pennsylvania
-		\item Caltech Machine Learning Course -- CS 156
-		
-			\hspace{1.5cm} Spring 2012 Video Lecture Series
 		\item Artificial Intelligence: A Modern Approach Textbook
 			
 			\hspace{1.5cm} Stuart Russell and Peter Norvig
+		\item Caltech Machine Learning Course -- CS 156
+		
+			\hspace{1.5cm} Spring 2012 Video Lecture Series
+		\item Derivation of Backpropagation
+		
+			\hspace{1.5cm} Swarthmore College, Swarthmore, Pennsylvania
+		\item Evolving Neural Network Controllers for a Team of Self-organizing Robots
+		
+			\hspace{1.5cm} University of Klagenfurt, Klagenfurt, Austria	
+		\item MIT OpenCourseWare 6.034 Artificial Intelligence
+		
+			\hspace{1.5cm} Fall 2010 Video Lecture Series				
 		\item The Java Language Specification
 			
 			\hspace{1.5cm} Java SE 8 Edition, Oracle
