@@ -2,6 +2,8 @@ package org.ecclesia.neural;
 
 import java.util.Random;
 
+import org.ecclesia.neural.util.Mathematics;
+
 /**
  * 
  * @author Sammy Shin, Trevor Thai Kim Nguyen, Christian Duffee
@@ -67,7 +69,7 @@ public class Neuron {
 	public float[] getOutput() {
 		float[] output = new float[weights.length];
 		for (int i = 0; i < weights.length; i++) {
-			output[i] = getSigmoidValue(input * weights[i]);
+			output[i] = Mathematics.getSigmoidValue(input * weights[i]);
 		}
 		resetInput();
 		return output;
@@ -77,12 +79,4 @@ public class Neuron {
 		return weights;
 	}
 	
-	/**
-	 * Gets an output based on a Sigmoid function
-	 * 
-	 * @return Sigmoid Value of v
-	 */
-	float getSigmoidValue(float v) {
-		return (float) ((Math.pow(Math.E, v)  + Math.pow(Math.E, v))/ (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
-	}
 }
