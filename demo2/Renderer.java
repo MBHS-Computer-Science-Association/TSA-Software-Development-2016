@@ -9,6 +9,11 @@ public class Renderer extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	static final int WIDTH = 16;
+<<<<<<< HEAD
+	final static Color foodColor = Color.BLUE;
+	final static Color viewColor = Color.BLUE;
+=======
+>>>>>>> master
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -28,9 +33,18 @@ public class Renderer extends JPanel {
 
 			final int headSize = 8;
 			final float mod = 8;
+<<<<<<< HEAD
+			g.drawLine((int) malish.getX(), (int)malish.getY(),(int)( malish.getX() + mod * Math.cos(malish.getAngle())),
+					(int)(malish.getY() + mod * Math.sin(malish.getAngle())));
+			// g.fillOval((int) (malish.getX() - WIDTH / 2 + mod *
+			// Math.cos(malish.getAngle())),
+			// (int) (malish.getY() - WIDTH / 2 + mod *
+			// Math.sin(malish.getAngle())), headSize, headSize);
+=======
 			//g.drawLine(malish.getX(), malish.getY(), x2, y2);
 			//g.fillOval((int) (malish.getX() - WIDTH / 2 + mod * Math.cos(malish.getAngle())),
 			//		(int) (malish.getY() - WIDTH / 2 + mod * Math.sin(malish.getAngle())), headSize, headSize);
+>>>>>>> master
 		}
 		for (int i = 0; i < Environment.foodList.size(); i++) {
 			g.setColor(Color.magenta);
