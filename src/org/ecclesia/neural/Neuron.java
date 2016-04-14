@@ -14,10 +14,6 @@ public class Neuron {
 	private float[] weights;
 	private float input;
 
-	public float[] getWeights() {
-		return weights;
-	}
-
 	/**
 	 * Initially generates a Random Neuron
 	 * 
@@ -77,6 +73,10 @@ public class Neuron {
 		return output;
 	}
 
+	public float[] getWeights() {
+		return weights;
+	}
+	
 	/**
 	 * Gets an output based on a Sigmoid function
 	 * 
