@@ -20,6 +20,9 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
+	final static int initialMalish = 15;
+	final static int initialFood = 10;
+	final static int clippingDistance = 5000;
 	final static int WIDTH = 1000;
 	final static int HEIGHT = 1000;
 	final static String title = "Demonstration 2";
@@ -47,6 +50,17 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 	public Environment() throws InterruptedException {
 		super(title);
 
+		for (int i = 0; i < initialFood; i++) {
+			foodList.add(new Food(random.nextFloat() * WIDTH, random.nextFloat() * HEIGHT));
+		}
+
+		for (int i = 0; i < initialMalish; i++) {
+			float x = random.nextFloat() * WIDTH;
+			float y = random.nextFloat() * HEIGHT;
+			Malish m = new Malish(x, y);
+			malishList.add(m);
+		}
+
 		time = new Timer(1000 / 60, this);
 		r = new Renderer();
 
@@ -59,6 +73,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 		add(r);
 
 		time.start();
+
 	}
 
 	/**
@@ -90,6 +105,8 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 			 * object and sets health to full inputs values of sensing into
 			 * neural net toolkit
 			 */
+			int direction = -2;
+			int shortestDistance = Integer.MAX_VALUE;
 			for (int j = foodList.size() - 1; j >= 0; j--) {
 				Food food = foodList.get(j);
 				float diffX = malish.getX() - food.getX();
@@ -112,44 +129,39 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 
 				float relativeAngle = theta -= malish.getAngle();
 
-				if (theta >= -fov && theta <= fov) {
-					//middle
+				int newDirection = -2;
+				// if (diffX * diffX + diffY * diffY < clippingDistance) {
+				if (relativeAngle >= -fov && relativeAngle <= fov) {
+					newDirection = 0;
+				} else if (relativeAngle < -fov && relativeAngle >= -fov - 2 * fov) {
+					newDirection = -1;
+				} else if (relativeAngle > fov && relativeAngle <= fov + 2 * fov) {
+					newDirection = 1;
+				}
+				// }
+
+				if (newDirection != -2) {
+					int newDist = (int) (diffX * diffX + diffY * diffY);
+					if (newDist < shortestDistance) {
+						shortestDistance = newDist;
+						direction = newDirection;
+					}
 				}
 
-				if (Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {
+				if (Math.abs(diffX) <= 10 && Math.abs(diffY) <= 10) {
 					foodList.remove(j);
 					malish.setHealth(1f);
-					// malishList.add(new Malish(malish));
+					malishList.add(new Malish(malish));
 				}
-
-				// if (Math.abs(dX) < clippingDistance && Math.abs(dY) <
-				// clippingDistance) {
-				// float realDistance;
-				// float currentTheta = malish.getVelocity().getAngle();
-				// float alpha = currentTheta - (float) Math.PI / 3;
-				// float beta = currentTheta + (float) Math.PI / 3;
-				// float theta = (float) Math.atan2(food.getY() - malish.getY(),
-				// food.getX() - malish.getX());
-				// if (theta >= alpha && theta <= beta
-				// && (realDistance = (float) Math.sqrt(dX * dX + dY * dY)) <
-				// clippingDistance) {
-				// input[0] = 1f;
-				// input[1] = (theta - malish.getAngle()) / (float) Math.PI -
-				// 0.5f;
-				// if(theta > malish.getAngle())
-				// {
-				// input[1] = input[1] * -1;
-				// }
-				// System.out.println(input[1]);
-				// }
-				// }
+			}
+			float[] input = new float[3];
+			if (direction != -2) {
+				input[direction + 1] = 1.0f;
 			}
 			if (malish.move(input)) {
 				malishList.remove(i);
 			}
-
 		}
-
 	}
 
 	@Override

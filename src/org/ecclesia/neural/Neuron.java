@@ -8,7 +8,7 @@ import java.util.Random;
  *
  */
 public class Neuron {
-	final static float mutationChance = 0.05f;
+	final static float mutationChance = 0.10f;
 	final static float changeFactor = 1.00f;
 
 	private float[] weights;
