@@ -97,6 +97,6 @@ public class Network {
 	 * @return Sigmoid Value of v
 	 */
 	float getSigmoidValue(float v) {
-		return (float) (1 / (1 + Math.pow(Math.E, -v)));
+		return (float) ((Math.pow(Math.E, v) - Math.pow(Math.E, -v))/ (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
 	}
 }
