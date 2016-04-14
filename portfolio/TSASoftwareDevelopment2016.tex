@@ -1,66 +1,205 @@
-\documentclass[letter, 10pt]{article}
-
-% Title Page
-\title{TSA Software Development \\ Regionals - Flower Mound, Texas}
-\author{Sammy Shin, Trevor Nguyen, Christian Duffee}
-\date{March 2016}
+\documentclass[letterpaper, 10pt]{article}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{verbatim}
 
 \begin{document}
-\maketitle
+
+% Title Page
+\begin{titlepage}
+	\centering	
+	\includegraphics[width=6.50cm]{res/TSA-Emblem.png}
+	\vspace{1.15cm}
+	
+	\scshape\Huge TSA Software Development \\
+	\vspace{0.25cm}
+	\scshape\huge Texas State Conference -- Waco, Texas \\
+	\vspace{0.25cm}
+	\scshape\LARGE April 11th - 16th, 2016 \\
+	
+	\vspace{1.55cm}
+	
+	\mdseries\Large McKinney Boyd High School Chapter \\
+	\vspace{0.25cm}
+	\slshape\LARGE Sammy Shin, Trevor Nguyen, Christian Duffee \\
+	\vspace{0.25cm}
+	\scshape\LARGE Spring 2016 \\
+\end{titlepage}
 
 \cleardoublepage
 
+\Large
 \tableofcontents
+\normalsize
 
 \cleardoublepage
+
 \section{Research}
-	\Large Several papers have already been published about artificial neural networks and work has been done almost all major universities. A significant portion or our inspiration has come from the work of the University of Klagenfurt in Austria. In a paper published by its Institute for Networked and Embedded Systems, we have examined the details of how neural networks worked abstractly and we knew the major concepts and general algorithms to implement. Further research went into discovering the art of designing genetic algorithms in order to model the entities as close to real life as possibly by emulating the way the evolution happens in populations over time yet allowing this process to be seen in real time. To view the genetic evolutionary process would be very slow as this process happens over several generations in real life, so what we have created uses generations of very short time spans and rapid mutations which would be most akin to observing a small population of bacteria. The California Institute of Technology also has an on-line lecture series covering advanced artificial intelligence projects which we also drew inspiration to create our own rendition on neural networks.
+	We focused our research on the topic of artificial neural networks (ANNs), which although relatively new grounds for our project team, ANNs is not a novel topic to academia. Several academic papers in computer science have been long since published about using ANNs in a variety of scenarios from analyzing partial derivatives to recognizing visual data. With a abstract knowledge of ANNs solved problems with software, we delved into the capabilities and limits of what ANNs could do in order to establish a deep understanding of their context in applications. We then spent the rest of our research on current implementation techniques which unsurprisingly required knowledge of mathematics beyond the scope of high school calculus. As difficult as it was rewarding, our research has culminated in a compilation of our findings below.
+	\paragraph{The Artificial Neural Network}
+		 The term \textbf{artificial neural network} refers to a data model which provides means to compute a set of outputs from a set of inputs which is specifically modeled after the \textbf{biological neural networks} present in animals. Biological neural pathways are based around impulses causing neurons to selectively fire after reaching a threshold. Whether a neuron will fire depends on multiple inputs of varying importance. When an active neuron fires, it stimulates the firing of other neurons further along the pathway. Computer scientists have likened this biological relationship to \textbf{weighted digraphs}, in which nodes represent neurons and are connected by unidirectional edges that have numerical weights associated with them. In ANNs, inputs are fed into one side of the digraph, and after series of abstract computations called \textbf{transfer functions}, outputs emerge on the other side. ANNs are, by nature, highly abstracted data models.
+	\paragraph{Capability}
+	ANNs are very good at pattern recognition because they are modeled off of the universe's most sophisticated decision making machine, the \emph{brain}. They have been able solve some of the most difficult problems with orders of magnitude more accurate than more traditional algorithms. ANNs are used in \textbf{natural language processing}, \textbf{image identification}, \textbf{speech recognition}, \textbf{handwriting recognition}, and recently, playing Go. Despite their robustness, ANNs are limited by their need for extremely large data sets from which they extrapolate algorithms.
+	\paragraph{Transfer Functions}
+	When all of a node's input values are available for computation, the node runs what is called a transfer function, which will calculate that specific node's output value. The transfer function takes a set of inputs and a set of corresponding weights as formal parameters and processes them with higher weighted inputs having more of an effect on the node's output. In addition to inputs, the transfer function also takes in a \textbf{threshold value} which will must be reached in order to have a signal propagate.
+	\paragraph{Backward Propagation}
+	Backward propagation is how ANNs adjust graph weights in order to improve network accuracy and reduce \textbf{systematic errors}. The network's compares its outputs with the desired outputs in order to calculate that error. The output nodes propagate the error to their respective input nodes and the individual input nodes' error is calculated mathematically.
+	\paragraph{Concurrency}
+	When a program runs on more than one thread and does not conform to a simple processing in sequential order, the program exhibits \textbf{concurrency}. For ANNs, the transfer functions of each node run independently of each other and instead of processed sequentially, they are often processed in parallel.
+	\paragraph{Parallel Computing and Process Synchronization}
+	Both of these concepts crop up in the world of concurrency and are techniques in order to effectively use a programming language's concurrency capabilities to one's advantage. \textbf{Parallel computing} is the act of running computational processes at the same time on different program threads. The actual hardware processor may use its own algorithms to handle these low level task, which is normally going to be some derivative of round-robin scheduling. With many independent asynchronous processes running in parallel, the issue of \textbf{process synchronization} emerges, which is essentially the unification of multiple processes under the same time domain. Classic problems such as the producer-consumer problem emerge in concurrent applications and desperately need synchronization in order to be stable.
+	
 \cleardoublepage
 \section{Description}
-	\paragraph{Problem} A large problem in computation lies in humans thinking of, designing, and implementing algorithms in software. Algorithm design for extremely esoteric scenarios can be time-consuming. For example, to design an algorithm to make individual decisions for a distributed system of robots, would require deep analysis of emergent behaviors as the scale becomes smaller, as well as attention to the larger aspect of things with large-scale integration and cooperation between individually functioning entities.
-	\paragraph{Solution} The project aims to create a neural network toolkit as well as a demonstrative displaying simulations of genetic algorithms visually in order to convey its usefulness. The demonstration will be displaying creatures in a simple environmental scenario of predation and survival.
-	\paragraph{Value} In an epic test of survival and a strong application of Charles Darwin's theories to explain evolution and the concept of natural selection, the software comes with toolkits in order to determine outputs from various inputs. The demonstration has educational value of teaching young people the prominence of computation in solving problems in everyday life as well as in industrial applications. Although not directly shown in our demonstration, the technology of neural networks can be applied to fields in image recognition and attempts at replicating human creativity. Deep learning is quite feasibly the future role of computer science.
+	\paragraph{Problem} The job of a software engineer is to maintain software code and to write algorithms to perform necessary operations on data while keeping in mind clarity, correctness, and efficiency. Being a software engineer is an example of a difficult job in high demand, requiring a very specific mindset and vast intellectual capability. Software engineers handle tasks at which ordinary people without the proper wherewithal would balk.
+	
+	Algorithms dominate the software engineering sphere. A large problem in applied computer science lies in humans thinking of, designing, and implementing algorithms in real software that can be run efficiently given hardware constraints. There is a large list of well-known algorithms that almost all computer scientists understand and study as part of their computer science degree, yet this list of algorithms that are studied is finite their immediate applications are limited. Known algorithms are efficient and used where possible, but when a problem requires an algorithm that has not yet been created, these well-known algorithms can only serve as a computer scientist's inspiration.
+	
+	Algorithm design for extremely esoteric scenarios can be time-consuming for software engineers, backing up the software design process, creating delays, and losing profits for a company. In short, algorithm design would be the major bottleneck for any sort of large software project. Too often, a company may sacrifice efficiency for speed of development, resulting in less-than-optimized algorithms. The larger problem, however is coming up with algorithms for which it would be completely infeasible to design by hand.
+	
+	For example, if one were to design software for a distributed system of robots, one would have to write the decision making model for each one of these robots. However, one must keep in mind the greater scale of the system complete with group interactions and changing environments. Deep analysis is required to determining emergent behaviors as the scale becomes smaller, as well as attention to the larger aspect of things with large-scale integration and cooperation between individually functioning entities. To put things into perspective, in order to organize a mob with a size on the order of one thousand people, it would require a massive bureaucratic organization, but also if the case that activities do not go according to plan, a leader must step in to correct the situation. The software on the robots system would mirror the situation except no form of organization would be present; each robot would have to have the artificial intelligence to instinctively know how to react to the rest of the robots' actions. In addition to this mess of a problem, the software engineer would have to foresee potential issues in his or her own design in order to write alternate routines for situations in which an error has occurred.
+	
+	Not just in the field of autonomous robotics do these design challenges appear. In areas such as image recognition, to implement an algorithm that recognizes if a bitmap image is representing a human would be unthinkable to do as a human because image recognition deals with billions of inputs at a time and simple case handling will simply not do the job. Simply put, the problem is that software engineers need an algorithm that will write algorithms -- code that writes code. To be precise and technical, what was just described would be metaprogramming. However, what is really needed is a program that will create, test, and refine an input/output-based algorithm. MATLAB has a neural network package available to purchase with their software. Many other neural network libraries are available to purchase. Such software solutions exist, but not all of them are available on every platform, nor are all of them simplistic and easy, yet effective at fulfilling their purpose. Java lacks popular native libraries that have a short enough learning curve for a beginner to computer science could use, yet robust enough to be used for serious applications.
+	\paragraph{Solution} Project Ecclesia aims to create a native Java library for artificial neural network that addresses current issues mentioned above. It will provide a framework for utilizing artificial neural networks in applications from year one student projects to refined industrial software. Not only will Ecclesia disseminate as an simple, yet powerful way to use neural networks, our project team intends for Ecclesia to be accessible to every developer at no cost under the MIT License at the end of the 2015-2016 academic year.
+	
+	We decided after the core of our project had been completed to name the culmination of our efforts Project Ecclesia. The name Ecclesia ($\varepsilon \kappa \kappa \lambda \eta \sigma i \alpha$) refers to the ancient Athenian democratic assembly, which we found highly appropriate because our program functions as a complex system for decision making. In addition, after Solon's reforms, the ecclesia became an assembly in which even the lowest ranks of society could participate. Aforementioned, Ecclesia will be available at no cost to developers as an openly sourced project. We like to think that the name is quite apt.
+\clearpage
+	\paragraph{Social and Educational Value} 
+	Ecclesia will simplify the jobs of Java software engineers who are designing algorithms. It will allow Java software engineers to focus on the more important abstract details of software programming rather than getting caught up in the minutia of programming. As Project Ecclesia increases in popularity, more and more people will be familiar with how artificial neural networks function and professionals will use artificial neural networks increasingly in their software. Because Java is one of the industry's most ubiquitous programming language, Project Ecclesia could be a game changer and shift the focus of the software development toward the use of artificial intelligence using neural networks.
+	
+	Project Ecclesia can also be used as an educational tool in the classroom to teach young computer science students the beauty and magic of artificial neural networks. Experience using libraries written natively in Java used to supplement teaching will seriously enrich a computer science student's understanding of real applications of computer science concepts. Furthermore, the fact that our team chose to write the artificial neural network in very clean and efficient code that embodies the ideals of Java, using Ecclesia library to make artificial intelligence applications may reinforce understanding use of object oriented principles.
+	
+	In addition to being used as a supplement to computer science education for experience using external Java libraries, Ecclesia is also able to offer an easy introduction to artificial intelligence for more advanced computer science students who are looking to move forward in computer science. A huge ideal in Project Ecclesia has been to make artificial neural networks simple and robust. It is easy to jump right into using it for development with a logically designed architecture paired with easy to understand and detailed documentation through Javadocs. The project will allow future pioneers in artificial intelligence to get their feet wet in artificial neural networks and hopefully inspire them to delve further into the topic and spark a love for computer science.
+	
+	Computers have had a profound effect on the development of the human race in recent years. In fact, computers are increasingly becoming irrefutably entwined with human life. Software developers have been working on improving the interfaces between computers and humans. Improved artificial intelligence makes human interactions with computers seamless and enjoyable for humans using technology. Technological advancements are also slowly replacing jobs that don't require as much skill to perform, and technology is working toward being able to do what currently only humans are capable of doing. Although not directly shown in our demonstration, the technology of artificial neural networks is increasingly being applied to the effort of trying to replicate human creativity. This seems to be the logical progression in the human interest in computers and the emerging prominent role of computation will be focused on deep machine learning.
+	
 \cleardoublepage
 \section{TSA Plan of Work Log}
 	
 	Advisor signature:
 	\rule{10cm}{0.4pt}
-
+	\footnotesize
 	\begin{center}
-	\begin{tabular} { l || p{1.25in}| l| l|p{1.25in}}
-		Date & Task & Time & Team member & Comments \\
-		03/04/16 & Plan abstract layouts & 50 min & Sammy Shin & This process took longer than expected. \\
-		03/04/16 & Java class design & 45 min & Trevor Nguyen & Designing object oriented fields and methods.\\
-		03/04/16 & Begin coding framework & 240 min & Sammy Shin & Good progression in the development cycle.\\
-		03/04/16 & Finish main project framework & 30 min & Trevor Nguyen & Project is not complete yet.\\
-		03/04/16 & Documentation process & 100 min & Sammy Shin & Documentation was quicker than projected.\\
-		03/04/16 & Create demonstration program & 125 min & Christian Duffee & The graphics programming caused some complications.\\
-		03/04/16 & Finalize design and make final revisions & 45 min & (all) & Debugging was easy with consistent code.\\
+	\renewcommand{\arraystretch}{2.15}
+	\begin{tabular} { l || p{1.25 in}| l| l|p{2.50in}}
+		Date 	& Task 								& Time 	& Initials 		& Comments \\
+		02/14/16 	& Plan abstract layouts 					& 50 min 	& SS, TN, CD	& This process took longer than expected. \\
+		02/23/16 	& Java class design 						& 45 min 	& TN, CD 		& Designing object oriented fields and methods.\\
+		02/24/16 	& Begin coding framework 				& 240 min & SS, TN, CD	& Good progression in the development cycle.\\
+		02/26/16 	& Finish main project framework 			& 30 min	& TN, CJ		& Project is not complete yet.\\
+		03/01/16 	& Documentation process 				& 100 min	& SS, TN 		& Documentation was quicker than projected.\\
+		03/01/16 	& Create demonstration program 			& 125 min	& CD, SS 		& The graphics programming caused some complications.\\
+		03/03/16 	& Finalize design and make final revisions 	& 45 min 	& SS, TN, CD 	& Debugging was easy with consistent code.\\
+		03/08/16 	& 									& 55 min 	& TN, CD 		& \\
+		03/09/16 	& 					 				& 120 min & SS, TN, CD	& \\
+		03/12/16 	&  									& 30 min	& TN, CD		& \\
+		03/13/16 	&  									& 135 min	& SS, TN 		& \\
+		03/15/16 	&  									& 15 min 	& TN, CD 		& \\
+		03/18/16 	&  									& 25 min 	& SS, TN, CD	& \\
+		03/19/16 	&  									& 180 min	& TN, CD		& \\
+		03/23/16 	&  									& 135 min	& SS, TN 		& \\
+		03/25/16 	&  									& 55 min	& SS, TN 		& \\
+		03/26/16 	&  									& 80 min 	& TN, CD 		& \\
+		03/29/16 	&  									& 25 min 	& SS, TN, CD	& \\
+		04/02/16 	&  									& 170 min	& TN, CD		& \\
+		04/02/16 	& 					 				& 105 min	& SS, TN 		& \\
 		
+	 \begin{comment}
+	 \end{comment}
 		
 	\end{tabular}
 	\end{center}
+	
+	\normalsize
+	
 \cleardoublepage
 \section{Software Design Process}
 	\subsection{Project Requirements}
-		\paragraph{Usability} We knew that our software had to be usable by other programmers and software engineers. In order to fulfill this requirement, we made our code extremely logical without sacrificing our reputation for creating efficient algorithms. In addition, we were able 
+		\paragraph{Purpose}
+		Ecclesia's purpose is to provide means to extrapolate an approximated function from a map of inputs and desired outputs. The software will create and evolve a neural network by training it on inputs and respective desired outputs. The design incorporates bipartite graph data structures in order to organize neuron nodes appropriately, modeling the framework after biological neural networks. The artificial neural network must be capable of 
+		\paragraph{Usability}
+		One of the prime requirements decided upon was the usability of our software. Usability includes the clarity and conciseness of code so that people using our software would be able to develop applications quickly and effectively. Programming the components needed to be in the style of Java so that software developers would be able to use something with which they are familiar. In order to fulfill this requirement, we preferred to make our code as logical as possible without sacrificing our reputation for creating efficient code. In addition, we were able generate Javadocs from the source code markup comments.
+		
+		\paragraph{Java Conventions}
+		Going into our software development process, the team agreed upon using standard coding conventions when writing any portion of code for the project. Our project team used our best efforts to always write code with standard Java practices in mind, adhering to Java conventions. We were mindful of everything from proper use of whitespace, to maintaining object oriented principles in our design. Using conventions consistent with the programming language allows for readability of source code. Furthermore, using conventions allows for open source contributors to make contributions easily in order to grow Project Ecclesia. Writing with code conventions also allows for internal software development to occur at an increased rate because the whole team can agree on a universal style and everyone will
+		
+		\paragraph{Efficiency} 
+		A major interest in our design process was in the efficiency of our software. Having an understanding of time complexity analysis and all of the basic computer science data structures such as stacks, queues, linked lists, and heaps, we knew the difference between naive code and optimized code. During the software development process, we planned out our design in abstract terms, as as we moved along further in the project, we discussed which implementations would serve us best, offering least restrictive time complexity with asymptotic analysis.	
+	
 	\subsection{High-level Software Design}
 		\paragraph{Artificial Neural Networks}
 		The project is entirely based around artificial neural networks that add a layer of abstraction to our design process. This concept is a form of deep learning that is directly modeled off of the biological neural networks that are present in almost all Phyla of the Kingdom Animalia.
 		\paragraph{Abstract Algorithms}
 		In order to discover the actual algorithms to govern the organisms would be too difficult to make them both efficient yet seem realistic. This is where artificial neural networks become useful because they allow for specific algorithms to be discovered randomly by a computational process.
+		\paragraph{Modular Design}
+		\paragraph{Weakly Referenced Nodes}
+		\paragraph{Optimized Graph Data Model}
+		\paragraph{Asynchronous Transfer Functions}
+	\clearpage
 	\subsection{Testing}
-		In order to test the development toolkit, we created a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't completely technical, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project very nigh to the time of shipping the product. This was because in order to create the demonstration, we were required to push ourselves beyond our comfort zone in the field of video game design. We were required to implement graphical displays using the built-in Java swing graphics package in order to display information to the screen.
-		\paragraph{Demonstration} In all simplicity, our program was designed as a neural network toolkit for other developers to implement in their respective projects and ideas. We have demonstrated what a possible use could be for our toolkit by creating an environment in which many organisms (signified by the cyan colored blocks) dubbed as Malishes which is a rough Russian translation for small creature. The purpose of these creatures is to gather food (which is denoted by the green blocks) and reproduce. The longer a Malish goes without eating food, it becomes hungrier and dies. This hunger is visible through the creature changing its color from cyan to yellow, for slightly hungry, to red, about to die from hunger. Our neural network is seen in these creatures through their adaptive behavior to eat food more efficiently.  
+		\paragraph{Verification of Effectiveness}
+		In order to test the effectiveness of our development toolkit, we wrote a simple GUI application that involves 2D point predictions. An initial 2D point would be fed into the neural network and the output would be a second 2D point. The user of the application would choose an arbitrary pattern to his or her liking and continuously give the network sets of two points, with one point being the input and the other being the output. By training it on a specific pattern such as a fixed translation, or line reflection, or point rotation, the neural network would slowly be able to learn a patterned relationship between an input set of points and an output set of points. If, over time, the network becomes more and more accurate to the desired results, then the artificial neural network program can be considered effective.
+		\paragraph{Visual Demonstration} We wanted to create a quick graphical demonstration of how the software can be used in an actual application. Although the demonstration isn't extremely technical in design, it still accurately communicates the vast capabilities of our software. A lot of debugging went into the project in order to make the experience as interactive as possible utilizing mouse input and graphics. We were able to implement graphical displays using the built-in Java swing graphics package in order to display visual information to the GUI window. The demonstration is available for exploration in our demos directory detailed below.
+	
 	\subsection{End User Product Documentation}
-		In order to make the end user experience as great as possible, we used Java documentation style as much as humanly possible in order to make the software toolkit extremely usable. From our diligently commented and annotated code, anyone who is familiar with the inner-workings of Java and experience using something like JavaDocs will be able to use the software in anything from hobby projects to industrial applications.
+		\paragraph{Overview}
+		In our source code files, we have multiple directories. The actual neural network toolkit that we designed and implemented is located in the directory \texttt{/src/} which stores Ecclesia's core functionality. Everything needed to use Ecclesia for artificial intelligence software development is contained in this folder. Included in our source files is also the source code for our demonstrations, which is included separately in the directory \texttt{/demo/}. For one to compile these files and run the simulations, one would need access to the files in this directory and the main source directory because the demonstrations have dependencies on the Ecclesia core packages. Further explanation of each package is detailed in the Javadocs provided.
+		\paragraph{Javadocs Documentation}
+		In order to make the end user experience as great as possible, we used Java documentation style as much as possible in order to make the software toolkit extremely usable. From our diligent code commenting and annotations, anyone who is familiar with the inner-workings of Java and experience using something like Javadocs will be able to use the software in anything from hobby projects to industrial applications. Using Java's built in Javadocs capability that allows HTML documentation to generated instantaneously from code, we were able to create external documentation easily. However, simply exporting our source code to Javadocs was not as simple as running a script. The content contained in the generated Javadocs originated from our code comments for every package, class, and function. The project team aimed to properly explain the logic and purpose behind every element of our software in during the development process in order to aid in the final generated documentation. In our source files, the HTML documentation is included in the folder "docs". The Javadocs can be viewed as HTML files visually in any normal web browser. For this reason, in order to save paper, we have omitted the full end user product documentation in favor of using HTML
+		
+\cleardoublepage		
 \section{Team Evaluation and Future Prospects}
+	\paragraph{Research}
+	Entering the project, as we have already mentioned, we did not have the full understanding of artificial neural networks as we have now. In fact, a majority of our time allocated toward the project went into extensive research (which regrettably, there is only one page available for it in our portfolio), and we gained so much knowledge because of our genuine interest in artificial neural networks. All of us have taken advanced biology the previous year in our high school careers, and we were all excited to understand how computers could be successful at imitating real life biological systems. The research was a critical component to the correctness of our final product because it allowed us to base our development off of the architecture of real artificial neural networks used in the graduate courses of established universities. Going into the actual coding process with stable foundations in artificial intelligence gave us the ability to design a robust system that was not just a Java binding for another ANN library.
+
+	\paragraph{Development Cycle}
+	The development of Project Ecclesia has actually had two iterations to date. Our first iteration of Ecclesia had a very restrictive timeline that expected short development times and lofty goals and was completely nonpareil in terms of planning. When project team first sat down to discuss the details of our planned development cycle, we were very experienced programmers, yet we had no real experience working in a collaborative project. Our sophomoric prospects for the software's development was hastily planned, and the result was a hastily built final product. We believe that if we had shifted just a small portion of our research efforts toward planning our course of development, then our development would have proceeded more smoothly.
+	
+	\paragraph{Source Control}
+	In terms of source control, we decided on using Git, and hosted our project privately on GitHub for free with a student developer license. When we were deciding what source control solution to use, we were debating between Git and SVN. Git was a wonderful solution for us because of its distributed source control which allowed us to create different development branches to track our progress in our development cycle.
+	
+	\paragraph{March Redesign Efforts}
+	When our project team finished with the core components of Ecclesia in late February 2016, our software toolkit was functional. However, decided that our code needed major refactoring in order to maintain the ideals of clarity and conciseness that we so wished to have. We entered the slippery slope of code refactoring, and after much debate, we decided to do a complete redesign of our code base in favor of more consistent programming and improved organization.
+	
+	\paragraph{Coding Aesthetics}
 	Our team strongly believes in the project and it has been a great time working with it to make the program function as intended. Despite our successes, we believe that it would have been even more successful if the time line of the project had been spread out over a longer period of time to allow ideas to settle and problems to be resolved with much more deliberation.
+	
+	\paragraph{Effectiveness}
+	Through extensive testing, our team has been satisfied with the effectiveness of our artificial intelligence network's performance. We are confident in the efficiency of the design due to our preparations and planning of the software architecture. One major limitation on which our team wholeheartedly agrees is the neural network's reliance on extremely large sample data sets in order to train the network and achieve desired accuracy. However, this is a known limitation of artificial neural networks in general because of the way
+	
+	\paragraph{Future Prospects}
+	We intend for Ecclesia to grow and develop as an openly-sourced project keeping in mind our original ideals of developmental beauty derived from simplicity. After the 2015-2016 academic school year, our team plans to make Project Ecclesia's first public release, hosting the code base on GitHub. We are interested in seeing what the community can do to improve the artificial neural network toolkit. Because Java is an extremely popular programming language in the industry right now, we anticipate that our project will become popular with many users and contributors.
+
+
 \cleardoublepage
 \section{References and Further Readings}
-	MIT OpenCourseWare Artificial Intelligence 2006 Lecture Series \\ \\
-	Evolving Neural Network Controllers for a Team of
-	Self-organizing Robots\\\\
-	Washington University: Introduction to Neural Networks
+	We encountered many extremely invaluable resources during our team's research which allowed us to attain a well-rounded, responsible working knowledge of artificial neural networks by the time we were finished with the project.
+
+	\large
+	\vspace{0.65cm}
+
+	\begin{itemize}
+		\item MIT OpenCourseWare 6.034 Artificial Intelligence
+		
+			\hspace{1.5cm} Fall 2010 Video Lecture Series
+		\item Evolving Neural Network Controllers for a Team of Self-organizing Robots
+		
+			\hspace{1.5cm} University of Klagenfurt, Klagenfurt, Austria
+		\item Approximation of Functions and Their Derivatives: A Neural Network Implementation with Applications
+		
+			\hspace{1.5cm} University of Southern Queensland, Toowoomba, Australia
+		\item Derivation of Backpropagation
+		
+			\hspace{1.5cm} Swarthmore College, Swarthmore, Pennsylvania
+		\item Caltech Machine Learning Course -- CS 156
+		
+			\hspace{1.5cm} Spring 2012 Video Lecture Series
+		\item Artificial Intelligence: A Modern Approach Textbook
+			
+			\hspace{1.5cm} Stuart Russell and Peter Norvig
+		\item The Java Language Specification
+			
+			\hspace{1.5cm} Java SE 8 Edition, Oracle
+	\end{itemize}
 \end{document}          
  
