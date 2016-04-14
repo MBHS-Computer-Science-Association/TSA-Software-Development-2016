@@ -1,6 +1,9 @@
 package org.ecclesia.demo.graphics;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Window extends JFrame {
 	/**
