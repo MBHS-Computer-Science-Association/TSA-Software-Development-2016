@@ -24,12 +24,20 @@ public class CreatureVector {
 
 	public CreatureVector(float angle) {
 		this.angle = angle;
+<<<<<<< HEAD
 		fixAngle();
+=======
+		fix();
+>>>>>>> master
 	}
 
 	public void setAngle(float theta) {
 		angle = theta;
+<<<<<<< HEAD
 		fixAngle();
+=======
+		fix();
+>>>>>>> master
 	}
 
 	/**
@@ -38,11 +46,19 @@ public class CreatureVector {
 	 */
 	public void adjustAngle(float theta) {
 		angle += theta;
+<<<<<<< HEAD
 		fixAngle();
 	}
 
 	private void fixAngle() {
 		while (angle >= twoPI) {
+=======
+		fix();
+	}
+
+	private void fix() {
+		while (angle > twoPI) {
+>>>>>>> master
 			angle -= twoPI;
 		}
 		while (angle < 0) {

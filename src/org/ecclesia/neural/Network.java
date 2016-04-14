@@ -87,6 +87,7 @@ public class Network {
 		for (int i = 0; i < output.length; i++) {
 			output[i] = getSigmoidValue(output[i]);
 		}
+
 		return output;
 	}
 
