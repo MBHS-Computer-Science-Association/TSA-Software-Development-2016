@@ -40,7 +40,7 @@ public class Neuron {
 		Random random = new Random();
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
-			if (random.nextFloat() < mutationChance) {
+			if (random.nextFloat() <= mutationChance) {
 				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * changeFactor * random.nextFloat();
 				weights[i] = Math.max(weights[i], -1);
 				weights[i] = Math.min(weights[i], 1);

@@ -14,20 +14,21 @@ public class Network {
 	 * @param outputWidth
 	 */
 	public Network(int inputWidth, int hiddenWidth, int numHidden, int outputWidth) {
-		network = new Neuron[numHidden + 1][0];
+		network = new Neuron[numHidden+1][0];
 		network[0] = new Neuron[inputWidth];
-		for (int i = 1; i < numHidden + 1; i++) {
+		for (int i = 1; i < numHidden+1; i++) {
 			network[i] = new Neuron[hiddenWidth];
 		}
-
-		for (int i = 0; i < network.length - 1; i++) {
-			for (int n = 0; n < network[i].length; n++) {
+		
+		for(int i=0; i < network.length-1; i++)
+		{
+			for(int n = 0; n < network[i].length; n++){
 				network[i][n] = new Neuron(hiddenWidth);
 			}
 		}
-
-		for (int i = 0; i < network[network.length - 1].length; i++) {
-			network[network.length - 1][i] = new Neuron(outputWidth);
+		
+		for(int i=0; i < network[network.length-1].length; i++){
+			network[network.length-1][i] = new Neuron(outputWidth);
 		}
 	}
 
@@ -83,12 +84,13 @@ public class Network {
 				output[n] += localOutputs[n];
 			}
 		}
-		for (int i = 0; i < output.length; i++) {
+		for(int i=0; i<output.length; i++)
+		{
 			output[i] = getSigmoidValue(output[i]);
 		}
 		return output;
 	}
-
+	
 	/**
 	 * Gets an output based on a Sigmoid function
 	 * 
