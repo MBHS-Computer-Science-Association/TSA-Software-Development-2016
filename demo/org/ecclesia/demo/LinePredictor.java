@@ -31,16 +31,16 @@ public class LinePredictor {
 		if (points.size() == 1) {
 			float[] pointer = new float[2];
 			Point o = points.get(0);
-			pointer[0] = (float)o.getX() / 750;
-			pointer[1] = (float)o.getY() / 750;
+			pointer[0] = (float) o.getX() / 1000;
+			pointer[1] = (float) o.getY() / 1000;
 			float[] predictedOutput = net.getOutput(pointer);
-			int preX = (int)( predictedOutput[0] * 750);
-			int preY = (int) (predictedOutput[1] * 750);
-			
-			System.out.println(Arrays.toString(pointer) + " " + Arrays.toString(predictedOutput) + " " + preX + " " + preY);
+			int preX = (int) (predictedOutput[0] * 550);
+			int preY = (int) (predictedOutput[1] * 550);
+
+			System.out.println(
+					Arrays.toString(pointer) + " " + Arrays.toString(predictedOutput) + " " + preX + " " + preY);
 			GraphicsFrame.addDrawable(new PredictedPoint(preX, preY));
 		} else {
-			// TODO Train Neural Network
 			points.clear();
 			GraphicsFrame.clearDrawables();
 		}

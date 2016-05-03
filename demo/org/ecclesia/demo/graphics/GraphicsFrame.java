@@ -26,6 +26,7 @@ public class GraphicsFrame extends JPanel {
 	 * Paints all drawables
 	 */
 	public void paint(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(Color.BLACK);
 		for (int i = 0; i < drawables.size(); i++) {
 			drawables.get(i).draw(g);
