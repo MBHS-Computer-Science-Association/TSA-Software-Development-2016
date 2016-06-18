@@ -1,5 +1,7 @@
 package org.ecclesia.neural;
 
+import java.util.Arrays;
+
 import org.ecclesia.neural.util.Mathematics;
 
 /**
@@ -8,11 +10,11 @@ import org.ecclesia.neural.util.Mathematics;
  */
 public class Network {
 	/**
-	 * Two dimensional array that stores the perceptron neurons of a discrete network
-	 * Has package level visibility for restricted encapsulation.
+	 * Two dimensional array that stores the perceptron neurons of a discrete
+	 * network Has package level visibility for restricted encapsulation.
 	 */
 	Neuron[][] network;
-
+	float[] output;
 	/**
 	 * Generates a new Random Neural Network
 	 * 
@@ -23,21 +25,22 @@ public class Network {
 	 */
 	public Network(int inputWidth, int hiddenWidth, int numHidden, int outputWidth) {
 		network = new Neuron[numHidden + 1][0];
-		network[0] = new Neuron[inputWidth];
-		for (int i = 1; i < numHidden+1; i++) {
+		network[0] = new Neuron[inputWidth]; // creates input Neuron row
+		for (int i = 1; i <= numHidden; i++) { // creates hidden Neuron rows
 			network[i] = new Neuron[hiddenWidth];
 		}
 
 		for (int i = 0; i < network.length - 1; i++) {
-
 			for (int n = 0; n < network[i].length; n++) {
 				network[i][n] = new Neuron(hiddenWidth);
 			}
 		}
-		
+
 		for (int i = 0; i < network[network.length - 1].length; i++) {
 			network[network.length - 1][i] = new Neuron(outputWidth);
 		}
+		
+		output = new float[outputWidth];
 	}
 
 	/**
@@ -55,6 +58,7 @@ public class Network {
 				network[i][n] = new Neuron(parentNetwork[i][n]);
 			}
 		}
+		output = new float[network[network.length-1][0].getWeights().length];
 	}
 
 	/**
@@ -73,6 +77,17 @@ public class Network {
 	 * @return output
 	 */
 	public float[] getOutput(float[] input) {
+		Arrays.fill(output, 0);
+		fillNetwork(input);
+		return output;
+	}
+
+	/**
+	 * Fills the network
+	 * 
+	 * @param input
+	 */
+	public void fillNetwork(float[] input) {
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
 		}
@@ -83,8 +98,8 @@ public class Network {
 				 * Only apply activation function if it is a hidden neuron
 				 * Excludes Input neurons
 				 */
-				if(n!=0) {
-					for(int j=0; j<localOutput.length; j++) {
+				if (n != 0) {
+					for (int j = 0; j < localOutput.length; j++) {
 						localOutput[j] = Mathematics.getSigmoidValue(localOutput[j]);
 					}
 				}
@@ -93,8 +108,7 @@ public class Network {
 				}
 			}
 		}
-
-		float[] output = new float[network[network.length - 1][0].getWeights().length];
+		
 		for (int i = 0; i < network[network.length - 1].length; i++) {
 			float[] localOutputs = network[network.length - 1][i].getOutput();
 			for (int n = 0; n < localOutputs.length; n++) {
@@ -104,7 +118,35 @@ public class Network {
 		for (int i = 0; i < output.length; i++) {
 			output[i] = Mathematics.getSigmoidValue(output[i]);
 		}
+	}
 
-		return output;
+	/**
+	public void backPropagation(float[] input, float[] expectedOutput) {
+		for (int row = network.length - 1; row == network.length - 1; row--) {
+			for (int i = 0; i < network[row].length; i++) {
+				double ak = n.getOutput();
+				double ai = con.leftNeuron.getOutput();
+				double desiredOutput = expectedOutput[i];
+
+				double partialDerivative = -ak * (1 - ak) * ai * (desiredOutput - ak);
+				double deltaWeight = -learningRate * partialDerivative;
+				double newWeight = con.getWeight() + deltaWeight;
+				con.setDeltaWeight(deltaWeight);
+				con.setWeight(newWeight + momentum * con.getPrevDeltaWeight());
+			}
+		}
+
+	}
+	**/
+
+	/**
+	 * Resets all the Neurons of the network
+	 */
+	public void reset() {
+		for (int r = 0; r < network.length; r++) {
+			for (int c = 0; c < network[r].length; c++) {
+				network[r][c].resetInput();
+			}
+		}
 	}
 }

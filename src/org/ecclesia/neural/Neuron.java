@@ -55,7 +55,7 @@ public class Neuron {
 	/**
 	 * Resets input down to zero for next iterative cycle
 	 */
-	private void resetInput() {
+	public void resetInput() {
 		input = 0;
 	}
 
