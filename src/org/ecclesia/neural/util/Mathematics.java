@@ -16,8 +16,8 @@ public class Mathematics {
 	 * @return sigmoid Value of v
 	 */
 	public static float getSigmoidValue(float v) {
-		return (float) ((Math.pow(Math.E, v) + Math.pow(Math.E, v)) / (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
-	}
+		//return (float) ((Math.pow(Math.E, v) + Math.pow(Math.E, v)) / (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
+		return (float) (1.0f / (1+Math.pow(Math.E, -2*v)));	}
 
 	/**
 	 * Calculates the inverse square root of a number quickly using bitwise

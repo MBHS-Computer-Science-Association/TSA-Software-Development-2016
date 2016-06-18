@@ -31,7 +31,7 @@ public class Neuron {
 		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = random.nextFloat() * (random.nextBoolean() ? 1 : -1);
+			weights[i] = random.nextFloat();
 		}
 	}
 
@@ -46,7 +46,7 @@ public class Neuron {
 		for (int i = 0; i < weights.length; i++) {
 			if (random.nextFloat() <= mutationChance) {
 				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * changeFactor * random.nextFloat();
-				weights[i] = Math.max(weights[i], -1);
+				weights[i] = Math.max(weights[i], 0);
 				weights[i] = Math.min(weights[i], 1);
 			}
 		}
@@ -75,7 +75,7 @@ public class Neuron {
 	public float[] getOutput() {
 		float[] output = new float[weights.length];
 		for (int i = 0; i < weights.length; i++) {
-			output[i] = Mathematics.getSigmoidValue(input * weights[i]);
+			output[i] = input * weights[i];
 		}
 		resetInput();
 		return output;
@@ -87,5 +87,5 @@ public class Neuron {
 	public float[] getWeights() {
 		return weights;
 	}
-	
+
 }

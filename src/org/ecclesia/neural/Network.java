@@ -79,6 +79,15 @@ public class Network {
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
 				float[] localOutput = network[i][n].getOutput();
+				/**
+				 * Only apply activation function if it is a hidden neuron
+				 * Excludes Input neurons
+				 */
+				if(n!=0) {
+					for(int j=0; j<localOutput.length; j++) {
+						localOutput[j] = Mathematics.getSigmoidValue(localOutput[j]);
+					}
+				}
 				for (int j = 0; j < localOutput.length; j++) {
 					network[i + 1][j].addInput(localOutput[j]);
 				}
