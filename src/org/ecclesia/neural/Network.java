@@ -132,7 +132,7 @@ public class Network {
 	public void backPropagation(float[] input, float[] expectedOutput) {
 		reset();
 		fillNetwork(input);
-		int row = network.length-1; //row of neurons before the output
+		int row = network.length - 1; // row of neurons before the output
 		for (int c = 0; c < network[row].length; c++) {
 			Neuron n = network[row][c];
 			float[] neuronOutput = n.getOutput();
@@ -145,8 +145,13 @@ public class Network {
 				float newWeight = weights[o] + deltaWeight;
 				float prevWeight = weights[o];
 				weights[o] = newWeight + momentum * prevWeight;
+				System.out.println(newWeight);
+				weights[o] = Math.min(weights[o], 1);
+				weights[o] = Math.max(weights[o], 0);
 			}
 		}
+
+		row = network.length - 2;
 	}
 
 	/**
