@@ -15,6 +15,8 @@ public class Network {
 	 */
 	Neuron[][] network;
 	float[] output;
+	final float backLearing = 0.85f;
+
 	/**
 	 * Generates a new Random Neural Network
 	 * 
@@ -39,7 +41,7 @@ public class Network {
 		for (int i = 0; i < network[network.length - 1].length; i++) {
 			network[network.length - 1][i] = new Neuron(outputWidth);
 		}
-		
+
 		output = new float[outputWidth];
 	}
 
@@ -58,7 +60,7 @@ public class Network {
 				network[i][n] = new Neuron(parentNetwork[i][n]);
 			}
 		}
-		output = new float[network[network.length-1][0].getWeights().length];
+		output = new float[network[network.length - 1][0].getWeights().length];
 	}
 
 	/**
@@ -77,7 +79,6 @@ public class Network {
 	 * @return output
 	 */
 	public float[] getOutput(float[] input) {
-		Arrays.fill(output, 0);
 		fillNetwork(input);
 		return output;
 	}
@@ -87,7 +88,8 @@ public class Network {
 	 * 
 	 * @param input
 	 */
-	public void fillNetwork(float[] input) {
+	private void fillNetwork(float[] input) {
+		Arrays.fill(output, 0);
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
 		}
@@ -108,7 +110,7 @@ public class Network {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < network[network.length - 1].length; i++) {
 			float[] localOutputs = network[network.length - 1][i].getOutput();
 			for (int n = 0; n < localOutputs.length; n++) {
@@ -120,13 +122,12 @@ public class Network {
 		}
 	}
 
-	/**
 	public void backPropagation(float[] input, float[] expectedOutput) {
 		for (int row = network.length - 1; row == network.length - 1; row--) {
-			for (int i = 0; i < network[row].length; i++) {
-				double ak = n.getOutput();
+			for (int c = 0; c < network[row].length; c++) {
+				float ak = network[row][c].getOutput();
 				double ai = con.leftNeuron.getOutput();
-				double desiredOutput = expectedOutput[i];
+				double desiredOutput = expectedOutput[c];
 
 				double partialDerivative = -ak * (1 - ak) * ai * (desiredOutput - ak);
 				double deltaWeight = -learningRate * partialDerivative;
@@ -137,7 +138,6 @@ public class Network {
 		}
 
 	}
-	**/
 
 	/**
 	 * Resets all the Neurons of the network
