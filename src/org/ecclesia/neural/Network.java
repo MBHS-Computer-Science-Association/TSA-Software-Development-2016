@@ -15,7 +15,8 @@ public class Network {
 	 */
 	Neuron[][] network;
 	float[] output;
-	final float backLearing = 0.85f;
+	final float backLearingFactor = 0.9f;
+	final float momentum = 0.7f;
 
 	/**
 	 * Generates a new Random Neural Network
@@ -79,6 +80,7 @@ public class Network {
 	 * @return output
 	 */
 	public float[] getOutput(float[] input) {
+		reset();
 		fillNetwork(input);
 		return output;
 	}
@@ -89,7 +91,6 @@ public class Network {
 	 * @param input
 	 */
 	private void fillNetwork(float[] input) {
-		Arrays.fill(output, 0);
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
 		}
@@ -122,21 +123,30 @@ public class Network {
 		}
 	}
 
+	/**
+	 * Applies the backpropagation algorithm to the data
+	 * 
+	 * @param input
+	 * @param expectedOutput
+	 */
 	public void backPropagation(float[] input, float[] expectedOutput) {
-		for (int row = network.length - 1; row == network.length - 1; row--) {
-			for (int c = 0; c < network[row].length; c++) {
-				float ak = network[row][c].getOutput();
-				double ai = con.leftNeuron.getOutput();
-				double desiredOutput = expectedOutput[c];
-
-				double partialDerivative = -ak * (1 - ak) * ai * (desiredOutput - ak);
-				double deltaWeight = -learningRate * partialDerivative;
-				double newWeight = con.getWeight() + deltaWeight;
-				con.setDeltaWeight(deltaWeight);
-				con.setWeight(newWeight + momentum * con.getPrevDeltaWeight());
+		reset();
+		fillNetwork(input);
+		int row = network.length-1; //row of neurons before the output
+		for (int c = 0; c < network[row].length; c++) {
+			Neuron n = network[row][c];
+			float[] neuronOutput = n.getOutput();
+			for (int o = 0; o < output.length; o++) {
+				float outputNode = output[o];
+				float partialDerivative = -outputNode * (1 - outputNode) * neuronOutput[o]
+						* (expectedOutput[o] - outputNode);
+				float deltaWeight = -backLearingFactor * partialDerivative;
+				float[] weights = n.getWeights();
+				float newWeight = weights[o] + deltaWeight;
+				float prevWeight = weights[o];
+				weights[o] = newWeight + momentum * prevWeight;
 			}
 		}
-
 	}
 
 	/**
@@ -148,5 +158,6 @@ public class Network {
 				network[r][c].resetInput();
 			}
 		}
+		Arrays.fill(output, 0);
 	}
 }
