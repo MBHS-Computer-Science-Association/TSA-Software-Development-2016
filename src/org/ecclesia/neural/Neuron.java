@@ -18,6 +18,7 @@ public class Neuron {
 	 * Arbitrary magnitude by which the weights will change.
 	 */
 	final static float changeFactor = 1.00f;
+	boolean allowsNegativeWeights;
 
 	private float[] weights;
 	private float input;
@@ -27,11 +28,12 @@ public class Neuron {
 	 * 
 	 * @param width
 	 */
-	public Neuron(int width) {
+	public Neuron(int width, boolean allowsNegativeWeights) {
+		this.allowsNegativeWeights = allowsNegativeWeights;
 		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = random.nextFloat();
+			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean()?-1:1);
 		}
 	}
 
@@ -41,13 +43,13 @@ public class Neuron {
 	 * @param parent
 	 */
 	public Neuron(Neuron parent) {
+		allowsNegativeWeights = parent.getAllowsNegativeWeights();
 		Random random = new Random();
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
 			if (random.nextFloat() <= mutationChance) {
 				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * changeFactor * random.nextFloat();
-				weights[i] = Math.max(weights[i], 0);
-				weights[i] = Math.min(weights[i], 1);
+				weights[i] = truent(weights[i]);
 			}
 		}
 	}
@@ -67,6 +69,14 @@ public class Neuron {
 	public void addInput(float value) {
 		input += value;
 	}
+	
+	/**
+	 * 
+	 * @return input
+	 */
+	public float getInput() {
+		return input;
+	}
 
 	/**
 	 * Gets the Neuron's output based on a sigmoid function and then resets the
@@ -77,7 +87,6 @@ public class Neuron {
 		for (int i = 0; i < weights.length; i++) {
 			output[i] = input * weights[i];
 		}
-		resetInput();
 		return output;
 	}
 
@@ -87,5 +96,26 @@ public class Neuron {
 	public float[] getWeights() {
 		return weights;
 	}
-
+	
+	/**
+	 * 
+	 * @param v
+	 * @return
+	 */
+	public float truent(float v) {
+		v = Math.min(v, 1f);
+		if (allowsNegativeWeights) {
+			return Math.max(-1, v);
+		} else {
+			return Math.max(0, v);
+		}
+	}
+	
+	/**
+	 * 
+	 * @return allowsNegativeWeights
+	 */
+	public boolean getAllowsNegativeWeights() {
+		return allowsNegativeWeights;
+	}
 }

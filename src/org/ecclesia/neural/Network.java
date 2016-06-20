@@ -15,8 +15,8 @@ public class Network {
 	 */
 	Neuron[][] network;
 	float[] output;
-	final float backLearingFactor = 0.9f;
-	final float momentum = 0.7f;
+	final float learningRate = 0.25f;
+	boolean allowsNegativeWeights;
 
 	/**
 	 * Generates a new Random Neural Network
@@ -27,6 +27,19 @@ public class Network {
 	 * @param outputWidth
 	 */
 	public Network(int inputWidth, int hiddenWidth, int numHidden, int outputWidth) {
+		this(inputWidth, hiddenWidth, numHidden, outputWidth, false);
+	}
+
+	/**
+	 * 
+	 * @param inputWidth
+	 * @param hiddenWidth
+	 * @param numHidden
+	 * @param outputWidth
+	 * @param allowsNegativeWeights
+	 */
+	public Network(int inputWidth, int hiddenWidth, int numHidden, int outputWidth, boolean allowsNegativeWeights) {
+		this.allowsNegativeWeights = allowsNegativeWeights;
 		network = new Neuron[numHidden + 1][0];
 		network[0] = new Neuron[inputWidth]; // creates input Neuron row
 		for (int i = 1; i <= numHidden; i++) { // creates hidden Neuron rows
@@ -135,23 +148,31 @@ public class Network {
 		int row = network.length - 1; // row of neurons before the output
 		for (int c = 0; c < network[row].length; c++) {
 			Neuron n = network[row][c];
-			float[] neuronOutput = n.getOutput();
 			for (int o = 0; o < output.length; o++) {
-				float outputNode = output[o];
-				float partialDerivative = -outputNode * (1 - outputNode) * neuronOutput[o]
-						* (expectedOutput[o] - outputNode);
-				float deltaWeight = -backLearingFactor * partialDerivative;
+				float outputError = expectedOutput[o] - output[o];
+				float change = learningRate * outputError * Mathematics.getSigmoidValue(n.getInput()) * output[o]
+						* (1 - output[o]);
 				float[] weights = n.getWeights();
-				float newWeight = weights[o] + deltaWeight;
-				float prevWeight = weights[o];
-				weights[o] = newWeight + momentum * prevWeight;
-				System.out.println(newWeight);
-				weights[o] = Math.min(weights[o], 1);
+				System.out.println(change);
+				weights[o] += change;
 				weights[o] = Math.max(weights[o], 0);
+				weights[o] = Math.min(weights[o], 1);
 			}
 		}
 
-		row = network.length - 2;
+		row = network.length - 2; // row of neurons 2 before the output
+		for (int c = 0; c < network[row].length; c++) {
+			Neuron n = network[row][c];
+			for (int o = 0; o < output.length; o++) {
+				float outputError = expectedOutput[o] - output[o];
+				float change = learningRate * outputError * Mathematics.getSigmoidValue(n.getInput())
+						* Mathematics.getSigmoidValue(network[row][o].getInput())
+						* (1 - Mathematics.getSigmoidValue(network[row][o].getInput()));
+				float[] weights = n.getWeights();
+				weights[o] += change;
+				weights[o] = truent(weights[o]);
+			}
+		}
 	}
 
 	/**
@@ -164,5 +185,19 @@ public class Network {
 			}
 		}
 		Arrays.fill(output, 0);
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @return
+	 */
+	public float truent(float v) {
+		v = Math.min(v, 1f);
+		if (allowsNegativeWeights) {
+			return Math.max(-1, v);
+		} else {
+			return Math.max(0, v);
+		}
 	}
 }

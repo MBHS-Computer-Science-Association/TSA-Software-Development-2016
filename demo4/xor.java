@@ -1,7 +1,3 @@
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
-import org.ecclesia.neural.Network;
-
 /**
  * 1 is true, 0 is false
  * 
