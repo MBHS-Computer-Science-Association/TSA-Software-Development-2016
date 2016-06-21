@@ -48,12 +48,12 @@ public class Network {
 
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
-				network[i][n] = new Neuron(hiddenWidth);
+				network[i][n] = new Neuron(hiddenWidth,allowsNegativeWeights);
 			}
 		}
 
 		for (int i = 0; i < network[network.length - 1].length; i++) {
-			network[network.length - 1][i] = new Neuron(outputWidth);
+			network[network.length - 1][i] = new Neuron(outputWidth, allowsNegativeWeights);
 		}
 
 		output = new float[outputWidth];
@@ -104,19 +104,22 @@ public class Network {
 	 * @param input
 	 */
 	private void fillNetwork(float[] input) {
+		System.out.println(Arrays.toString(input));
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
+			System.out.println("input "+network[0][i].getInput());
 		}
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
 				float[] localOutput = network[i][n].getOutput();
+				System.out.println("firstLocalOutput "+ Arrays.toString(localOutput));
 				/**
 				 * Only apply activation function if it is a hidden neuron
 				 * Excludes Input neurons
 				 */
 				if (n != 0) {
 					for (int j = 0; j < localOutput.length; j++) {
-						localOutput[j] = Mathematics.getSigmoidValue(localOutput[j]);
+						localOutput[j] = localOutput[j];
 					}
 				}
 				for (int j = 0; j < localOutput.length; j++) {
@@ -130,9 +133,6 @@ public class Network {
 			for (int n = 0; n < localOutputs.length; n++) {
 				output[n] += localOutputs[n];
 			}
-		}
-		for (int i = 0; i < output.length; i++) {
-			output[i] = Mathematics.getSigmoidValue(output[i]);
 		}
 	}
 
@@ -150,13 +150,11 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * outputError * Mathematics.getSigmoidValue(n.getInput()) * output[o]
+				float change = learningRate * outputError * activFunc(n.getInput()) * output[o]
 						* (1 - output[o]);
 				float[] weights = n.getWeights();
-				System.out.println(change);
 				weights[o] += change;
-				weights[o] = Math.max(weights[o], 0);
-				weights[o] = Math.min(weights[o], 1);
+				weights[o] = truent(weights[o]);
 			}
 		}
 
@@ -165,9 +163,9 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * outputError * Mathematics.getSigmoidValue(n.getInput())
-						* Mathematics.getSigmoidValue(network[row][o].getInput())
-						* (1 - Mathematics.getSigmoidValue(network[row][o].getInput()));
+				float change = learningRate * outputError * activFunc(n.getInput())
+						* activFunc(network[row][o].getInput())
+						* (1 - activFunc(network[row][o].getInput()));
 				float[] weights = n.getWeights();
 				weights[o] += change;
 				weights[o] = truent(weights[o]);
@@ -200,4 +198,17 @@ public class Network {
 			return Math.max(0, v);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param v
+	 * @return
+	 */
+	 public float activFunc(float v) {
+		 if(allowsNegativeWeights) {
+			 return Mathematics.getSigmoidValue(v);
+		 }else {
+			 return Mathematics.getSigmoidValue(v);
+		 }
+	 }
 }

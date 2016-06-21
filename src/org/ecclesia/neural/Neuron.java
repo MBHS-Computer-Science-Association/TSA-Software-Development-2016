@@ -85,7 +85,7 @@ public class Neuron {
 	public float[] getOutput() {
 		float[] output = new float[weights.length];
 		for (int i = 0; i < weights.length; i++) {
-			output[i] = input * weights[i];
+			output[i] = activFunc(input) * weights[i];
 		}
 		return output;
 	}
@@ -118,4 +118,17 @@ public class Neuron {
 	public boolean getAllowsNegativeWeights() {
 		return allowsNegativeWeights;
 	}
+	
+	/**
+	 * 
+	 * @param v
+	 * @return
+	 */
+	 public float activFunc(float v) {
+		 if(allowsNegativeWeights) {
+			 return Mathematics.getSigmoidValue(v);
+		 }else {
+			 return Mathematics.getSigmoidValue(v);
+		 }
+	 }
 }
