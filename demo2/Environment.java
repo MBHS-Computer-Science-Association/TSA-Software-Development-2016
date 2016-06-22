@@ -60,7 +60,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 			malishList.add(m);
 		}
 
-		time = new Timer(1000 / 60, this);
+		time = new Timer(1000 / 180, this);
 		r = new Renderer();
 
 		setVisible(true);

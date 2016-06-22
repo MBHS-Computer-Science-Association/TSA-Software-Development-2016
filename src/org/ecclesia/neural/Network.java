@@ -104,15 +104,12 @@ public class Network {
 	 * @param input
 	 */
 	private void fillNetwork(float[] input) {
-		System.out.println(Arrays.toString(input));
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
-			System.out.println("input "+network[0][i].getInput());
 		}
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
 				float[] localOutput = network[i][n].getOutput();
-				System.out.println("firstLocalOutput "+ Arrays.toString(localOutput));
 				/**
 				 * Only apply activation function if it is a hidden neuron
 				 * Excludes Input neurons
@@ -150,10 +147,10 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * outputError * activFunc(n.getInput()) * output[o]
+				float change = learningRate * -outputError * activFunc(n.getInput()) * output[o]
 						* (1 - output[o]);
 				float[] weights = n.getWeights();
-				weights[o] += change;
+				weights[o] -= change;
 				weights[o] = truent(weights[o]);
 			}
 		}
@@ -163,11 +160,11 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * outputError * activFunc(n.getInput())
+				float change = learningRate * -outputError * activFunc(n.getInput())
 						* activFunc(network[row][o].getInput())
 						* (1 - activFunc(network[row][o].getInput()));
 				float[] weights = n.getWeights();
-				weights[o] += change;
+				//weights[o] -= change;
 				weights[o] = truent(weights[o]);
 			}
 		}
