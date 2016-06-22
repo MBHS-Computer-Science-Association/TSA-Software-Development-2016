@@ -147,8 +147,8 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * -outputError * activFunc(n.getInput()) * output[o]
-						* (1 - output[o]);
+				float change = learningRate * -outputError * activFunc(n.getInput()) * activFunc(output[o])
+						* (1 - activFunc(output[o]));
 				float[] weights = n.getWeights();
 				weights[o] -= change;
 				weights[o] = truent(weights[o]);
@@ -160,12 +160,14 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * -outputError * activFunc(n.getInput())
-						* activFunc(network[row][o].getInput())
-						* (1 - activFunc(network[row][o].getInput()));
-				float[] weights = n.getWeights();
-				//weights[o] -= change;
-				weights[o] = truent(weights[o]);
+				for(int c2=0; c2<n.getWeights().length; c2++) {
+					float change = learningRate * -outputError * activFunc(n.getInput())
+							* activFunc(network[row+1][c2].getInput())
+							* (1 - activFunc(network[row+1][c2].getInput()));
+					float[] weights = n.getWeights();
+					weights[c2] -= change;
+					weights[c2] = truent(weights[c2]);
+				}
 			}
 		}
 	}
