@@ -197,7 +197,6 @@ public class Network {
 						float newWeight = truent(weights[w] + bruteForceLearningRate * (negative ? -1 : 1));
 						// prevents calculations if weight hasn't changed
 						boolean improvement = newWeight != oldWeight;
-						improvement = true;
 						float totalError = 0;
 						float totalNewError = 0;
 						for (int t = 0; t < testCases.length && improvement; t++) {
@@ -213,6 +212,7 @@ public class Network {
 							weights[w] = oldWeight;
 						}
 						if (totalNewError<totalError) {
+							System.out.println("boom");
 							weights[w] = newWeight;
 							solutionFound = true;
 							anyImprovment = true;
