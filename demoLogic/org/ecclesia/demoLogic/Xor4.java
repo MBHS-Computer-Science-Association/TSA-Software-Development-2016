@@ -1,4 +1,5 @@
 package org.ecclesia.demoLogic;
+
 import org.ecclesia.neural.Network;
 
 /**
