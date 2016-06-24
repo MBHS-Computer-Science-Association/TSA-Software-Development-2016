@@ -1,3 +1,4 @@
+package org.ecclesia.demoLogic;
 import org.ecclesia.neural.Network;
 
 /**
@@ -5,7 +6,7 @@ import org.ecclesia.neural.Network;
  * @author CJ Duffee
  *
  */
-public class xor4 {
+public class Xor4 {
 	static Network n;
 
 	public static void main(String args[]) {
