@@ -1,5 +1,6 @@
 package org.ecclesia.demoLines;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,7 @@ public class LinePredictor {
 	 * Initializes a Point at a given X and Y coordinate, calls processing code
 	 */
 	public static void initPoint(int x, int y) {
-		points.add(new Point(x, y));
+		points.add(new Point(x, y, Color.RED));
 		processPoints();
 		GraphicsFrame.addDrawable(new UserPoint(x, y));
 	}

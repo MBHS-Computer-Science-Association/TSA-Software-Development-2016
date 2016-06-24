@@ -2,8 +2,6 @@ package org.ecclesia.demoTemplate;
 
 import javax.swing.JPanel;
 
-import org.ecclesia.demoLines.DemoWindow;
-
 public abstract class Demonstration {
 	final String name;
 	String introductionText;
