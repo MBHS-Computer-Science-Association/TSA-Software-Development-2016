@@ -16,7 +16,7 @@ public class Network {
 	Neuron[][] network;
 	float[] output;
 	final float backpropagationLearningRate = 0.25f;
-	final float bruteForceLearningRate = 0.05f;
+	final float bruteForceLearningRate = 0.1f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -187,7 +187,6 @@ public class Network {
 		boolean anyImprovment = false;
 		for (int r = 0; r < network.length; r++) {
 			for (int c = 0; c < network[r].length; c++) {
-				System.out.println("LOOP");
 				Neuron n = network[r][c];
 				float[] weights = n.getWeights();
 				for (int w = 0; w < weights.length; w++) {
@@ -198,6 +197,7 @@ public class Network {
 						float newWeight = truent(weights[w] + bruteForceLearningRate * (negative ? -1 : 1));
 						// prevents calculations if weight hasn't changed
 						boolean improvement = newWeight != oldWeight;
+						improvement = true;
 						float totalError = 0;
 						float totalNewError = 0;
 						for (int t = 0; t < testCases.length && improvement; t++) {
@@ -212,8 +212,7 @@ public class Network {
 							totalNewError +=newError;
 							weights[w] = oldWeight;
 						}
-						if (totalError<totalNewError) {
-							System.out.println("BOOM");
+						if (totalNewError<totalError) {
 							weights[w] = newWeight;
 							solutionFound = true;
 							anyImprovment = true;
