@@ -1,5 +1,4 @@
 package org.ecclesia.demoLines;
-import org.ecclesia.demo.graphics.*;
 import org.ecclesia.neural.*;
 
 import java.util.ArrayList;

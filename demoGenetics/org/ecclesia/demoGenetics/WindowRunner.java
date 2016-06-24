@@ -1,8 +1,4 @@
 package org.ecclesia.demoGenetics;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import org.ecclesia.demoLines.CancerGenomicAnalysis;
 import org.ecclesia.demoTemplate.Demonstration;
 
 public class WindowRunner {

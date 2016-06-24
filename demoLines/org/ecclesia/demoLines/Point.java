@@ -3,7 +3,7 @@ package org.ecclesia.demoLines;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Point implements Drawable {
+public class Point implements Drawable {
 	private final static int size = 10;
 	private Color color;
 	private int x;
