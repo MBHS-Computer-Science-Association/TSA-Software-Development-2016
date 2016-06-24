@@ -1,4 +1,5 @@
 package org.ecclesia.demoMedical;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -6,7 +7,7 @@ import java.util.Scanner;
 
 import org.ecclesia.neural.Network;
 
-public class MedicalDemo {
+public class MedicalDemoBruteForce {
 	static int[][] dat = new int[306][4];
 
 	public static void main(String args[]) throws FileNotFoundException {
@@ -16,23 +17,21 @@ public class MedicalDemo {
 				dat[i][k] = scanny.nextInt();
 			}
 		}
-		Network n = new Network(3, 3, 2, 2);
-		int index = 1;
-		while (true) {
-			float[][] data = getData();
-			int score = getScore(n, data);
-			for (int i = 0; i < 1; i++) {
-				// Network n2 = new Network(3,3,2,2);
-				Network n2 = new Network(n);
-				int score2 = getScore(n2, data);
-				if (score2 > score) {
-					n = n2;
-				}
-			}
-			float[][] newData = getData();
-			System.out.println(index + ": " + getScore(n, newData));
-			index++;
+		Network n = new Network(3, 3, 2, 1, true);
+		float[][] data = getData();
+		float[][] newData = getData();
+		float[][][] testCases = new float[amtData][2][3];
+		for(int i=0; i<testCases.length; i++) {
+			testCases[i][0] = data[i];
+			testCases[i][1] = data[i+amtData];
 		}
+		boolean learning = true;
+		while(learning) {
+			learning = n.bruteForceWeightImprovement(testCases);
+		}
+		System.out.println(getScore(n,data));
+		System.out.println(getScore(n,newData));
+
 	}
 
 	static Random randy = new Random();
@@ -42,7 +41,7 @@ public class MedicalDemo {
 		float[][] data = new float[amtData * 2 + 1][3];
 		for (int i = 0; i < amtData; i++) {
 			int r = randy.nextInt(dat.length);
-			//r = i;
+			// r = i;
 			data[i][0] = (dat[r][0] - 30) / 60.0f;
 			data[i][1] = (dat[r][1] - 58) / 12.0f;
 			data[i][2] = (dat[r][2]) / 20.0f;
@@ -56,7 +55,7 @@ public class MedicalDemo {
 		int score = 0;
 		for (int i = 0; i < amtData; i++) {
 			float[] out = n.getOutput(data[i]);
-			if ((out[0] > out[1]) == (data[amtData + 1][0] == 1.0f)) {
+			if ((out[0] > 0.5f) == (data[amtData + i][0] == 1.0f)) {
 				score++;
 			}
 		}
