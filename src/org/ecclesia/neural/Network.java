@@ -16,7 +16,7 @@ public class Network {
 	Neuron[][] network;
 	float[] output;
 	final float backpropagationLearningRate = 0.25f;
-	final float bruteForceLearningRate = 0.1f;
+	final float bruteForceLearningRate = 0.05f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -94,7 +94,6 @@ public class Network {
 	 * @return output
 	 */
 	public float[] getOutput(float[] input) {
-		reset();
 		fillNetwork(input);
 		return output;
 	}
@@ -105,6 +104,7 @@ public class Network {
 	 * @param input
 	 */
 	private void fillNetwork(float[] input) {
+		reset();
 		for (int i = 0; i < input.length; i++) {
 			network[0][i].addInput(input[i]);
 		}
@@ -145,7 +145,6 @@ public class Network {
 	 * @param expectedOutput
 	 */
 	public void backPropagation(float[] input, float[] expectedOutput) {
-		reset();
 		fillNetwork(input);
 		int row = network.length - 1; // row of neurons before the output
 		for (int c = 0; c < network[row].length; c++) {
@@ -182,10 +181,12 @@ public class Network {
 	 * Improves the Neural Network using a bruteforce algorithm
 	 * 
 	 * @param testCases
+	 * @return true if there was an improvement, false otherwise
 	 */
-	public void bruteForceWeightImprovement(float[][][] testCases) {
+	public boolean bruteForceWeightImprovement(float[][][] testCases) {
+		boolean anyImprovment = false;
 		for (int r = 0; r < network.length; r++) {
-			for (int c = 0; c < network.length; c++) {
+			for (int c = 0; c < network[r].length; c++) {
 				Neuron n = network[r][c];
 				float[] weights = n.getWeights();
 				for (int w = 0; w < weights.length; w++) {
@@ -196,6 +197,8 @@ public class Network {
 						float newWeight = truent(weights[w] + bruteForceLearningRate * (negative ? -1 : 1));
 						// prevents calculations if weight hasn't changed
 						boolean improvement = newWeight != oldWeight;
+						float totalError = 0;
+						float totalNewError = 0;
 						for (int t = 0; t < testCases.length && improvement; t++) {
 							float[] testInput = testCases[t][0];
 							float[] testOutput = testCases[t][1];
@@ -204,20 +207,22 @@ public class Network {
 							weights[w] = newWeight;
 							fillNetwork(testInput);
 							float newError = getTotalError(output, testOutput);
-							if (newError > error) {
-								improvement = false;
-							}
+							totalError+=error;
+							totalNewError +=newError;
 							weights[w] = oldWeight;
 						}
-						if (improvement) {
+						if (totalError<totalNewError) {
+							System.out.println("BOOM");
 							weights[w] = newWeight;
 							solutionFound = true;
+							anyImprovment = true;
 						}
 						negative = !negative;
 					} while (negative && !solutionFound);
 				}
 			}
 		}
+		return anyImprovment;
 	}
 
 	/**
