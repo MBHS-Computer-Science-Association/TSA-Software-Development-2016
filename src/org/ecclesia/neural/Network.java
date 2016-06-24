@@ -187,6 +187,7 @@ public class Network {
 		boolean anyImprovment = false;
 		for (int r = 0; r < network.length; r++) {
 			for (int c = 0; c < network[r].length; c++) {
+				System.out.println("LOOP");
 				Neuron n = network[r][c];
 				float[] weights = n.getWeights();
 				for (int w = 0; w < weights.length; w++) {
