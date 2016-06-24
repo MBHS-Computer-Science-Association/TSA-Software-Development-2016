@@ -19,7 +19,7 @@ public class Mathematics {
 		// return (float) ((Math.pow(Math.E, v) + Math.pow(Math.E, v)) /
 		
 		// (Math.pow(Math.E, v) + Math.pow(Math.E, -v)));
-		return (float) (1.0f / (1.0f + Math.pow(Math.E, -2 * v)));
+		return (float) (1.0f / (1.0f + Math.pow(Math.E, -1 * v)));
 		// return v;
 	}
 

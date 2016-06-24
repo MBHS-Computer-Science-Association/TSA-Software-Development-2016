@@ -46,7 +46,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 	 * 
 	 */
 	public Environment() throws InterruptedException {
-		super(title);//
+		super(title);
 		DisplayInfo.display();
 
 		for (int i = 0; i < initialFood; i++) {
@@ -72,7 +72,6 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 		add(r);
 
 		time.start();
-
 	}
 
 	/**
@@ -80,9 +79,8 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 	 * also updating the environment itself (the reproduction of food)
 	 */
 	public void update() {
-		
-		if(malishList.size()<=0) 
-		{
+
+		if (malishList.size() <= 0) {
 			for (int i = 0; i < initialMalish; i++) {
 				float x = random.nextFloat() * WIDTH;
 				float y = random.nextFloat() * HEIGHT;
@@ -90,7 +88,7 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 				malishList.add(m);
 			}
 		}
-		
+
 		if (random.nextFloat() < foodRegenerationRate) {
 			foodList.add(new Food(random.nextInt(WIDTH), random.nextInt(HEIGHT)));
 		}

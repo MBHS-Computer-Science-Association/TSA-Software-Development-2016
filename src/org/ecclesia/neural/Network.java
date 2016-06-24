@@ -48,7 +48,7 @@ public class Network {
 
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
-				network[i][n] = new Neuron(hiddenWidth,allowsNegativeWeights);
+				network[i][n] = new Neuron(hiddenWidth, allowsNegativeWeights);
 			}
 		}
 
@@ -109,7 +109,7 @@ public class Network {
 		}
 		for (int i = 0; i < network.length - 1; i++) {
 			for (int n = 0; n < network[i].length; n++) {
-				float[] localOutput = network[i][n].getOutput();
+				float[] localOutput = network[i][n].getOutputs();
 				/**
 				 * Only apply activation function if it is a hidden neuron
 				 * Excludes Input neurons
@@ -126,10 +126,14 @@ public class Network {
 		}
 
 		for (int i = 0; i < network[network.length - 1].length; i++) {
-			float[] localOutputs = network[network.length - 1][i].getOutput();
+			float[] localOutputs = network[network.length - 1][i].getOutputs();
 			for (int n = 0; n < localOutputs.length; n++) {
 				output[n] += localOutputs[n];
 			}
+		}
+		for (int i = 0; i < output.length; i++) {
+			// output[i] = activFunc(output[i]);
+			// output[i] = truent(output[i]);
 		}
 	}
 
@@ -147,7 +151,8 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				float change = learningRate * -outputError * activFunc(n.getInput()) * activFunc(output[o])
+				// outputError = outputError * outputError;
+				float change = learningRate * -outputError * n.getRawOutput() * activFunc(output[o])
 						* (1 - activFunc(output[o]));
 				float[] weights = n.getWeights();
 				weights[o] -= change;
@@ -160,15 +165,22 @@ public class Network {
 			Neuron n = network[row][c];
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
-				for(int c2=0; c2<n.getWeights().length; c2++) {
-					float change = learningRate * -outputError * activFunc(n.getInput())
-							* activFunc(network[row+1][c2].getInput())
-							* (1 - activFunc(network[row+1][c2].getInput()));
+				// outputError = outputError * outputError;
+				for (int c2 = 0; c2 < n.getWeights().length; c2++) {
+					float change = learningRate * -outputError * n.getRawOutput() * network[row + 1][c2].getRawOutput()
+							* (1 - network[row + 1][c2].getRawOutput());
 					float[] weights = n.getWeights();
 					weights[c2] -= change;
 					weights[c2] = truent(weights[c2]);
 				}
 			}
+		}
+	}
+
+	public void bruteForceWeightImprovement(float[][][] testCases) {
+		for (int t = 0; t < testCases.length; t++) {
+			float[] testInput = testCases[t][0];
+			float[] testOutput = testCases[t][0];
 		}
 	}
 
@@ -197,17 +209,17 @@ public class Network {
 			return Math.max(0, v);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param v
 	 * @return
 	 */
-	 public float activFunc(float v) {
-		 if(allowsNegativeWeights) {
-			 return Mathematics.getSigmoidValue(v);
-		 }else {
-			 return Mathematics.getSigmoidValue(v);
-		 }
-	 }
+	public float activFunc(float v) {
+		if (allowsNegativeWeights) {
+			return Mathematics.getSigmoidValue(v);
+		} else {
+			return Mathematics.getSigmoidValue(v);
+		}
+	}
 }

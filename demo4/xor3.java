@@ -6,36 +6,35 @@ import org.ecclesia.neural.Network;
  * @author CJ Duffee
  *
  */
-public class xor2 {
+public class xor3 {
 	static Network n;
 
 	public static void main(String args[]) {
-		while (true) {
-			n = new Network(2, 2, 1, 2, false);
-			float[] in1 = { 0.05f, 0.1f };
-			float[] in2 = { 0, 10 };
+		//while (true) {
+			n = new Network(2, 2, 1, 2, true);
+			float[] in1 = { .05f,.1f };
+			float[] in2 = { -9f };
 			float[] z = { 0, 0 };
-			float[] ou1 = { .01f, .99f };
-			float[] ou2 = { 10f };
+			float[] ou1 = {.1f,.99f };
+			float[] ou2 = { 0.1f };
 			int index = 1;
-			System.out.println("*" + n.getOutput(in1)[0] + " " + n.getOutput(in1)[1]);
-			while (index++ < 1000) {
+			System.out.println("*" + n.getOutput(in1)[0] + " " + n.getOutput(in1)[0]);
+			while (index++ < 1000000) {
 				n.backPropagation(in1, ou1);
-				// System.out.println("*" + n.getOutput(in1)[0]);
-				 n.backPropagation(in2, ou2);
+				//System.out.println("*" + n.getOutput(in1)[0]);
+			    //n.backPropagation(in2, ou2);
 				// System.out.println("*" + n.getOutput(in2)[0]);
 				// System.out.println("------------------ " + index);
 			}
-			while (index++ < 10000) {
-				// n.backPropagation(in2, ou2);
+			index=0;
+			while (index++ < 100) {
+				//n.backPropagation(in2, ou2);
 			}
 			System.out.println("*" + n.getOutput(in1)[0] + " " + n.getOutput(in1)[1]);
-			// System.out.println("*" + n.getOutput(in2)[0]);
-			if(n.getOutput(in1)[0]>1f) {
-				System.exit(1);
-			}
-		}
+			//System.out.println("*" + n.getOutput(in2)[0] + " " + n.getOutput(in2)[0]);
 
+			// System.out.println("*" + n.getOutput(in2)[0]);
+		//}
 	}
 
 	static float getSucessRate() {

@@ -33,7 +33,7 @@ public class Neuron {
 		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean()?-1:1);
+			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean() ? -1 : 1);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class Neuron {
 	public void addInput(float value) {
 		input += value;
 	}
-	
+
 	/**
 	 * 
 	 * @return input
@@ -79,15 +79,21 @@ public class Neuron {
 	}
 
 	/**
-	 * Gets the Neuron's output based on a sigmoid function and then resets the
+	 * Gets the Neuron's outputs based on a sigmoid function and then resets the
 	 * input
+	 * 
+	 * @return the output of the neuron including weight calculations
 	 */
-	public float[] getOutput() {
+	public float[] getOutputs() {
 		float[] output = new float[weights.length];
 		for (int i = 0; i < weights.length; i++) {
 			output[i] = activFunc(input) * weights[i];
 		}
 		return output;
+	}
+
+	public float getRawOutput() {
+		return activFunc(input);
 	}
 
 	/**
@@ -96,7 +102,7 @@ public class Neuron {
 	public float[] getWeights() {
 		return weights;
 	}
-	
+
 	/**
 	 * 
 	 * @param v
@@ -110,7 +116,7 @@ public class Neuron {
 			return Math.max(0, v);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return allowsNegativeWeights
@@ -118,17 +124,17 @@ public class Neuron {
 	public boolean getAllowsNegativeWeights() {
 		return allowsNegativeWeights;
 	}
-	
+
 	/**
 	 * 
 	 * @param v
 	 * @return
 	 */
-	 public float activFunc(float v) {
-		 if(allowsNegativeWeights) {
-			 return Mathematics.getSigmoidValue(v);
-		 }else {
-			 return Mathematics.getSigmoidValue(v);
-		 }
-	 }
+	public float activFunc(float v) {
+		if (allowsNegativeWeights) {
+			return Mathematics.getSigmoidValue(v);
+		} else {
+			return Mathematics.getSigmoidValue(v);
+		}
+	}
 }
