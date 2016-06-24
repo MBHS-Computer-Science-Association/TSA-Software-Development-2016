@@ -15,7 +15,8 @@ public class Network {
 	 */
 	Neuron[][] network;
 	float[] output;
-	final float learningRate = 0.25f;
+	final float backpropagationLearningRate = 0.25f;
+	final float bruteForceLearningRate = 0.1f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -152,7 +153,7 @@ public class Network {
 			for (int o = 0; o < output.length; o++) {
 				float outputError = expectedOutput[o] - output[o];
 				// outputError = outputError * outputError;
-				float change = learningRate * -outputError * n.getRawOutput() * activFunc(output[o])
+				float change = backpropagationLearningRate * -outputError * n.getRawOutput() * activFunc(output[o])
 						* (1 - activFunc(output[o]));
 				float[] weights = n.getWeights();
 				weights[o] -= change;
@@ -167,8 +168,8 @@ public class Network {
 				float outputError = expectedOutput[o] - output[o];
 				// outputError = outputError * outputError;
 				for (int c2 = 0; c2 < n.getWeights().length; c2++) {
-					float change = learningRate * -outputError * n.getRawOutput() * network[row + 1][c2].getRawOutput()
-							* (1 - network[row + 1][c2].getRawOutput());
+					float change = backpropagationLearningRate * -outputError * n.getRawOutput()
+							* network[row + 1][c2].getRawOutput() * (1 - network[row + 1][c2].getRawOutput());
 					float[] weights = n.getWeights();
 					weights[c2] -= change;
 					weights[c2] = truent(weights[c2]);
@@ -177,11 +178,63 @@ public class Network {
 		}
 	}
 
+	/**
+	 * Improves the Neural Network using a bruteforce algorithm
+	 * 
+	 * @param testCases
+	 */
 	public void bruteForceWeightImprovement(float[][][] testCases) {
-		for (int t = 0; t < testCases.length; t++) {
-			float[] testInput = testCases[t][0];
-			float[] testOutput = testCases[t][0];
+		for (int r = 0; r < network.length; r++) {
+			for (int c = 0; c < network.length; c++) {
+				Neuron n = network[r][c];
+				float[] weights = n.getWeights();
+				for (int w = 0; w < weights.length; w++) {
+					boolean negative = false;
+					boolean solutionFound = false;
+					do {
+						float oldWeight = weights[w];
+						float newWeight = truent(weights[w] + bruteForceLearningRate * (negative ? -1 : 1));
+						// prevents calculations if weight hasn't changed
+						boolean improvement = newWeight != oldWeight;
+						for (int t = 0; t < testCases.length && improvement; t++) {
+							float[] testInput = testCases[t][0];
+							float[] testOutput = testCases[t][1];
+							fillNetwork(testInput);
+							float error = getTotalError(output, testOutput);
+							weights[w] = newWeight;
+							fillNetwork(testInput);
+							float newError = getTotalError(output, testOutput);
+							if (newError > error) {
+								improvement = false;
+							}
+							weights[w] = oldWeight;
+						}
+						if (improvement) {
+							weights[w] = newWeight;
+							solutionFound = true;
+						}
+						negative = !negative;
+					} while (negative && !solutionFound);
+				}
+			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param output
+	 * @param expectedOutput
+	 * @return the total error rating between the two or -1 if there is an error
+	 */
+	public float getTotalError(float[] output, float[] expectedOutput) {
+		if (output.length != expectedOutput.length) {
+			return -1;
+		}
+		float error = 0;
+		for (int i = 0; i < output.length; i++) {
+			error += Math.abs(output[i] - expectedOutput[i]);
+		}
+		return error;
 	}
 
 	/**
