@@ -16,7 +16,7 @@ public class Network {
 	Neuron[][] network;
 	float[] output;
 	final float backpropagationLearningRate = 0.25f;
-	final float bruteForceLearningRate = 0.1f;
+	final float greedyAlgorithmRate = 0.1f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -183,7 +183,7 @@ public class Network {
 	 * @param testCases
 	 * @return true if there was an improvement, false otherwise
 	 */
-	public boolean bruteForceWeightImprovement(float[][][] testCases) {
+	public boolean greedAlhorithm(float[][][] testCases) {
 		boolean anyImprovment = false;
 		for (int r = 0; r < network.length; r++) {
 			for (int c = 0; c < network[r].length; c++) {
@@ -194,7 +194,7 @@ public class Network {
 					boolean solutionFound = false;
 					do {
 						float oldWeight = weights[w];
-						float newWeight = truent(weights[w] + bruteForceLearningRate * (negative ? -1 : 1));
+						float newWeight = truent(weights[w] + greedyAlgorithmRate * (negative ? -1 : 1));
 						// prevents calculations if weight hasn't changed
 						boolean improvement = newWeight != oldWeight;
 						float totalError = 0;
