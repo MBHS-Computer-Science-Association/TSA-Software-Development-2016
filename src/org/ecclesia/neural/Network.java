@@ -17,6 +17,7 @@ public class Network {
 	float[] output;
 	final float backpropagationLearningRate = 0.25f;
 	final float greedyAlgorithmRate = 0.1f;
+	final float bruteForceLearningRate = 0.5f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -207,12 +208,11 @@ public class Network {
 							weights[w] = newWeight;
 							fillNetwork(testInput);
 							float newError = getTotalError(output, testOutput);
-							totalError+=error;
-							totalNewError +=newError;
+							totalError += error;
+							totalNewError += newError;
 							weights[w] = oldWeight;
 						}
-						if (totalNewError<totalError) {
-							System.out.println("boom");
+						if (totalNewError < totalError) {
 							weights[w] = newWeight;
 							solutionFound = true;
 							anyImprovment = true;
@@ -223,6 +223,72 @@ public class Network {
 			}
 		}
 		return anyImprovment;
+	}
+
+	private float leastError;
+	
+	/**
+	 * Brute force weight combinations and chooses the one with the least error
+	 * 
+	 * @param testCases
+	 * @return true if any improvment was made, false otherwise
+	 */
+	public boolean bruteForceWeightImprovement(float[][][] testCases) {
+		leastError = 0;
+		for(int i=0; i<testCases.length; i++) {
+			fillNetwork(testCases[i][0]);
+			leastError += getTotalError(output, testCases[i][1]);
+		}
+		return recursiveBruteForce(testCases,0,0);
+	}
+
+	/**
+	 * 
+	 * @param testCases
+	 * @param r
+	 * @param c
+	 * @return true if any improvement, false otherwise
+	 */
+	private boolean recursiveBruteForce(float[][][] testCases, int r, int c) {
+		boolean last = r == network.length - 1 && c == network[r].length - 1;
+		boolean anyImprovement = false;
+		Neuron n = network[r][c];
+		float[] weights = n.getWeights();
+		for (int i = 0; i < weights.length; i++) {
+			float oldWeight = weights[i];
+			for (float w = (allowsNegativeWeights ? -1 : 0); w <= 1; w += bruteForceLearningRate) {
+				weights[i] = w;
+				if (last) {
+					float newError = 0;
+					for (int j = 0; j < testCases.length; j++) {
+						fillNetwork(testCases[j][0]);
+						newError += getTotalError(output, testCases[j][1]);
+					}
+					if (newError < leastError) {
+						leastError = newError;
+						anyImprovement = true;
+						oldWeight = w;
+					}
+				} else {
+					boolean better;
+					int nextR = r;
+					int nextC = c + 1;
+					if (nextC == network[r].length) {
+						nextR++;
+						nextC = 0;
+					}
+					better = recursiveBruteForce(testCases, nextR, nextC);
+					if (better) {
+						oldWeight = w;
+						anyImprovement = true;
+					} else {
+						weights[i] = oldWeight;
+					}
+				}
+
+			}
+		}
+		return anyImprovement;
 	}
 
 	/**
