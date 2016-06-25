@@ -271,6 +271,8 @@ public class Network {
 						leastError = newError;
 						anyImprovement = true;
 						oldWeight = w;
+					}else {
+						weights[i] = oldWeight;
 					}
 				} else {
 					boolean better;
