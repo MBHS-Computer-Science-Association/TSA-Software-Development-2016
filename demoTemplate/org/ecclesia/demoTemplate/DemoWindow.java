@@ -1,11 +1,10 @@
 package org.ecclesia.demoTemplate;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +32,9 @@ public class DemoWindow extends JFrame {
 	JPanel control;
 	JPanel content;
 
+	// Instructions Area
 	JTextArea introTextArea;
+	JScrollPane introScrollPane;
 
 	/**
 	 * Constructs a demonstration window to display a GUI for any demonstration.
@@ -50,7 +51,7 @@ public class DemoWindow extends JFrame {
 
 		// Initializes the platform specific style of buttons and window frames
 		// to provide a native experience to the user.
-		initializeWindow();
+		initializeWindow(new Dimension(800, 600));
 
 		createComponents();
 		fillPanels();
@@ -65,22 +66,25 @@ public class DemoWindow extends JFrame {
 	 */
 	public void lockAspectRatio() {
 		// Using an anonymous subclass in order to simplify things.
-		new Timer().schedule(new TimerTask(){
+		new Timer().schedule(new TimerTask() {
 			public void run() {
 				int width = getWidth();
 				int height = getHeight();
-				
+
 				if (Math.abs(width * 3.0 / 4.0 - height) > 5) {
-					// Run this as soon as possible without interrupting any tasks.
+					// Run this as soon as possible without interrupting any
+					// tasks.
 					SwingUtilities.invokeLater(new Thread() {
-						
+
 						public void run() {
-//							if (width < height)
-							setSize(width, (int) (width * 3.0/4.0));
+							if (width * 3.0 / 4.0 < height)
+								setSize(width, (int) (width * 3.0 / 4.0));
+							else
+								setSize((int)(height * 4.0 / 3.0), height);
 
 							formatComponents();
 						}
-						
+
 					});
 				}
 			}
@@ -140,34 +144,20 @@ public class DemoWindow extends JFrame {
 
 	public void fillPanels() {
 		introTextArea = new JTextArea(demo.getIntroduction());
-		JScrollPane scroller = new JScrollPane(introTextArea);
-		instructions.add(scroller);
-		// instructions.add(introTextArea);
+		introScrollPane = new JScrollPane(introTextArea);
+
+		instructions.setLayout(new BorderLayout());
+		instructions.add(introScrollPane, BorderLayout.CENTER);
+
 		introTextArea.setWrapStyleWord(true);
-		// introTextArea.setLineWrap(true);
+		introTextArea.setLineWrap(true);
 		introTextArea.setEditable(false);
+
+		introScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 
 	public void formatComponents() {
-
-		introTextArea.setSize(instructions.getSize());
-		// System.out.println(instructions.getSize());
-
-		/**
-		 * begin{codereview}
-		 */
-		// debugging alias
-		// JScrollPane d = scroller;
-		// introTextArea.setColumns(5);
-		// d.setSize(instructions.getSize());
-		// d.revalidate();
-		// d.revalidate();
-		// System.out.println();
-		/**
-		 * end{codereview}
-		 */
 		validate();
-		// introTextArea.setBackground(getBackground());
 	}
 
 	/**
@@ -176,11 +166,12 @@ public class DemoWindow extends JFrame {
 	 * closed when the exit button is clicked. Initializes the window to certain
 	 * dimensions. Layout is set to the GridBagLayout.
 	 */
-	public void initializeWindow() {
+	public void initializeWindow(Dimension d) {
 		// Required "boiler plate" code to make sure the frame will close
 		// and operate as expected.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
+		setSize(d);
+		setMinimumSize(d);
 
 		// GridBagLayout was chosen to allow for a uniform
 		// layout design while providing flexibility.
