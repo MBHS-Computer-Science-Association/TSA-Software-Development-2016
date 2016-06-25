@@ -12,9 +12,8 @@ public class Xor5 {
 	static Network n;
 
 	public static void main(String args[]) {
-		n = new Network(2, 3, 2, 1, true);
+		n = new Network(2, 3, 1, 1, true);
 		float sucessRate = 0;
-		int index = 0;
 		int in = 0;
 		float[][][] testCases = new float[4][2][0];
 		testCases[in][0] = new float[]{-1f,-1f};
