@@ -266,6 +266,7 @@ public class Network {
 						newError += getTotalError(output, testCases[j][1]);
 					}
 					if (newError < leastError) {
+						System.out.println(newError);
 						leastError = newError;
 						anyImprovement = true;
 						oldWeight = w;
