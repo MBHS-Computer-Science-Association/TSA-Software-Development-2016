@@ -4,6 +4,13 @@ import javax.swing.JPanel;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
+/**
+ * The functioning class that calls the GUI template and appends the 
+ * proper content to the content panel and the proper content to the control panel
+ * 
+ * @author Sammy Shin
+ *
+ */
 public class CancerGenomicAnalysis extends Demonstration {
 	JPanel contentPanel;
 	JPanel controlPanel;
@@ -33,11 +40,4 @@ public class CancerGenomicAnalysis extends Demonstration {
 		return controlPanel;
 	}
 
-	class ContentPanel extends JPanel {
-
-	}
-
-	class ControlPanel extends JPanel {
-
-	}
 }
