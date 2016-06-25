@@ -256,7 +256,6 @@ public class Network {
 		Neuron n = network[r][c];
 		float[] weights = n.getWeights();
 		for (int i = 0; i < weights.length; i++) {
-			//System.out.println(i);
 			float oldWeight = weights[i];
 			for (float w = (allowsNegativeWeights ? -1 : 0); w <= 1; w += bruteForceLearningRate) {
 				weights[i] = w;
