@@ -57,12 +57,12 @@ public class DemoWindow extends JFrame {
 		fillPanels();
 		lockAspectRatio();
 		setVisible(true);
-		formatComponents();
+		validate();
 	}
 
 	/**
-	 * Should trigger auto-resizing to a 4:3 aspect ratio on window resizing
-	 * event.
+	 * Should trigger auto-resizing to a 4:3 aspect ratio every ms in order to
+	 * ensure aspect ratio. Method needs to be only called once.
 	 */
 	public void lockAspectRatio() {
 		// Using an anonymous subclass in order to simplify things.
@@ -72,28 +72,43 @@ public class DemoWindow extends JFrame {
 				int height = getHeight();
 
 				if (Math.abs(width * 3.0 / 4.0 - height) > 5) {
-					// Run this as soon as possible without interrupting any
-					// tasks.
+					// Invoking later will execute after pending
+					// AWT threads have been processed, reducing
+					// potential problems.
 					SwingUtilities.invokeLater(new Thread() {
 
 						public void run() {
-							if (width * 3.0 / 4.0 < height)
-								setSize(width, (int) (width * 3.0 / 4.0));
-							else
-								setSize((int)(height * 4.0 / 3.0), height);
+							int desiredHeight = (int) (width * 3.0 / 4.0);
+							int desiredWidth = (int) (height * 4.0 / 3.0);
+							
+							// If the actual height is greater than
+							// the desired height, then the application
+							// will choose to change the height;
+							if (height > desiredHeight)
+								setSize(width, desiredHeight);
+							
+							// If the actual width is greater than
+							// the desired width, then the application
+							// will choose to change the width;
+							else if (width > desiredWidth)
+								setSize(desiredWidth, height);
 
-							formatComponents();
+							// The JFrame will layout all of the components
+							// and subcomponents again after a resizing event.
+							validate();
 						}
 
 					});
 				}
 			}
-		}, 0, 50);
+		}, 0, 1);
 	}
 
 	/**
 	 * Creates the three component panels for the application and initializes
-	 * all of the constraints and the borders.
+	 * all of the constraints and the borders. Constrains the components on a
+	 * grid system to ensure they occupy the right proportions of the
+	 * application frame.
 	 */
 	public void createComponents() {
 		// Initializing the panels for each content pane.
@@ -120,6 +135,9 @@ public class DemoWindow extends JFrame {
 		constraints.weighty = 9;
 		constraints.gridheight = 9;
 		add(instructions, constraints);
+		// Makes so that the instruction size does not flexibly
+		// expand into other regions.
+		instructions.setPreferredSize(new Dimension(0, 0));
 
 		// Setting constraints for the content panel.
 		// Located on the right of the screen.
@@ -130,6 +148,9 @@ public class DemoWindow extends JFrame {
 		constraints.weighty = 9;
 		constraints.gridheight = 9;
 		add(content, constraints);
+		// Makes so that the content size does not flexibly
+		// expand into other regions.
+		content.setPreferredSize(new Dimension(0, 0));
 
 		// Setting up constraints for the control panel.
 		// Located on the bottom of the screen.
@@ -140,11 +161,16 @@ public class DemoWindow extends JFrame {
 		constraints.weighty = 3;
 		constraints.gridheight = 3;
 		add(control, constraints);
+		// Makes so that the control size does not flexibly
+		// expand into other regions.
+		control.setPreferredSize(new Dimension(0, 0));
 	}
 
 	public void fillPanels() {
 		introTextArea = new JTextArea(demo.getIntroduction());
 		introScrollPane = new JScrollPane(introTextArea);
+		introScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		introScrollPane.setBorder(BorderFactory.createEmptyBorder());
 
 		instructions.setLayout(new BorderLayout());
 		instructions.add(introScrollPane, BorderLayout.CENTER);
@@ -152,12 +178,8 @@ public class DemoWindow extends JFrame {
 		introTextArea.setWrapStyleWord(true);
 		introTextArea.setLineWrap(true);
 		introTextArea.setEditable(false);
+		introTextArea.setBorder(BorderFactory.createEmptyBorder());
 
-		introScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	}
-
-	public void formatComponents() {
-		validate();
 	}
 
 	/**
@@ -165,6 +187,11 @@ public class DemoWindow extends JFrame {
 	 * UIManager which adapts to the operating system. Allows the window to be
 	 * closed when the exit button is clicked. Initializes the window to certain
 	 * dimensions. Layout is set to the GridBagLayout.
+	 * 
+	 * @param d
+	 *            The dimensions of the frame to initialize. These dimensions
+	 *            will end up being changed later should the user decide to
+	 *            resize the application.
 	 */
 	public void initializeWindow(Dimension d) {
 		// Required "boiler plate" code to make sure the frame will close
