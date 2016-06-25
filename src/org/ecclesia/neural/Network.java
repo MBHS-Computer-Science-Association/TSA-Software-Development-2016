@@ -239,6 +239,7 @@ public class Network {
 			fillNetwork(testCases[i][0]);
 			leastError += getTotalError(output, testCases[i][1]);
 		}
+		leastError = Float.MAX_VALUE;
 		return recursiveBruteForce(testCases,0,0);
 	}
 
@@ -255,6 +256,7 @@ public class Network {
 		Neuron n = network[r][c];
 		float[] weights = n.getWeights();
 		for (int i = 0; i < weights.length; i++) {
+			//System.out.println(i);
 			float oldWeight = weights[i];
 			for (float w = (allowsNegativeWeights ? -1 : 0); w <= 1; w += bruteForceLearningRate) {
 				weights[i] = w;
@@ -265,9 +267,12 @@ public class Network {
 						newError += getTotalError(output, testCases[j][1]);
 					}
 					if (newError < leastError) {
+						System.out.println(newError);
 						leastError = newError;
 						anyImprovement = true;
 						oldWeight = w;
+					}else {
+						weights[i] = oldWeight;
 					}
 				} else {
 					boolean better;
@@ -285,7 +290,6 @@ public class Network {
 						weights[i] = oldWeight;
 					}
 				}
-
 			}
 		}
 		return anyImprovement;
@@ -298,12 +302,22 @@ public class Network {
 	 * @return the total error rating between the two or -1 if there is an error
 	 */
 	public float getTotalError(float[] output, float[] expectedOutput) {
-		if (output.length != expectedOutput.length) {
+		return getDifference(output, expectedOutput);
+	}
+	
+	/**
+	 * 
+	 * @param arr
+	 * @param arr2
+	 * @return the total difference between the arrays
+	 */
+	public static float getDifference(float[] arr, float[] arr2) {
+		if (arr.length != arr2.length) {
 			return -1;
 		}
 		float error = 0;
-		for (int i = 0; i < output.length; i++) {
-			error += Math.abs(output[i] - expectedOutput[i]);
+		for (int i = 0; i < arr.length; i++) {
+			error += Math.abs(arr[i] - arr2[i]);
 		}
 		return error;
 	}
