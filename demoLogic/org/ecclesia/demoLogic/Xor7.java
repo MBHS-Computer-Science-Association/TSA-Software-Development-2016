@@ -8,7 +8,7 @@ import org.ecclesia.neural.Network;
  * @author CJ Duffee
  *
  */
-public class Xor5 {
+public class Xor7 {
 	static Network n;
 
 	public static void main(String args[]) {
