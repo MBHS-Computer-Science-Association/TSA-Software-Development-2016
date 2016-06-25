@@ -19,21 +19,50 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Manages all of the Java Swing components of the demonstration including GUIs
- * and JFrames in order to have separation of logic and style.
+ * and JFrames in order to have separation of logic and style. Reused code for
+ * all demonstrations and provides main framework for rendering the demonstration
+ * within a graphical window interface.
  * 
  * @author Trevor Nguyen
  *
  */
 public class DemoWindow extends JFrame {
+	/**
+	 * Stores the graphical information specific to the demonstration
+	 * and allows reuse of code through abstraction. Demo contains information
+	 * about the introductory text and 
+	 */
 	Demonstration demo;
 
-	// Three main panels that constitute the JFrame
+	/**
+	 * One of the three main panels that constitutes the JFrame.
+	 * Holds the instructions on how to use the demo. Sits on the left
+	 * side of the demonstration window.
+	 */
 	JPanel instructions;
+	/**
+	 * One of the three main panels that constitutes the JFrame.
+	 * Holds the control buttons that allow the user to interface
+	 * with the content panel. Main software-user interface that resides
+	 * on the bottom of the demonstration window.
+	 */
 	JPanel control;
+	/**
+	 * One of the three main panels that constitutes the JFrame.
+	 * Sits in the top right corner and dominates the center of the demonstration
+	 * window. Displays the main content of the demonstration.
+	 */
 	JPanel content;
 
-	// Instructions Area
+	
+	/**
+	 * The instructions text on the side bar of every demonstration.
+	 */
 	JTextArea introTextArea;
+	/**
+	 * The scrolling pane in which the instructions text resides.
+	 * Located within the instructions JPanel.
+	 */
 	JScrollPane introScrollPane;
 
 	/**
@@ -166,6 +195,10 @@ public class DemoWindow extends JFrame {
 		control.setPreferredSize(new Dimension(0, 0));
 	}
 
+	/**
+	 * Adds content to the panels. Separates the content from the formatting
+	 * of the three main panels.
+	 */
 	public void fillPanels() {
 		introTextArea = new JTextArea(demo.getIntroduction());
 		introScrollPane = new JScrollPane(introTextArea);
