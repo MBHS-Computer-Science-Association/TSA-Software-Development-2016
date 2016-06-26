@@ -27,7 +27,8 @@ public class MedicalDemoBruteForce {
 		}
 		boolean learning = true;
 		while(learning) {
-			learning = n.greedAlhorithm(testCases);
+			System.out.println('l');
+			learning = n.greedyAlgorithmWeightImprovment(testCases);
 		}
 		System.out.println(getScore(n,data));
 		System.out.println(getScore(n,newData));
