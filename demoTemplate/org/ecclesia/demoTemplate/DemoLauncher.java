@@ -126,7 +126,7 @@ public final class DemoLauncher extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(d);
 //		this.setMaximumSize(d);
-		this.setResizable(false);
+//		this.setResizable(false);
 
 		// BoxLayout was chosen for the demo launcher to
 		// allow for an easily scalable layout to meet the

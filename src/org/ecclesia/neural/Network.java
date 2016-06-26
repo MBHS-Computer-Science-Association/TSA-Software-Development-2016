@@ -185,7 +185,7 @@ public class Network {
 	 * @param testCases
 	 * @return true if there was an improvement, false otherwise
 	 */
-	public boolean greedAlhorithm(float[][][] testCases) {
+	public boolean greedyAlgorithmWeightImprovment(float[][][] testCases) {
 		boolean anyImprovment = false;
 		for (int r = 0; r < network.length; r++) {
 			for (int c = 0; c < network[r].length; c++) {
