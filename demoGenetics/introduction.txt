@@ -7,3 +7,5 @@
 			you can modify the sequence of nucleotides in the EGFR gene of a "patient" and a neural network will try to find the pattern in the nucleotide 
 			sequence and identify if he has a mutated set of nucleotides or a non-mutated set. Furthermore, you can train the neural network
 			to better identify whether or not the patient does have mutations in the EGFR gene.
+	</body>
+</html>
