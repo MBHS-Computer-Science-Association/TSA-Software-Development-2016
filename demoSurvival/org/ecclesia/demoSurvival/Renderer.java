@@ -4,6 +4,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import org.ecclesia.demoSurvival.entities.Food;
+import org.ecclesia.demoSurvival.entities.Malish;
+
 public class Renderer extends JPanel {
 	/**
 	 * 
@@ -18,9 +21,9 @@ public class Renderer extends JPanel {
 		super.paintComponent(g);
 		for (int i = 0; i < Environment.malishList.size(); i++) {
 			Malish malish = Environment.malishList.get(i);
-			if (malish.health < 0.1f) {
+			if (malish.getHealth() < 0.1f) {
 				g.setColor(Color.RED);
-			} else if (malish.health < 0.4f) {
+			} else if (malish.getHealth() < 0.4f) {
 				g.setColor(Color.YELLOW);
 			} else {
 				g.setColor(Color.GREEN);

@@ -1,4 +1,4 @@
-package org.ecclesia.demoSurvival;
+package org.ecclesia.demoSurvival.entities;
 
 public class CreatureVector {
 	private float x;

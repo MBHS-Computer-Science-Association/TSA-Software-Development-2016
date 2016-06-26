@@ -1,4 +1,5 @@
-package org.ecclesia.demoSurvival;
+package org.ecclesia.demoSurvival.entities;
+
 public class Food extends Organism {
 
 	public Food(float x, float y) {
