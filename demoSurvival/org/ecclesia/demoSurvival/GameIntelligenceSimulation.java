@@ -14,6 +14,8 @@ public class GameIntelligenceSimulation extends Demonstration {
 	public GameIntelligenceSimulation() {
 		super("Game Intelligence Simulation");
 		introduction = Demonstration.getInstructionsFromFile(new File("demoSurvival/introduction.txt"));
+		controlPanel = new ControlPanel();
+		contentPanel = new ContentPanel();
 	}
 
 	@Override
@@ -30,5 +32,12 @@ public class GameIntelligenceSimulation extends Demonstration {
 	public JPanel getControlPanel() {
 		return controlPanel;
 	}
-
+	
+	class ControlPanel extends JPanel {
+		
+	}
+	
+	class ContentPanel extends JPanel {
+		
+	}
 }
