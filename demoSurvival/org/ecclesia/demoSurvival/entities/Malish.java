@@ -51,7 +51,7 @@ public class Malish extends Animal {
 	 * @return true if dead or false if alive
 	 */
 	public boolean move(float[] input) {
-		boolean debug = true;
+		boolean debug = false;
 		
 		super.move(moveSpeed);
 		float[] output = net.getOutput(input);

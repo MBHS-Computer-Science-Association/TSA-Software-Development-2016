@@ -140,7 +140,8 @@ public class Environment {
 				Food food = foodList.get(j);
 				float diffX = food.getX() - malish.getX();
 				float diffY = food.getY() - malish.getY();
-				float theta = (float) Math.atan(diffY / diffX);
+				float theta = (float) Math.atan2(diffY, diffX);
+				
 				if (theta < 0) {
 					theta += 2.00 * Math.PI;
 				}
@@ -149,14 +150,11 @@ public class Environment {
 				if (food.getX() < malish.getX() && food.getY() < malish.getY()) {
 					theta += Math.PI;
 				// 2nd quadrant
-				} else if (food.getX() < malish.getX() && food.getY() >= malish.getY()) { // if
-																							// in
-																							// 2nd
-																							// quadrant
+				} else if (food.getX() < malish.getX() && food.getY() >= malish.getY()) {
 					theta += Math.PI;
 				}
 
-				float relativeAngle = theta -= malish.getAngle();
+				float relativeAngle = theta - malish.getAngle();
 
 				int newDirection = -2;
 				// if (diffX * diffX + diffY * diffY < clippingDistance) {
