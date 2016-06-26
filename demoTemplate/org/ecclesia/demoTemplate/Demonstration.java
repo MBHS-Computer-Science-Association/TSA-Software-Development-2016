@@ -14,6 +14,11 @@ import javax.swing.JPanel;
  * these three things, the designer does not have to worry about how the actual
  * window will appear; only the content within the panels matters.
  * 
+ * <br />
+ * 
+ * Note: In order to work properly, the subclass must set the intruoduction,
+ * control and content panels manually.
+ * 
  * @author Trevor Nguyen
  *
  */

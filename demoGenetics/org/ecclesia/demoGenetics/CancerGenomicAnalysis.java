@@ -14,30 +14,10 @@ import org.ecclesia.demoTemplate.Demonstration;
  *
  */
 public class CancerGenomicAnalysis extends Demonstration {
-	private JPanel contentPanel;
-	private JPanel controlPanel;
-	private String introduction;
-	
 	public CancerGenomicAnalysis() {
 		super("Artificial Neural Networks in Cancer Genetic Studies");
-		introduction = Demonstration.getInstructionsFromFile(new File("demoGenetics/introduction.txt"));
-		contentPanel = new ContentPanel();
-		controlPanel = new ControlPanel();
+		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoGenetics/introduction.txt")));
+		this.setContentPanel(new ContentPanel());
+		this.setControlPanel(new ControlPanel());
 	}
-
-	@Override
-	public String getIntroduction() {
-		return introduction;
-	}
-
-	@Override
-	public JPanel getContentPanel() {
-		return contentPanel;
-	}
-
-	@Override
-	public JPanel getControlPanel() {
-		return controlPanel;
-	}
-
 }
