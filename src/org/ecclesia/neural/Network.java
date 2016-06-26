@@ -15,9 +15,10 @@ public class Network {
 	 */
 	Neuron[][] network;
 	float[] output;
-	final float backpropagationLearningRate = 0.25f;
-	final float greedyAlgorithmRate = 0.05f;
-	final float bruteForceLearningRate = 0.25f;
+	final static float backpropagationLearningRate = 0.25f;
+	final static float greedyAlgorithmRate = 0.05f;
+	final static float bruteForceLearningRate = 1f;
+	final static float weightsMax = 10;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -257,7 +258,7 @@ public class Network {
 		float[] weights = n.getWeights();
 		for (int i = 0; i < weights.length; i++) {
 			float oldWeight = weights[i];
-			for (float w = (allowsNegativeWeights ? -1 : 0); w <= 1; w += bruteForceLearningRate) {
+			for (float w = (allowsNegativeWeights ? -weightsMax : 0); w <= weightsMax; w += bruteForceLearningRate) {
 				weights[i] = w;
 				if (last) {
 					float newError = 0;
@@ -338,9 +339,9 @@ public class Network {
 	 * @return
 	 */
 	public float truent(float v) {
-		v = Math.min(v, 1f);
+		v = Math.min(v, weightsMax);
 		if (allowsNegativeWeights) {
-			return Math.max(-1, v);
+			return Math.max(-weightsMax, v);
 		} else {
 			return Math.max(0, v);
 		}
