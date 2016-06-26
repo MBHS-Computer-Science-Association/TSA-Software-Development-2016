@@ -9,24 +9,32 @@ import org.ecclesia.neural.Network;
 
 public class LinePredictor {
 
-	static Network net = new Network(2, 2, 1, 2);
+	private Network net;
 
-	static List<Point> points = new ArrayList<>();
-
+	private List<Point> points;
+	private Renderer renderer;
+	
+	public LinePredictor() {
+		net = new Network(2, 2, 1, 2);
+		points = new ArrayList<>();
+		
+		renderer = new Renderer(this);
+	}
+	
 	/**
 	 * Initializes a Point at a given X and Y coordinate, calls processing code
 	 */
-	public static void initPoint(int x, int y) {
+	public void initPoint(int x, int y) {
 		points.add(new Point(x, y, Color.RED));
 		processPoints();
-		GraphicsFrame.addDrawable(new UserPoint(x, y));
+		renderer.addDrawable(new UserPoint(x, y));
 	}
 
 	/**
 	 * If there is one Point, then calls Neural Network to predict 2nd point
 	 * else, clear the point list and train Neural Network
 	 */
-	private static void processPoints() {
+	private void processPoints() {
 		if (points.size() == 1) {
 			float[] pointer = new float[2];
 			Point o = points.get(0);
@@ -38,10 +46,18 @@ public class LinePredictor {
 
 			System.out.println(
 					Arrays.toString(pointer) + " " + Arrays.toString(predictedOutput) + " " + preX + " " + preY);
-			GraphicsFrame.addDrawable(new PredictedPoint(preX, preY));
+			renderer.addDrawable(new PredictedPoint(preX, preY));
 		} else {
 			points.clear();
-			GraphicsFrame.clearDrawables();
+			renderer.clearDrawables();
 		}
+	}
+	
+	/**
+	 * Accesses this simulation's graphical renderer panel
+	 * @return renderer
+	 */
+	protected Renderer getRenderer() {
+		return renderer;
 	}
 }

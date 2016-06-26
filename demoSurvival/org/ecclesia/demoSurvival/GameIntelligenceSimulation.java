@@ -23,7 +23,7 @@ import org.ecclesia.demoTemplate.Demonstration;
  *
  */
 public class GameIntelligenceSimulation extends Demonstration {
-	Environment environment;
+	private Environment environment;
 
 	public GameIntelligenceSimulation() {
 		super("Game Intelligence Simulation");

@@ -15,7 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.ecclesia.demoGenetics.CancerGenomicAnalysis;
-import org.ecclesia.demoLines.DisplayInfo;
+import org.ecclesia.demoLines.LineExtrapolationDemo;
 import org.ecclesia.demoSurvival.GameIntelligenceSimulation;
 
 /**
@@ -44,6 +44,7 @@ public final class DemoLauncher extends JFrame {
 		demoList = new LinkedList<>();
 		demoList.add(new CancerGenomicAnalysis());
 		demoList.add(new GameIntelligenceSimulation());
+		demoList.add(new LineExtrapolationDemo());
 	}
 	
 	/**
