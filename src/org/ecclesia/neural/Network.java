@@ -16,8 +16,8 @@ public class Network {
 	Neuron[][] network;
 	float[] output;
 	final float backpropagationLearningRate = 0.25f;
-	final float greedyAlgorithmRate = 0.1f;
-	final float bruteForceLearningRate = 0.5f;
+	final float greedyAlgorithmRate = 0.05f;
+	final float bruteForceLearningRate = 0.25f;
 	boolean allowsNegativeWeights;
 
 	/**
@@ -134,7 +134,7 @@ public class Network {
 			}
 		}
 		for (int i = 0; i < output.length; i++) {
-			// output[i] = activFunc(output[i]);
+			output[i] = activFunc(output[i]);
 			// output[i] = truent(output[i]);
 		}
 	}
@@ -266,7 +266,6 @@ public class Network {
 						newError += getTotalError(output, testCases[j][1]);
 					}
 					if (newError < leastError) {
-						System.out.println(newError);
 						leastError = newError;
 						anyImprovement = true;
 						oldWeight = w;
