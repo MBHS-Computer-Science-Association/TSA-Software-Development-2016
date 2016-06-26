@@ -2,12 +2,15 @@ package org.ecclesia.demoLines;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class Renderer extends JPanel {
@@ -42,6 +45,18 @@ public class Renderer extends JPanel {
 				linePredictor.initPoint(x, y);
 			}
 		});
+		
+		/**
+		 * Refreshes at 60 FPS
+		 */
+		new Timer(1000 / 60, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				repaint();
+			}
+			
+		}).start();
 	}
 
 	/**
@@ -50,11 +65,12 @@ public class Renderer extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		
+		
 		g.setColor(Color.BLACK);
 		for (int i = 0; i < drawables.size(); i++) {
 			drawables.get(i).draw(g);
 		}
-		repaint();
 	}
 
 	/**

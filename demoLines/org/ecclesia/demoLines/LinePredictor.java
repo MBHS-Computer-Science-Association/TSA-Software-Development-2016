@@ -46,6 +46,7 @@ public class LinePredictor {
 
 			System.out.println(
 					Arrays.toString(pointer) + " " + Arrays.toString(predictedOutput) + " " + preX + " " + preY);
+			
 			renderer.addDrawable(new PredictedPoint(preX, preY));
 		} else {
 			points.clear();

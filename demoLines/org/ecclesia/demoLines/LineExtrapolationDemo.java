@@ -28,6 +28,11 @@ public class LineExtrapolationDemo extends Demonstration {
 		this.setControlPanel(new ControlPanel());
 	}
 	
+	/**
+	 * Control panel that manages the user interface for the demo.
+	 * @author Trevor Nguyen
+	 *
+	 */
 	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
 		public ControlPanel() {
