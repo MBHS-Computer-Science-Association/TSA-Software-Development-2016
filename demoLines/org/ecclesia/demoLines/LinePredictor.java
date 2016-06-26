@@ -14,7 +14,7 @@ public class LinePredictor {
 	private Renderer renderer;
 
 	public LinePredictor() {
-		net = new Network(2, 2, 3, 2);
+		net = new Network(2, 2, 2, 2, true);
 		userPoints = new LinkedList<>();
 		renderer = new Renderer(this);
 	}
@@ -24,6 +24,7 @@ public class LinePredictor {
 	 */
 	public void inputPoint(Point userPoint) {
 		userPoints.add(userPoint);
+
 		processPoints();
 	}
 
@@ -34,17 +35,15 @@ public class LinePredictor {
 	 */
 	private void processPoints() {
 		if (userPoints.size() == 1) {
-			Point one = userPoints.get(0);
-			float[] input = { one.getX(), one.getY() };
+			Point inputPoint = userPoints.get(0);
+			float[] input = { inputPoint.getX(), inputPoint.getY() };
 			this.input = input;
-			float[] predictedOutput = net.getOutput(input);
-			this.output = predictedOutput;
 
-			System.out.println("Processing Points:");
-			System.out.println("\tInput Point: ");
-			System.out.println("\t\t" + Arrays.toString(input));
-			System.out.println("\tOutput Point:");
-			System.out.println("\t\t" + Arrays.toString(predictedOutput));
+			float[] predictedOutput = null;
+
+			predictedOutput = net.getOutput(input);
+
+			this.output = predictedOutput;
 
 			// Predictions for the point.
 			float predX = predictedOutput[0];
@@ -53,20 +52,16 @@ public class LinePredictor {
 
 			// Tells the renderer to render the predicted point.
 			renderer.addPoint(prediction);
-
 		} else if (userPoints.size() == 2) {
 			// Receives point and loads into the float array.
 			Point two = userPoints.get(1);
 			float[] desired = { two.getX(), two.getY() };
 			this.desired = desired;
 
-			// Helps with debugging for now.
-			System.out.println("\tDesired Point:");
-			System.out.println("\t\t" + Arrays.toString(desired));
-
 			// Feeds in the input vs the desired and will correct
 			// based on the error.
-			net.backPropagation(input, desired);
+			for (int i = 0; i < 10000; i++)
+				net.backPropagation(input, desired);
 		} else {
 			// Set all coordinate arrays to null to
 			// prepare for a new case of input.
