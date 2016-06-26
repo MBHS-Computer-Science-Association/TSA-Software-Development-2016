@@ -38,7 +38,7 @@ public class GeneticsLogic {
 	
 	
 	private void readTrainCases() throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader("TrainCases.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("demoGenetics/TrainCases.txt"));
 		String line;
 		int count = 0;
 		while((line = br.readLine()) != null){
@@ -66,6 +66,8 @@ public class GeneticsLogic {
 		System.err.println(Arrays.toString(l.getStage(y)));
 		float[] z = {0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F};
 		System.out.println(Arrays.toString(l.getStage(z)));
+		float[] e = {.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F};
+		System.out.println(Arrays.toString(l.getStage(e)));
 
 		
 	}
