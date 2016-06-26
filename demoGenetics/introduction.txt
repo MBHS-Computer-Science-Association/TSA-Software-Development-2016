@@ -1,2 +1,9 @@
-Cancer. This is what it's about. Do you know what the most important aspect of life is? Death. It's the death due to the uncontrolled proliferation of life. How ironic. Yet, this is not an English class and we need to teach you how to use this software.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis venenatis lorem a faucibus. Nam eros quam, pellentesque porta rutrum vel, bibendum in augue. Duis molestie, massa at pharetra pretium, purus magna condimentum tortor, ut tincidunt quam est ut justo. Nullam finibus bibendum urna, ac dignissim quam lobortis a. Aenean fermentum nibh tincidunt lorem efficitur, iaculis malesuada justo scelerisque. Aenean molestie laoreet magna, et gravida purus fermentum sit amet. Nam vel felis malesuada, facilisis nunc et, mollis ante. Nullam sed magna mi. Quisque venenatis id ex at pretium. Nam id metus lorem. Curabitur lacinia id enim ac pharetra. Aliquam feugiat nunc leo, sed eleifend tortor pellentesque id. Morbi est nunc, hendrerit quis cursus eu, semper sed lorem. Proin sed rhoncus dui, in rhoncus lectus. Mauris aliquet lorem sed feugiat tempor. Sed et metus nisi. 
+<html>
+	<body style="margin: 3px 1px 3px 8px">
+		<h1>Demonstration Info</h1>
+			<p>This demo displays the use of an Artificial Neural Network in the identification of mutation in the EGFR gene, a gene which
+			frequently mutates and is the baseline cause of lung cancer. For instance, a patient without cancer would have a non-mutated sequence
+			of nucleotides in the EGFR gene, while a patient with lung cancer would have a mutated nucleotide sequence.<br><br><p>In this demo
+			you can modify the sequence of nucleotides in the EGFR gene of a "patient" and a neural network will try to find the pattern in the nucleotide 
+			sequence and identify if he has a mutated set of nucleotides or a non-mutated set. Furthermore, you can train the neural network
+			to better identify whether or not the patient does have mutations in the EGFR gene.

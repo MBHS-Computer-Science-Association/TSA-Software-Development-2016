@@ -18,7 +18,7 @@ import org.ecclesia.demoSurvival.entities.Malish;
  * @author Christian Duffee, Sammy Shin, Thai Nguyen
  */
 public class Environment {
-	final static int initialMalish = 15;
+	final static int initialMalish = 1;
 	final static int initialFood = 10;
 	final static int clippingDistance = 5000;
 	final static int WIDTH = 800;
