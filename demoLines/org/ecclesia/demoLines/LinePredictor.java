@@ -1,6 +1,6 @@
 package org.ecclesia.demoLines;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +18,8 @@ public class LinePredictor {
 		userPoints = new LinkedList<>();
 		renderer = new Renderer(this);
 	}
+
+	ArrayList<Float[][]> testCases = new ArrayList<>();
 
 	/**
 	 * Initializes a Point at a given X and Y coordinate, calls processing code
@@ -57,11 +59,35 @@ public class LinePredictor {
 			Point two = userPoints.get(1);
 			float[] desired = { two.getX(), two.getY() };
 			this.desired = desired;
-
+			Float[][] testCase = new Float[2][0];
+			Float[] newInput = new Float[input.length];
+			for(int i=0; i<input.length; i++) {
+				newInput[i] = input[i];
+			}
+			Float[] newDesired = new Float[input.length];
+			for(int i=0; i<desired.length; i++) {
+				newDesired[i] = desired[i];
+			}
+			testCase[0] = newInput;
+			testCase[1] = newDesired;
+			testCases.add(testCase);
 			// Feeds in the input vs the desired and will correct
 			// based on the error.
-			for (int i = 0; i < 10000; i++)
-				net.backPropagation(input, desired);
+			for (int i = 0; i < 10000; i++) {
+				for (int k = 0; k < testCases.size(); k++) {
+					Float[] objInput = testCases.get(k)[0];
+					Float[] objOutput = testCases.get(k)[1];
+					float[] in = new float[objInput.length];
+					for (int j = 0; j < objInput.length; j++) {
+						in[j] = objInput[j];
+					}
+					float[] out = new float[objOutput.length];
+					for (int j = 0; j < objOutput.length; j++) {
+						out[j] = objOutput[j];
+					}
+					net.backPropagation(in, out);
+				}
+			}
 		} else {
 			// Set all coordinate arrays to null to
 			// prepare for a new case of input.
