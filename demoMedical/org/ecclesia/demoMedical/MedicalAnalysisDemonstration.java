@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
+/**
+ * 
+ * @author Thai Nguyen
+ *
+ */
 public class MedicalAnalysisDemonstration extends Demonstration {
 
 	public MedicalAnalysisDemonstration() {
