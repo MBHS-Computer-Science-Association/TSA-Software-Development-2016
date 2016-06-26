@@ -1,4 +1,5 @@
-package org.ecclesia.demoSurvival;
+package org.ecclesia.demoSurvival.entities;
+
 public abstract class Animal extends Organism {
 	float health;
 
