@@ -11,12 +11,12 @@ import org.ecclesia.neural.*;
 public class GeneticsLogic {
 	Network net;
 	float[][] trainer;
-	float[][] trainer2;
+
 	
 	public GeneticsLogic(){
-		net = new Network(10, 5, 1, 1, true);
+		net = new Network(10, 30, 1, 1, true);
 		trainer = new float[20][10];
-		trainer2 = new float[20][10];
+
 	}
 
 	public float[] getStage(float[] seq){
@@ -27,14 +27,13 @@ public class GeneticsLogic {
 	public void train(){
 		float[] s = {1.0F};
 		float[] a = {0.0F};
+		float[] d = {0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F};
 		for(int i = 0; i < 100; i++){//
-		for(float[] x : trainer){
-			net.backPropagation(x, s);
+			for(float[] x : trainer){
+				net.backPropagation(d, a);
+				net.backPropagation(x, s);
+			}	
 		}
-		for(float[] y : trainer2){
-			net.backPropagation(y, a);
-		}
-		}//
 	}
 	
 	
@@ -51,20 +50,6 @@ public class GeneticsLogic {
 			}
 			
 			count++;
-		}
-		//////////////////////////////////////
-		br = new BufferedReader(new FileReader("TrainCases2.txt"));
-		String line2;
-		int count2 = 0;
-		while((line2 = br.readLine()) != null){
-			
-			int counter2 = 0;
-			for(String a2 : line2.split(" ")){
-				trainer2[count2][counter2] = Float.valueOf(a2);
-				counter2++;
-			}
-			
-			count2++;
 		}
 		//System.out.println(Arrays.deepToString(trainer));
 		
