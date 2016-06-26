@@ -9,12 +9,21 @@ import org.ecclesia.demoTemplate.Demonstration;
 public class LineExtrapolationDemo extends Demonstration {
 	private LinePredictor linePredictor;
 	
+	/**
+	 * This constructor does not start anything. It only serves to create
+	 * an entry in the DemoLauncher. The run() method will start the simulation.
+	 */
 	public LineExtrapolationDemo() {
 		super("Line Extrapolation Demonstration");
-		
-		linePredictor = new LinePredictor();
-		
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLines/introduction.txt")));
+	}
+	
+	/**
+	 * Starts a fresh instance of the simulation.
+	 */
+	@Override
+	public void run() {
+		linePredictor = new LinePredictor();
 		this.setContentPanel(linePredictor.getRenderer());
 		this.setControlPanel(new ControlPanel());
 	}

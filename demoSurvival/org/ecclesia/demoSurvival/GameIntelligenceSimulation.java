@@ -25,20 +25,24 @@ import org.ecclesia.demoTemplate.Demonstration;
 public class GameIntelligenceSimulation extends Demonstration {
 	private Environment environment;
 
+	/**
+	 * This constructor does not start anything. It only serves to create
+	 * an entry in the DemoLauncher. The run() method will start the simulation.
+	 */
 	public GameIntelligenceSimulation() {
 		super("Game Intelligence Simulation");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoSurvival/introduction.txt")));
-
-		environment = new Environment();
-
-		this.setControlPanel(new ControlPanel());
-		this.setContentPanel(environment.getRenderer());
 	}
-
+	
+	/**
+	 * Starts a fresh instance of this simulation.
+	 */
 	@Override
-	public void start() {
+	public void run() {
+		environment = new Environment();
+		this.setContentPanel(environment.getRenderer());
+		this.setControlPanel(new ControlPanel());
 		environment.start();
-		super.start();
 	}
 
 	@SuppressWarnings("serial")
@@ -130,4 +134,5 @@ public class GameIntelligenceSimulation extends Demonstration {
 			}
 		}
 	}
+
 }

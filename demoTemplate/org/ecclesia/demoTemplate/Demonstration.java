@@ -16,13 +16,13 @@ import javax.swing.JPanel;
  * 
  * <br />
  * 
- * Note: In order to work properly, the subclass must set the intruoduction,
+ * Note: In order to work properly, the subclass must set the introduction,
  * control and content panels manually.
  * 
  * @author Trevor Nguyen
  *
  */
-public abstract class Demonstration {
+public abstract class Demonstration implements Runnable {
 	/**
 	 * The name that appears at the top of the window.
 	 */
@@ -59,8 +59,9 @@ public abstract class Demonstration {
 
 	/**
 	 * Creates a demonstration window off of the template window class.
+	 * Only the DemoLauncher can access this method.
 	 */
-	public void start() {
+	void startWindow() {
 		new DemoWindow(this);
 	}
 	

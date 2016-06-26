@@ -67,15 +67,16 @@ public final class DemoLauncher extends JFrame {
 		JLabel label = new JLabel("Select a Demo:", JLabel.CENTER);
 		this.add(label);
 		
-		for (Demonstration d : demoList) {
-			JButton b = new JButton(d.name);
+		for (Demonstration demo : demoList) {
+			JButton b = new JButton(demo.name);
 			
 			// Links the button to the demonstration
 			// start() method.
 			b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					d.start();
+					demo.run();
+					demo.startWindow();
 				}
 			});
 			

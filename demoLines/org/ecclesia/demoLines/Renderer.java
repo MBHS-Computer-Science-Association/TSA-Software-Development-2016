@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Renderer extends JPanel {
-	static List<Drawable> drawables = new ArrayList<>();
+	private List<Drawable> drawables = new ArrayList<>();
 
 	LinePredictor linePredictor;
 	
