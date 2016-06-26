@@ -15,11 +15,16 @@ import javax.swing.JPanel;
  */
 public class ContentPanel extends JPanel {
 	
-	GridBagConstraints gbc = new GridBagConstraints();
-	JButton b1;
 	
 	public ContentPanel()
 	{	
+		createComponents();
+	}
+	
+	private void createComponents() {
+		GridBagConstraints gbc = new GridBagConstraints();
+		JButton b1;
+		
 		setLayout(new GridBagLayout());
 		
 		gbc.fill = GridBagConstraints.NONE;
@@ -29,6 +34,5 @@ public class ContentPanel extends JPanel {
 		gbc.gridx = 2;
 		gbc.gridy = 5;
 		add(b1, gbc);
-
 	}
 }

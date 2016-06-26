@@ -1,6 +1,6 @@
 package org.ecclesia.demoSurvival;
-import java.awt.*;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class DisplayInfo {
 
