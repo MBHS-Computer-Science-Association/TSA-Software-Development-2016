@@ -1,13 +1,12 @@
 package org.ecclesia.demoSurvival;
-import java.awt.Color;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
-import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import org.ecclesia.demoSurvival.entities.Food;
@@ -15,43 +14,38 @@ import org.ecclesia.demoSurvival.entities.Malish;
 
 /**
  * @author Christian Duffee, Sammy Shin, Thai Nguyen
- * @school McKinney Boyd High School
- * @date March 4, 2016
  */
-public class Environment extends JFrame implements ActionListener, KeyListener {
+public class Environment {
 
 	private static final long serialVersionUID = 1L;
 
 	final static int initialMalish = 15;
 	final static int initialFood = 10;
 	final static int clippingDistance = 5000;
-	final static int WIDTH = 1000;
-	final static int HEIGHT = 1000;
-	final static String title = "Demonstration 2";
+	final static int WIDTH = 800;
+	final static int HEIGHT = 600;
 
 	final static float foodRegenerationRate = 0.01f;
 	final static int initialPopulation = 10;
 
 	final static float fov = (float) (Math.PI / 8);
-
-	static ArrayList<Malish> malishList = new ArrayList<>();
-	static ArrayList<Food> foodList = new ArrayList<>();
-
 	static Random random = new Random();
 
-	Renderer r;
-	Timer time;
+	private List<Malish> malishList;
+	private List<Food> foodList;
+	private Renderer renderer;
+	private Timer timer;
 
 	/**
 	 * 
 	 * Initializes the evolutionary simulator graphics window
 	 * 
-	 * @throws InterruptedException
-	 * 
 	 */
-	public Environment() throws InterruptedException {
-		super(title);
-		DisplayInfo.display();
+	public Environment() {
+		malishList = new LinkedList<>();
+		foodList = new LinkedList<>();
+
+		renderer = new Renderer(this);
 
 		for (int i = 0; i < initialFood; i++) {
 			foodList.add(new Food(random.nextFloat() * WIDTH, random.nextFloat() * HEIGHT));
@@ -64,18 +58,16 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 			malishList.add(m);
 		}
 
-		time = new Timer(1000 / 180, this);
-		r = new Renderer();
+		// Creates auto updating cycle.
+		// Refreshes 180 times each second.
+		timer = new Timer(1000 / 180, new ActionListener() {
 
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.GRAY);
-		setBounds(10, 10, WIDTH, HEIGHT);
-		setLocationRelativeTo(null);
-		setResizable(false);
-		add(r);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				update();
+			}
 
-		time.start();
+		});
 	}
 
 	/**
@@ -176,46 +168,22 @@ public class Environment extends JFrame implements ActionListener, KeyListener {
 		}
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// switch (e.getKeyCode()) {
-		// case KeyEvent.VK_UP:
-		// System.out.println("UP");
-		// time.setDelay(1);
-		// time.start();
-		// break;
-		// case KeyEvent.VK_DOWN:
-		// time.setDelay(100);
-		// }
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
-	 * Runs the update and repaint method via the timer calling it repeatedly
+	 * Starts the simulation.
 	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		update();
-		r.repaint();
+	public void start() {
+		timer.start();
 	}
 
-	/**
-	 * Instantiates the environment/starts the demo
-	 * 
-	 * @param args
-	 * @throws InterruptedException
-	 * 
-	 */
-	public static void main(String args[]) throws InterruptedException {
-		Environment e = new Environment();
+	public Renderer getRenderer() {
+		return renderer;
+	}
+
+	public List<Malish> getMalishList() {
+		return malishList;
+	}
+
+	public List<Food> getFoodList() {
+		return foodList;
 	}
 }

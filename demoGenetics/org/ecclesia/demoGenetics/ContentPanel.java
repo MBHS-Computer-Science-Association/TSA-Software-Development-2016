@@ -22,12 +22,12 @@ public class ContentPanel extends JPanel {
 	{	
 		setLayout(new GridBagLayout());
 		
-		gbc.fill = GridBagConstraints.BOTH;
+		gbc.fill = GridBagConstraints.NONE;
 		
 		b1 = new JButton("this");
 		gbc.gridwidth = 4;
 		gbc.gridx = 2;
-		gbc.gridy = 0;
+		gbc.gridy = 5;
 		add(b1, gbc);
 
 	}
