@@ -48,6 +48,8 @@ public class GameIntelligenceSimulation extends Demonstration {
 	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
 		JButton restartButton;
+		JButton optimizeButton;
+		JLabel sliderLabel;
 		JLabel generationLabel;
 		JSlider speedSlider;
 		JLabel restartLabel;
@@ -84,6 +86,24 @@ public class GameIntelligenceSimulation extends Demonstration {
 
 			});
 
+			optimizeButton = new JButton("Enable Backpropagation");
+			optimizeButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					boolean enabled = environment.getBackPropagationEnabled();
+					environment.setBackPropagation(!enabled);
+					
+					// Was enabled before
+					if (enabled)
+						optimizeButton.setText("Enable Backpropagation");
+					else
+						optimizeButton.setText("Disable Backpropagation");
+				}
+			});
+			
+			sliderLabel = new JLabel("Simulation Speed");
+			
 			generationLabel = new JLabel("Generation: 0");
 			speedSlider = new JSlider(5, 1000, 180);
 			
@@ -96,7 +116,6 @@ public class GameIntelligenceSimulation extends Demonstration {
 				public void stateChanged(ChangeEvent e) {
 					int ups = speedSlider.getValue();
 					environment.setUPS(ups);
-					System.out.printf("The value of slider: %d%n", ups);
 				}
 			});
 			speedSlider.setMajorTickSpacing(100);
@@ -104,8 +123,10 @@ public class GameIntelligenceSimulation extends Demonstration {
 
 			restartLabel = new JLabel("Number of Restarts: 0");
 
-			this.setLayout(new GridLayout(2, 2, 50, 50));
+			this.setLayout(new GridLayout(3, 2, 10, 10));
 			this.add(restartButton);
+			this.add(optimizeButton);
+			this.add(sliderLabel);
 			this.add(generationLabel);
 			this.add(speedSlider);
 			this.add(restartLabel);

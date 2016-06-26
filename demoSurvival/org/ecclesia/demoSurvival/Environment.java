@@ -242,9 +242,6 @@ public class Environment {
 	 * Accesses the number of generations since the start of the simulation.
 	 * 
 	 * @return generationCount
-	 * @deprecated This method returns the generation count, yet the generation
-	 *             count has not yet been linked to any sort of meaninful
-	 *             information.
 	 */
 	public int getGenerationCount() {
 		return generationCount;
@@ -265,5 +262,21 @@ public class Environment {
 			ups = 1000;
 
 		timer.setDelay(1000 / ups);
+	}
+	
+	/**
+	 * Enables back propagation algorithm to optimize error correction
+	 * @param value true will enable back propagation
+	 */
+	public void setBackPropagation(boolean value) {
+		Malish.setBackPropagation(value);
+	}
+	
+	/**
+	 * Determines whether the networks are being optimized
+	 * @return true if the back propagation is enabled
+	 */
+	public boolean getBackPropagationEnabled() {
+		return Malish.getBackPropagationEnabled();
 	}
 }

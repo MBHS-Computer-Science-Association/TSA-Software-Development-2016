@@ -1,4 +1,5 @@
 package org.ecclesia.demoSurvival.entities;
+
 import java.util.Random;
 
 import org.ecclesia.neural.Network;
@@ -8,6 +9,9 @@ public class Malish extends Animal {
 	final static int inputWidth = 3;
 	final static int intermediateWidth = 3;
 	final static int numIntermediate = 1;
+
+	private static boolean backPropagationEnabled = false;
+	
 	public static int getOutputwidth() {
 		return outputWidth;
 	}
@@ -28,7 +32,7 @@ public class Malish extends Animal {
 	 * Instantiates the neural network toolkit and appends it to the creatures
 	 */
 	public Malish(float x, float y) {
-		super((float)(random.nextFloat() * Math.PI * 2),x,y);
+		super((float) (random.nextFloat() * Math.PI * 2), x, y);
 		net = new Network(inputWidth, intermediateWidth, numIntermediate, outputWidth);
 		super.setX(x);
 		super.setY(y);
@@ -48,11 +52,12 @@ public class Malish extends Animal {
 
 	/**
 	 * Changes the Malish's condition Ran each Tick Returns True if Dead,
+	 * 
 	 * @return true if dead or false if alive
 	 */
 	public boolean move(float[] input) {
 		boolean debug = false;
-		
+
 		super.move(moveSpeed);
 		float[] output = net.getOutput(input);
 		int greatest = 0;
@@ -70,11 +75,15 @@ public class Malish extends Animal {
 				}
 			}
 		}
+
+		if (backPropagationEnabled)
+			net.backPropagation(input, input);
+
 		if (greatest == 0) {
-		//System.out.println("left");
+			// System.out.println("left");
 			super.adjustAngle((float) -turnSpeed);
 		} else if (greatest == 2) {
-			//System.out.println("right");
+			// System.out.println("right");
 			super.adjustAngle((float) turnSpeed);
 		}
 		if (super.depleteHealth(heathDepletion)) {
@@ -82,8 +91,16 @@ public class Malish extends Animal {
 		}
 		return false;
 	}
-	
+
 	public int getGeneration() {
 		return generation;
+	}
+	
+	public static void setBackPropagation(boolean value) {
+		backPropagationEnabled = value;
+	}
+	
+	public static boolean getBackPropagationEnabled() {
+		return backPropagationEnabled;
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,8 +12,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.JTextComponent;
 
 import org.ecclesia.demoGenetics.CancerGenomicAnalysis;
 import org.ecclesia.demoLines.LineExtrapolationDemo;
@@ -64,6 +67,12 @@ public final class DemoLauncher extends JFrame {
 	 * demonstrations in the demoList out of JButtons.
 	 */
 	private void createComponents() {
+		JTextComponent introTextPane = new JTextPane();
+		((JTextPane) introTextPane).setContentType("text/html");
+		introTextPane.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/introduction.txt")));
+		
+		this.add(introTextPane);
+		
 		JLabel label = new JLabel("Select a Demo:", JLabel.CENTER);
 		this.add(label);
 		
