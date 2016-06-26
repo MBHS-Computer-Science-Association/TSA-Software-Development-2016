@@ -5,41 +5,41 @@ import org.ecclesia.neural.Network;
 /**
  * 1 is true, 0 is false
  * 
- * @author CJ Duffee
+ * @author Christian Duffee
  *
  */
-public class Xor5 {
-	static Network n;
+public class XORLogicTrainer {
+	private Network n;
 
-	public static void main(String args[]) {
+	public XORLogicTrainer() {		
 		n = new Network(2, 3, 1, 1, true);
 		float sucessRate = 0;
 		int in = 0;
 		float[][][] testCases = new float[4][2][0];
-		testCases[in][0] = new float[]{-1f,-1f};
-		testCases[in++][1] = new float[] {0};
+		testCases[in][0] = new float[] { 0, 0 };
+		testCases[in++][1] = new float[] { 0 };
 		
-		testCases[in][0] = new float[]{-1f,1f};
-		testCases[in++][1] = new float[]{0};
+		testCases[in][0] = new float[] { 0, 1f };
+		testCases[in++][1] = new float[] { 1 };
 		
-		testCases[in][0] = new float[]{-1f,1f};
-		testCases[in++][1] = new float[]{1};
+		testCases[in][0] = new float[] { 1f, 0 };
+		testCases[in++][1] = new float[] { 1 };
 		
-		testCases[in][0] = new float[]{1f,1f};
-		testCases[in++][1] = new float[]{1};
-
-		
+		testCases[in][0] = new float[] { 1f, 1f };
+		testCases[in++][1] = new float[] { 0 };
+		float time = System.nanoTime();
 		System.out.println(n.bruteForceWeightImprovement(testCases));
-		boolean learning= true;
-		while(learning) {
-			learning = n.greedAlhorithm(testCases);
+		boolean learning = false;
+		while (learning) {
+			System.out.println("Loop");
+			learning = n.greedyAlgorithmWeightImprovment(testCases);
 		}
 		sucessRate = getSucessRate();
 		System.out.println(sucessRate);
-
+		System.out.println((System.nanoTime() - time) / 1000000000.0f / 60.0f);
 	}
-
-	static float getSucessRate() {
+	
+	public float getSucessRate() {
 		float right = 0;
 		for (int i = 0; i <= 1; i++) {
 			for (int k = 0; k <= 1; k++) {

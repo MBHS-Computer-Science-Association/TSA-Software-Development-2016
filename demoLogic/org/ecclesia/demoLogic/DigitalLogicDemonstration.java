@@ -7,14 +7,17 @@ import javax.swing.JPanel;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
-public class DigitalLogicTrainer extends Demonstration {
-	public DigitalLogicTrainer() {
+public class DigitalLogicDemonstration extends Demonstration {
+	XORLogicTrainer logicTrainer;
+	
+	public DigitalLogicDemonstration() {
 		super("Digital Logic Trainer");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLogic/introduction.txt")));
 	}
 	
 	@Override
 	public void run() {
+		logicTrainer = new XORLogicTrainer();
 		this.setContentPanel(new ContentPanel());
 		this.setControlPanel(new ControlPanel());
 	}

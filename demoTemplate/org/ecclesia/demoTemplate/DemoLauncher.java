@@ -24,7 +24,7 @@ import javax.swing.text.JTextComponent;
 
 import org.ecclesia.demoGenetics.CancerGenomicAnalysis;
 import org.ecclesia.demoLines.LineExtrapolationDemo;
-import org.ecclesia.demoLogic.DigitalLogicTrainer;
+import org.ecclesia.demoLogic.DigitalLogicDemonstration;
 import org.ecclesia.demoMedical.MedicalAnalysisDemonstration;
 import org.ecclesia.demoSurvival.GameIntelligenceSimulation;
 
@@ -55,7 +55,7 @@ public final class DemoLauncher extends JFrame {
 		demoList.add(new CancerGenomicAnalysis());
 		demoList.add(new GameIntelligenceSimulation());
 		demoList.add(new LineExtrapolationDemo());
-		demoList.add(new DigitalLogicTrainer());
+		demoList.add(new DigitalLogicDemonstration());
 		demoList.add(new MedicalAnalysisDemonstration());
 	}
 	
