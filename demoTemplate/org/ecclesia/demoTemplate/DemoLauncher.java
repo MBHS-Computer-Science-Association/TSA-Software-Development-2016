@@ -1,17 +1,22 @@
 package org.ecclesia.demoTemplate;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -56,10 +61,11 @@ public final class DemoLauncher extends JFrame {
 	 */
 	public DemoLauncher() {
 		super("Ecclesia Launcher");
-		initializeWindow(new Dimension(300, 480));
+		initializeWindow(new Dimension(600, 800));
 		createComponents();
+//		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.pack();
+//		this.pack();
 	}
 	
 	/**
@@ -70,8 +76,16 @@ public final class DemoLauncher extends JFrame {
 		JTextComponent introTextPane = new JTextPane();
 		((JTextPane) introTextPane).setContentType("text/html");
 		introTextPane.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/introduction.txt")));
+		introTextPane.setEditable(false);
+		introTextPane.setPreferredSize(new Dimension(0,0));
+		JScrollPane introScrollPane = new JScrollPane(introTextPane);
+//		this.add(introTextPane);
+		this.add(introScrollPane);
+
 		
-		this.add(introTextPane);
+		QuadrantOrganizer quad = new QuadrantOrganizer();
+		quad.setMinimumSize(new Dimension(0, 0));
+		this.add(quad);
 		
 		JLabel label = new JLabel("Select a Demo:", JLabel.CENTER);
 		this.add(label);
@@ -110,8 +124,9 @@ public final class DemoLauncher extends JFrame {
 		// Required "boiler plate" code to make sure the frame will close
 		// and operate as expected.
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		this.setSize(d);
-//		this.setMinimumSize(d);
+		this.setSize(d);
+//		this.setMaximumSize(d);
+		this.setResizable(false);
 
 		// BoxLayout was chosen for the demo launcher to
 		// allow for an easily scalable layout to meet the
@@ -132,6 +147,61 @@ public final class DemoLauncher extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Manages the quadrant of methods used in artificial intelligence.
+	 * 
+	 * @author Trevor Nguyen
+	 *
+	 */
+	class QuadrantOrganizer extends JComponent {
+		public QuadrantOrganizer() {
+			createComponents();
+		}
+		
+		JTextPane northwest;
+		JTextPane northeast;
+		JTextPane southwest;
+		JTextPane southeast;
+		
+		/**
+		 * Creates all of the components.
+		 */
+		public void createComponents() {
+			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			this.setLayout(new GridLayout(2, 2, 15, 15));
+			
+			northwest = new JTextPane();
+			northwest.setContentType("text/html");
+			northwest.setEditable(false);
+			northwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/backPropagationInfo.txt")));
+//			northwest.setPreferredSize(new Dimension(0,0));
+			
+			northeast = new JTextPane();
+			northeast.setContentType("text/html");
+			northeast.setEditable(false);
+			northeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/bruteForceInfo.txt")));
+//			northeast.setPreferredSize(new Dimension(0,0));
+			
+			southwest = new JTextPane();
+			southwest.setContentType("text/html");
+			southwest.setEditable(false);
+			southwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/geneticAlgorithmInfo.txt")));
+//			southwest.setPreferredSize(new Dimension(0,0));
+			
+			southeast = new JTextPane();
+			southeast.setContentType("text/html");
+			southeast.setEditable(false);
+			southeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/greedyAlgorithmInfo.txt")));
+//			southeast.setPreferredSize(new Dimension(0,0));
+			
+			this.add(northwest);
+			this.add(northeast);
+			this.add(southwest);
+			this.add(southeast);
+		}
+	}
+	
 	
 	/**
 	 * Main entry point into the application. Instantiates one instance

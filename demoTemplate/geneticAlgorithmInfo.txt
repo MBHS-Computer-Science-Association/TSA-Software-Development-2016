@@ -1,0 +1,3 @@
+<h3>Genetic Algorithm</h3>
+<p>
+This algorithm works by generating several random neural networks and making them compete in some way against each other. The one that preforms the best creates a number of children, each a clone of the parent except with mutations. These children then compete and the one best at completing the task then creates its own children with mutations. This continues until a child has a perfect neural network. The advantage of this is that it is moderately fast and will eventually

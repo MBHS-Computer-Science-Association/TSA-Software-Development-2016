@@ -145,7 +145,7 @@ public class DemoWindow extends JFrame {
 		instructions = new JPanel();
 		content = demo.getContentPanel();
 		control = demo.getControlPanel();
-
+		
 		// Giving defined borders for each panel.
 		instructions.setBorder(BorderFactory.createLineBorder(Color.black));
 		control.setBorder(BorderFactory.createLineBorder(Color.black));
