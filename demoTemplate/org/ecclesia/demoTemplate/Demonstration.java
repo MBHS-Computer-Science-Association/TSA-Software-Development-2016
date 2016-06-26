@@ -23,10 +23,25 @@ public abstract class Demonstration {
 	 */
 	final String name;
 	/**
-	 * The text that is displayed at the top of the window.
+	 * The text that is displayed on the left sidebar.
 	 */
-	String introductionText;
-
+	private String introduction;
+	/**
+	 * The main content panel on the right side of the application.
+	 */
+	private JPanel contentPanel;
+	/**
+	 * The bottom control panel as the main user interaction interface.
+	 */
+	private JPanel controlPanel;
+	
+	/**
+	 * Creates the demonstration and meant to be called by the concrete subclasses.
+	 */
+	public Demonstration() {
+		name = "";
+	}
+	
 	/**
 	 * Creates the demonstration and meant to be called by concrete subclasses.
 	 * 
@@ -39,35 +54,64 @@ public abstract class Demonstration {
 
 	/**
 	 * Creates a demonstration window off of the template window class.
-	 * 
-	 * @return the object to allow the simultaneous declaration, creation, and
-	 *         initiation of the demonstration.
 	 */
-	public Demonstration start() {
+	public void start() {
 		new DemoWindow(this);
-		return this;
 	}
-
+	
+	/**
+	 * Sets the introductory remarks of the demonstration.
+	 * Meant to be called by a concrete subclass.
+	 * @param introduction
+	 */
+	protected void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+	
+	/**
+	 * Sets the content panel to a specific JPanel.
+	 * Meant to be called by a concrete subclass.
+	 * @param content
+	 */
+	protected void setContentPanel(JPanel content) {
+		this.contentPanel = content;
+	}
+	
+	/**
+	 * Sets the control panel to a specific JPanel.
+	 * Meant to be called by a concrete subclass.
+	 * @param control
+	 */
+	protected void setControlPanel(JPanel control) {
+		this.controlPanel = control;
+	}
+	
 	/**
 	 * Allows the demonstration's introductory text
 	 * to be extracted for use in the GUI.
 	 * @return the introduction text associated with the demonstration
 	 */
-	public abstract String getIntroduction();
+	String getIntroduction() {
+		return introduction;
+	}
 
 	/**
 	 * Allows the demonstration's main content
 	 * to be extracted for use in the GUI.
 	 * @return the main content of the demonstration
 	 */
-	public abstract JPanel getContentPanel();
+	JPanel getContentPanel() {
+		return contentPanel;
+	}
 
 	/**
 	 * Allows the demonstration's main control panel
 	 * to be extracted for use in the GUI.
 	 * @return the main control interface for the demonstration
 	 */
-	public abstract JPanel getControlPanel();
+	JPanel getControlPanel() {
+		return controlPanel;
+	}
 	
 	public static String getInstructionsFromFile(File file) {
 		String instructions = "Instructions.";
