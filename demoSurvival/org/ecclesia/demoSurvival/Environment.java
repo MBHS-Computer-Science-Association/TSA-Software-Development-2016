@@ -98,6 +98,7 @@ public class Environment {
 		}
 
 		restartCount++;
+		generationCount = 1;
 	}
 
 	/**
@@ -179,7 +180,10 @@ public class Environment {
 				if (Math.abs(diffX) <= 10 && Math.abs(diffY) <= 10) {
 					foodList.remove(j);
 					malish.setHealth(1f);
-					malishList.add(new Malish(malish));
+					Malish newborn = new Malish(malish);
+					malishList.add(newborn);
+					if (newborn.getGeneration() > generationCount)
+						generationCount = newborn.getGeneration();
 				}
 			}
 			float[] input = new float[3];

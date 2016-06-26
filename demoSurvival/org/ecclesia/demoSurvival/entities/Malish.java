@@ -22,6 +22,7 @@ public class Malish extends Animal {
 	final static float moveSpeed = 1f;
 	final static int vision = 100;
 	Network net;
+	private int generation;
 
 	/**
 	 * Instantiates the neural network toolkit and appends it to the creatures
@@ -32,6 +33,7 @@ public class Malish extends Animal {
 		super.setX(x);
 		super.setY(y);
 		super.setHealth(1f);
+		generation = 1;
 	}
 
 	public Malish(Malish mother) {
@@ -41,6 +43,7 @@ public class Malish extends Animal {
 		super.setY(mother.getY());
 		super.adjustAngle((float) (random.nextFloat() * Math.PI * 2));
 		super.setHealth(1f);
+		generation = mother.generation + 1;
 	}
 
 	/**
@@ -78,5 +81,9 @@ public class Malish extends Animal {
 			return true;
 		}
 		return false;
+	}
+	
+	public int getGeneration() {
+		return generation;
 	}
 }
