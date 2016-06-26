@@ -45,7 +45,7 @@ public class Malish extends Animal {
 
 	/**
 	 * Changes the Malish's condition Ran each Tick Returns True if Dead,
-	 * Returns boolean whether creature is dead or alive
+	 * @return true if dead or false if alive
 	 */
 	public boolean move(float[] input) {
 		super.move(moveSpeed);

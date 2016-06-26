@@ -56,12 +56,19 @@ public class GameIntelligenceSimulation extends Demonstration {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					update();
+					updateLabels();
 				}
 				
 			}).start();
 		}
 
+		/**
+		 * Creates and adds the GUI components to the control panel.
+		 * Also links up logic and event triggering to the restart button
+		 * as well as the slider.
+		 * 
+		 * Uses the GridLayout for simplicity and quick development.
+		 */
 		private void createComponents() {
 			restartButton = new JButton("Restart Ecosystem");
 			restartButton.addActionListener(new ActionListener() {
@@ -73,34 +80,54 @@ public class GameIntelligenceSimulation extends Demonstration {
 
 			});
 
-			generationLabel = new JLabel("Generation: X");
-			speedSlider = new JSlider(0, 100, 50);
+			generationLabel = new JLabel("Generation: 0");
+			speedSlider = new JSlider(5, 1000, 180);
+			
 			speedSlider.addChangeListener(new ChangeListener() {
-
+				/**
+				 * Sets the environment's updates per second to the 
+				 * value of the slider.
+				 */
 				@Override
 				public void stateChanged(ChangeEvent e) {
-					int value = speedSlider.getValue();
-					// TODO: Set the environment speed to the value.
-					System.out.printf("The value of slider: %d%n", value);
+					int ups = speedSlider.getValue();
+					environment.setUPS(ups);
+					System.out.printf("The value of slider: %d%n", ups);
 				}
 			});
+			speedSlider.setMajorTickSpacing(100);
+			speedSlider.setPaintTicks(true);
 
-			restartLabel = new JLabel("Number of Restarts: X");
+			restartLabel = new JLabel("Number of Restarts: 0");
 
 			this.setLayout(new GridLayout(2, 2, 50, 50));
 			this.add(restartButton);
 			this.add(generationLabel);
 			this.add(speedSlider);
 			this.add(restartLabel);
+			
 		}
 		
-		private void update() {
-//			if (<value of slider changed>)
-//				generationLabel.setText("Number of Generations: " + <value>);
-//			if (<value of restarts changed>)
-//				restartLabel.setText("Number of Restarts: " + <value>);
+		private int prevGenerations = 0;
+		private int prevRestarts = 0;
+		
+		/**
+		 * Updates the values of the two label components:
+		 * the generations and the number of restarts.
+		 * 
+		 * Checks to make sure that the values have been changed
+		 * before making updates to the GUI to reduce overhead.
+		 */
+		private void updateLabels() {
+			if (environment.getGenerationCount() != prevGenerations) {
+				prevGenerations = environment.getGenerationCount();
+				generationLabel.setText("Number of Generations: " + prevGenerations);
+			}
 			
-			// TODO: Finish implementing this.
+			if (environment.getRestartCount() != prevRestarts) {
+				prevRestarts = environment.getRestartCount();
+				restartLabel.setText("Number of Restarts: " + prevRestarts);
+			}
 		}
 	}
 }

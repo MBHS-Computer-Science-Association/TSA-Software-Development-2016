@@ -43,7 +43,7 @@ public abstract class Animal extends Organism {
 	 * 
 	 * @param amount
 	 *            of health depletion
-	 * @return boolean: True if Dead, False if Alive
+	 * @return true if dead, false if alive
 	 */
 	public boolean depleteHealth(float amount) {
 		health -= amount;
