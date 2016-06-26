@@ -15,6 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.ecclesia.demoGenetics.CancerGenomicAnalysis;
+import org.ecclesia.demoSurvival.GameIntelligenceSimulation;
 
 /**
  * Allows all of the demonstrations to be launched from a single window.
@@ -41,6 +42,7 @@ public final class DemoLauncher extends JFrame {
 	static {
 		demoList = new LinkedList<>();
 		demoList.add(new CancerGenomicAnalysis());
+		demoList.add(new GameIntelligenceSimulation());
 	}
 	
 	/**

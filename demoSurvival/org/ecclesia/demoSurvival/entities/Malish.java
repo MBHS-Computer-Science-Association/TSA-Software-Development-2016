@@ -1,4 +1,4 @@
-package org.ecclesia.demoSurvival;
+package org.ecclesia.demoSurvival.entities;
 import java.util.Random;
 
 import org.ecclesia.neural.Network;

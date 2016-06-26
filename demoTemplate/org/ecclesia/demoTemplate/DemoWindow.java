@@ -233,7 +233,7 @@ public class DemoWindow extends JFrame {
 	public void initializeWindow(Dimension d) {
 		// Required "boiler plate" code to make sure the frame will close
 		// and operate as expected.
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(d);
 		setMinimumSize(d);
 

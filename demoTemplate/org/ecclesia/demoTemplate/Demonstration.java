@@ -1,5 +1,10 @@
 package org.ecclesia.demoTemplate;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.JPanel;
 
 /**
@@ -63,4 +68,21 @@ public abstract class Demonstration {
 	 * @return the main control interface for the demonstration
 	 */
 	public abstract JPanel getControlPanel();
+	
+	public static String getInstructionsFromFile(File file) {
+		String instructions = "Instructions.";
+		
+		try (BufferedReader input = new BufferedReader(new FileReader(file))) {
+			StringBuilder result = new StringBuilder();
+			String line;
+			while ((line = input.readLine()) != null) {
+				result.append(line).append('\n');
+			}
+			instructions = result.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return instructions;
+	}
 }
