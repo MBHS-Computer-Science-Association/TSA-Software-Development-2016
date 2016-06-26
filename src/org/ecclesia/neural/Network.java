@@ -17,7 +17,7 @@ public class Network {
 	float[] output;
 	final static float backpropagationLearningRate = 0.25f;
 	final static float greedyAlgorithmRate = 0.05f;
-	final static float bruteForceLearningRate = 1f;
+	final static float bruteForceLearningRate = 2.5f;
 	final static float weightsMax = 10;
 	boolean allowsNegativeWeights;
 
