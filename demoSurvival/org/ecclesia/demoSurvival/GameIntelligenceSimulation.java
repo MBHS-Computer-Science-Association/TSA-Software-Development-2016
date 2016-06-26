@@ -96,9 +96,9 @@ public class GameIntelligenceSimulation extends Demonstration {
 					
 					// Was enabled before
 					if (enabled)
-						optimizeButton.setText("Enable Backpropagation");
+						optimizeButton.setText("Load Optimized NNs");
 					else
-						optimizeButton.setText("Disable Backpropagation");
+						optimizeButton.setText("Disable Optimized NNs");
 				}
 			});
 			
