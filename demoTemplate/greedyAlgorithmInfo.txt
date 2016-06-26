@@ -1,0 +1,3 @@
+<h3>Greedy Algorithm</h3>
+<p>
+This algorithm works by generating a random network and trying modification of weights to minimize error. The advantage to this is that it is very fast; the time it takes increases linearly with the complexity of the network. The disadvantage is that it can get stuck at local minimums of error; it can get struck at a good solution that is not necessarily the best.
