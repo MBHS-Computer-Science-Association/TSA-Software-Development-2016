@@ -15,6 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.ecclesia.demoGenetics.CancerGenomicAnalysis;
+import org.ecclesia.demoLines.LineExtrapolationDemo;
 import org.ecclesia.demoSurvival.GameIntelligenceSimulation;
 
 /**
@@ -43,6 +44,7 @@ public final class DemoLauncher extends JFrame {
 		demoList = new LinkedList<>();
 		demoList.add(new CancerGenomicAnalysis());
 		demoList.add(new GameIntelligenceSimulation());
+		demoList.add(new LineExtrapolationDemo());
 	}
 	
 	/**
@@ -62,18 +64,19 @@ public final class DemoLauncher extends JFrame {
 	 * demonstrations in the demoList out of JButtons.
 	 */
 	private void createComponents() {
-		JLabel label = new JLabel("Hey", JLabel.CENTER);
+		JLabel label = new JLabel("Select a Demo:", JLabel.CENTER);
 		this.add(label);
 		
-		for (Demonstration d : demoList) {
-			JButton b = new JButton(d.name);
+		for (Demonstration demo : demoList) {
+			JButton b = new JButton(demo.name);
 			
 			// Links the button to the demonstration
 			// start() method.
 			b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					d.start();
+					demo.run();
+					demo.startWindow();
 				}
 			});
 			

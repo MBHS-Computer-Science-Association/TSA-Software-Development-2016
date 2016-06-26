@@ -3,7 +3,6 @@ package org.ecclesia.demoTemplate;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Timer;
@@ -13,10 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.JTextComponent;
 
 /**
  * Manages all of the Java Swing components of the demonstration including GUIs
@@ -60,7 +60,7 @@ public class DemoWindow extends JFrame {
 	/**
 	 * The instructions text on the side bar of every demonstration.
 	 */
-	JTextArea introTextArea;
+	JTextComponent introTextArea;
 	/**
 	 * The scrolling pane in which the instructions text resides.
 	 * Located within the instructions JPanel.
@@ -201,7 +201,11 @@ public class DemoWindow extends JFrame {
 	 * of the three main panels.
 	 */
 	public void fillPanels() {
-		introTextArea = new JTextArea(demo.getIntroduction());
+		introTextArea = new JTextPane();
+		((JTextPane) introTextArea).setContentType("text/html");
+		introTextArea.setText(demo.getIntroduction());
+		
+		// Want to have styling here.
 		introScrollPane = new JScrollPane(introTextArea);
 		introScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		introScrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -209,14 +213,9 @@ public class DemoWindow extends JFrame {
 		instructions.setLayout(new BorderLayout());
 		instructions.add(introScrollPane, BorderLayout.CENTER);
 
-		introTextArea.setWrapStyleWord(true);
-		introTextArea.setLineWrap(true);
 		introTextArea.setEditable(false);
 		introTextArea.setBorder(BorderFactory.createEmptyBorder());
 		introTextArea.setBackground(instructions.getBackground());
-		Font textFont = introTextArea.getFont().deriveFont(Font.BOLD, 14f);
-		introTextArea.setFont(textFont);
-
 	}
 
 	/**

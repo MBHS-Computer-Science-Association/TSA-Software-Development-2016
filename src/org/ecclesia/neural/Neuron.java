@@ -3,7 +3,6 @@ package org.ecclesia.neural;
 import java.util.Random;
 
 import org.ecclesia.neural.util.Mathematics;
-
 /**
  * 
  * @author Sammy Shin, Trevor Thai Kim Nguyen, Christian Duffee
@@ -33,7 +32,7 @@ public class Neuron {
 		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean() ? -1 : 1);
+			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean() ? -Network.weightsMax : Network.weightsMax);
 		}
 	}
 
@@ -48,7 +47,7 @@ public class Neuron {
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
 			if (random.nextFloat() <= mutationChance) {
-				weights[i] = weights[i] + (random.nextBoolean() ? 1 : -1) * changeFactor * random.nextFloat();
+				weights[i] = weights[i] + (random.nextBoolean() ? Network.weightsMax : -Network.weightsMax) * changeFactor * random.nextFloat();
 				weights[i] = truent(weights[i]);
 			}
 		}
@@ -109,9 +108,9 @@ public class Neuron {
 	 * @return
 	 */
 	public float truent(float v) {
-		v = Math.min(v, 1f);
+		v = Math.min(v, Network.weightsMax);
 		if (allowsNegativeWeights) {
-			return Math.max(-1, v);
+			return Math.max(-Network.weightsMax, v);
 		} else {
 			return Math.max(0, v);
 		}

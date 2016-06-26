@@ -1,39 +1,47 @@
 package org.ecclesia.demoLines;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-public class Point implements Drawable {
-	private final static int size = 10;
-	private Color color;
-	private int x;
-	private int y;
+public class Point {
+	final static int USER = 0;
+	final static int PREDICTED = 1;
+	final static int DEBUG = -1;
+	
+	private float x;
+	private float y;
+	private int type;
 
 	/**
 	 * Instantiates the point
 	 * @param x
 	 * @param y
 	 */
-	public Point(int x, int y, Color color) {
+	public Point(float x, float y, int type) {
 		this.x = x;
 		this.y = y;
-		this.color = color;
+		this.type = type;
 	}
 
 	/**
-	 * Draws the Point
+	 * 
+	 * @return x a floating point value on the interval of (0, 1)
 	 */
-	@Override
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillOval(x - size / 2, y - size / 2, size, size);
-	}
-	public int getX()
+	public float getX()
 	{
 		return x;
 	}
-	public int getY()
+	/**
+	 * 
+	 * @return y a floating point value on the interval of (0, 1)
+	 */
+	public float getY()
 	{
 		return y;
+	}
+	
+	/**
+	 * Gets the type of point this point represents
+	 * @return type either a user-defined point or a computer-predicted point
+	 */
+	public int getType() {
+		return type;
 	}
 }

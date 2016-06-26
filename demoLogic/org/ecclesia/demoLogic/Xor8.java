@@ -8,11 +8,11 @@ import org.ecclesia.neural.Network;
  * @author CJ Duffee
  *
  */
-public class Xor7 {
+public class Xor8 {
 	static Network n;
 
 	public static void main(String args[]) {
-		n = new Network(2, 3, 1, 1, true);
+		n = new Network(2, 4, 1, 1, true);
 		float sucessRate = 0;
 		int in = 0;
 		float[][][] testCases = new float[4][2][0];
@@ -28,15 +28,14 @@ public class Xor7 {
 		testCases[in][0] = new float[] { 1f, 1f };
 		testCases[in++][1] = new float[] { 0 };
 		float time = System.nanoTime();
-		System.out.println(n.bruteForceWeightImprovement(testCases));
-		boolean learning = false;
-		while (learning) {
-			System.out.println("Loop");
-			learning = n.greedAlhorithm(testCases);
+		for(int i=0; i<10000; i++) {
+			for(int j=0;j<testCases.length; j++) {
+				n.backPropagation(testCases[j][0], testCases[j][1]);
+			}
 		}
 		sucessRate = getSucessRate();
 		System.out.println(sucessRate);
-		System.out.println((System.nanoTime() - time) / 1000000000.0f / 60.0f);
+		System.out.println((System.nanoTime()-time)/1000000000.0f/60.0f);
 
 	}
 

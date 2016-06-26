@@ -13,6 +13,7 @@ import javax.swing.JPanel;
  * @author Sammy Shin
  *
  */
+@SuppressWarnings("serial")
 public class ContentPanel extends JPanel {
 	
 	

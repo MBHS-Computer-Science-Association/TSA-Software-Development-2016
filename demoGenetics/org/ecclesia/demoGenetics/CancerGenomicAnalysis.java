@@ -2,8 +2,6 @@ package org.ecclesia.demoGenetics;
 
 import java.io.File;
 
-import javax.swing.JPanel;
-
 import org.ecclesia.demoTemplate.Demonstration;
 
 /**
@@ -17,6 +15,10 @@ public class CancerGenomicAnalysis extends Demonstration {
 	public CancerGenomicAnalysis() {
 		super("Artificial Neural Networks in Cancer Genetic Studies");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoGenetics/introduction.txt")));
+	}
+
+	@Override
+	public void run() {		
 		this.setContentPanel(new ContentPanel());
 		this.setControlPanel(new ControlPanel());
 	}

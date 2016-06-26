@@ -3,7 +3,7 @@
  */
 
 /**
- * @author Sammy Shin, Trevor Thai Kim Nguyen, Christian Duffee
+ * @author Sammy Shin, Trevor Nguyen, Christian Duffee
  *
  */
 package org.ecclesia.demoLines;
