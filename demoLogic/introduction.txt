@@ -1,6 +1,6 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px">
 		<h1>Demonstration Info</h1>
-			<p>Logic trainer! This will help you train your logics.  By clicking repeatedly from any random point and back again to the same point, you are training the neural network. The green dots are the random points you have inputted into the network, and the orangedot is the predicted output of the whole program after constant training of the component.<br><br><p>Although this demonstration shows our neural network, it is implementing a slow learning curve for accurate   results therefore it would take time to train our program. We have a second demonstration that has a lower learning curve therefore learns faster
+			<p>Logic trainer! This will help you train your logics.  By clicking repeatedly from any random point and back again to the same point, you are training the neural network. The green dots are the random points you have inputted into the network, and the orangedot is the predicted output of the whole program after constant training of the component.<br><br><p>Although this demonstration shows our neural network, it is implementing a slow learning curve for accurate   results therefore it would take time to train our program. We have a second demonstration that has a lower learning curve therefore learns faster</p>
 	</body>
 </html>
