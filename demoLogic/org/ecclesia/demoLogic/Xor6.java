@@ -15,7 +15,7 @@ public class Xor6 {
 
 	public static void main(String args[]) {
 		while (true) {
-			n = new Network(1, 3, 2, 1, true);
+			n = new Network(1, 3, 1, 1, true);
 			float sucessRate = 0;
 			int in = 0;
 			testCases = new float[2][2][0];
@@ -38,8 +38,8 @@ public class Xor6 {
 		float one = n.getOutput(testCases[0][0])[0];
 		System.out.println(one);
 		System.out.println(n.getOutput(testCases[1][0])[0]);
-		System.out.println(Network.getDifference(n.getOutput(testCases[0][0]), testCases[0][1])
-				+ Network.getDifference(n.getOutput(testCases[1][0]), testCases[1][1]));
+		//System.out.println(Network.getDifference(n.getOutput(testCases[0][0]), testCases[0][1])
+		//		+ Network.getDifference(n.getOutput(testCases[1][0]), testCases[1][1]));
 		if (one > .1f) {
 			System.exit(2);
 		}
