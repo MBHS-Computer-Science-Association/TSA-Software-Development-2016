@@ -3,6 +3,7 @@ package org.ecclesia.demoTemplate;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Timer;
@@ -26,6 +27,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Trevor Nguyen
  *
  */
+@SuppressWarnings("serial")
 public class DemoWindow extends JFrame {
 	/**
 	 * Stores the graphical information specific to the demonstration
@@ -86,7 +88,6 @@ public class DemoWindow extends JFrame {
 		fillPanels();
 		lockAspectRatio();
 		setVisible(true);
-		validate();
 	}
 
 	/**
@@ -212,6 +213,9 @@ public class DemoWindow extends JFrame {
 		introTextArea.setLineWrap(true);
 		introTextArea.setEditable(false);
 		introTextArea.setBorder(BorderFactory.createEmptyBorder());
+		introTextArea.setBackground(instructions.getBackground());
+		Font textFont = introTextArea.getFont().deriveFont(Font.BOLD, 14f);
+		introTextArea.setFont(textFont);
 
 	}
 
