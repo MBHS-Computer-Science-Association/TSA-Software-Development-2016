@@ -1,3 +1,8 @@
-<h3>Backpropagation</h3>
-<p>
-Backpropagation is a relatively recent discovery in computer science. The idea is to consider a neural network as a many dimensional function. To change the weights, first the error between the expected and actual output is calculated. Then the derivation of each weight is calculated and multiplied by this error to find the amount each weight should be modifying. This is widely considered to be the best method to teach the neural network and is the method most modern researchers and companies use.
+<html>
+	<body style="margin: 3px 1px 3px 8px">
+		<h3>Backpropagation</h3>
+			<p>
+				Backpropagation is a relatively recent discovery in computer science. The idea is to consider a neural network as a many dimensional function. To change the weights, first the error between the expected and actual output is calculated. Then the derivation of each weight is calculated and multiplied by this error to find the amount each weight should be modifying. This is widely considered to be the best method to teach the neural network and is the method most modern researchers and companies use.
+			</p>
+	</body>
+</html>
