@@ -71,19 +71,27 @@ public class Environment {
 	}
 
 	/**
+	 * Restarts the simulation with new neural networks.
+	 */
+	public void restart() {
+		malishList.clear();
+		
+		for (int i = 0; i < initialMalish; i++) {
+			float x = random.nextFloat() * WIDTH;
+			float y = random.nextFloat() * HEIGHT;
+			Malish m = new Malish(x, y);
+			malishList.add(m);
+		}
+	}
+	
+	/**
 	 * Updates the simulation mechanics by calling on the neural network and
 	 * also updating the environment itself (the reproduction of food)
 	 */
 	public void update() {
 
-		if (malishList.size() <= 0) {
-			for (int i = 0; i < initialMalish; i++) {
-				float x = random.nextFloat() * WIDTH;
-				float y = random.nextFloat() * HEIGHT;
-				Malish m = new Malish(x, y);
-				malishList.add(m);
-			}
-		}
+		if (malishList.size() <= 0)
+			restart();
 
 		if (random.nextFloat() < foodRegenerationRate) {
 			foodList.add(new Food(random.nextInt(WIDTH), random.nextInt(HEIGHT)));
