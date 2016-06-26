@@ -14,17 +14,24 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class Renderer extends JPanel {
-	private List<Drawable> drawables = new ArrayList<>();
-
-	LinePredictor linePredictor;
-	
 	/**
-	 * Bases the graphics frame off of a simulation object
-	 * Adds user input capabilities to JPanel
+	 * Stores all of the points in the simulation.
+	 * Periodically cleared for each test case.
+	 */
+	private List<Point> points = new ArrayList<>();
+
+	/**
+	 * Stores the simulation logic and variables
+	 */
+	private LinePredictor linePredictor;
+
+	/**
+	 * Bases the graphics frame off of a simulation object Adds user input
+	 * capabilities to JPanel
 	 */
 	public Renderer(LinePredictor linePredictor) {
 		this.linePredictor = linePredictor;
-		
+
 		setupListener();
 	}
 
@@ -34,18 +41,35 @@ public class Renderer extends JPanel {
 	public void setupListener() {
 		this.addMouseListener(new MouseAdapter() {
 			/**
-			 * Runs on release of either mouse button Adds a new point to the
-			 * list
+			 * Detects mouse input and creates normalized points based on the
+			 * relative mouse location within the renderer panel.
 			 */
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-				addDrawable(new UserPoint(x, y));
-				linePredictor.initPoint(x, y);
+				// Mouse positions.
+				int mouseX = e.getX();
+				int mouseY = e.getY();
+
+				// Actual dimensions of the component and
+				// needed for scaling after resizing.
+				int componentWidth = getWidth();
+				int componentHeight = getHeight();
+
+				// Creates coordinates by normalizing them on the interval [0,
+				// 1]
+				// This allows the coordinates to be portable and fed
+				// directly into the neural network.
+				float normX = (float) mouseX / (float) componentWidth;
+				float normY = (float) mouseY / (float) componentHeight;
+
+				// Creates points based on normalized x and y coordinates
+				Point userPoint = new Point(normX, normY, Point.USER);
+
+				addPoint(userPoint);
+				linePredictor.inputPoint(userPoint);
 			}
 		});
-		
+
 		/**
 		 * Refreshes at 60 FPS
 		 */
@@ -55,37 +79,55 @@ public class Renderer extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				repaint();
 			}
-			
+
 		}).start();
 	}
 
 	/**
-	 * Paints all drawables
+	 * Paints all points on the screen.
 	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		
-		
-		g.setColor(Color.BLACK);
-		for (int i = 0; i < drawables.size(); i++) {
-			drawables.get(i).draw(g);
+
+		int componentWidth = this.getWidth();
+		int componentHeight = this.getHeight();
+
+		for (Point p : points) {
+			int x = (int) (p.getX() * componentWidth);
+			int y = (int) (p.getY() * componentHeight);
+			int diameter = 10;
+
+			switch (p.getType()) {
+			case Point.USER:
+				g.setColor(Color.BLUE);
+				break;
+			case Point.PREDICTED:
+				g.setColor(Color.RED);
+				break;
+			case Point.DEBUG:
+				g.setColor(Color.MAGENTA);
+				break;
+			}
+
+			g.fillOval(x - diameter / 2, y - diameter / 2, diameter, diameter);
 		}
 	}
 
 	/**
 	 * Adds an item to the rendering list
 	 * 
-	 * @param d entity that will be rendered
+	 * @param point
+	 *            entity that will be rendered
 	 */
-	public void addDrawable(Drawable d) {
-		drawables.add(d);
+	public void addPoint(Point point) {
+		points.add(point);
 	}
 
 	/**
-	 * Removes all items from the renderingList
+	 * Removes all items from the rendering list
 	 */
 	public void clearDrawables() {
-		drawables.clear();
+		points.clear();
 	}
 }
