@@ -66,12 +66,9 @@ public class Renderer extends JPanel {
 			
 			g.setColor(viewColor);
 			final float mod = 8 * componentWidth / Environment.WIDTH;
-//			g.drawLine((int) malish.getX(), (int)malish.getY(),(int)( malish.getX() + mod * Math.cos(malish.getAngle())),
-//					(int)(malish.getY() + mod * Math.sin(malish.getAngle())));
 			
 			g.drawLine((int) x, (int) y,(int)( x + mod * Math.cos(malish.getAngle())),
 					(int)(y + mod * Math.sin(malish.getAngle())));
-			// TODO: Scale this mod variable.
 			
 			// g.fillOval((int) (malish.getX() - WIDTH / 2 + mod *
 			// Math.cos(malish.getAngle())),
