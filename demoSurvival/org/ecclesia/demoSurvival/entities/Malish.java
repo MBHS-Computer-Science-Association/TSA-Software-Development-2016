@@ -48,14 +48,23 @@ public class Malish extends Animal {
 	 * @return true if dead or false if alive
 	 */
 	public boolean move(float[] input) {
+		boolean debug = true;
+		
 		super.move(moveSpeed);
 		float[] output = net.getOutput(input);
 		int greatest = 0;
 		float greatestValue = 0.0f;
 		for (int i = 0; i < output.length; i++) {
-			if (output[i] > greatestValue) {
-				greatest = i;
-				greatestValue = output[i];
+			if (!debug) {
+				if (output[i] > greatestValue) {
+					greatest = i;
+					greatestValue = output[i];
+				}
+			} else {
+				if (input[i] > greatestValue) {
+					greatest = i;
+					greatestValue = input[i];
+				}
 			}
 		}
 		if (greatest == 0) {

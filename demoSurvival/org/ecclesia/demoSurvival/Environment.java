@@ -137,17 +137,17 @@ public class Environment {
 			int shortestDistance = Integer.MAX_VALUE;
 			for (int j = foodList.size() - 1; j >= 0; j--) {
 				Food food = foodList.get(j);
-				float diffX = malish.getX() - food.getX();
-				float diffY = malish.getY() - food.getY();
+				float diffX = food.getX() - malish.getX();
+				float diffY = food.getY() - malish.getY();
 				float theta = (float) Math.atan(diffY / diffX);
 				if (theta < 0) {
 					theta += 2.00 * Math.PI;
 				}
-				if (food.getX() < malish.getX() && food.getY() < malish.getY()) { // if
-																					// in
-																					// 3rd
-																					// quadrant
+				
+				// 3rd quadrant
+				if (food.getX() < malish.getX() && food.getY() < malish.getY()) {
 					theta += Math.PI;
+				// 2nd quadrant
 				} else if (food.getX() < malish.getX() && food.getY() >= malish.getY()) { // if
 																							// in
 																							// 2nd
