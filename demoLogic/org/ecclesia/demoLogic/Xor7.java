@@ -36,7 +36,7 @@ public class Xor7 {
 		}
 		sucessRate = getSucessRate();
 		System.out.println(sucessRate);
-		System.out.println((System.nanoTime()-time)/1000000000.0f/60.0f);
+		System.out.println((System.nanoTime() - time) / 1000000000.0f / 60.0f);
 
 	}
 
