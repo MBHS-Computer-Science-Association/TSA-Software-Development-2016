@@ -1,8 +1,7 @@
 <html>
 <body  style="margin: 3px 1px 3px 8px; font-family: arial">
 <h2><center>
-Learning with Artificial Intelligence using Neural Networks
-<br />Project Ecclesia
+Project Ecclesia: Artificial Intelligence using Neural Networks
 </center></h2>
 
 <center>

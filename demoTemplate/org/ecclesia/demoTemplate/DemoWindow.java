@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
@@ -209,6 +210,7 @@ public class DemoWindow extends JFrame {
 		introScrollPane = new JScrollPane(introTextArea);
 		introScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		introScrollPane.setBorder(BorderFactory.createEmptyBorder());
+		JScrollBar scrollBar = introScrollPane.getVerticalScrollBar();
 
 		instructions.setLayout(new BorderLayout());
 		instructions.add(introScrollPane, BorderLayout.CENTER);
@@ -216,6 +218,7 @@ public class DemoWindow extends JFrame {
 		introTextArea.setEditable(false);
 		introTextArea.setBorder(BorderFactory.createEmptyBorder());
 		introTextArea.setBackground(instructions.getBackground());
+		introTextArea.setCaretPosition(0);
 	}
 
 	/**
