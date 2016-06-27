@@ -83,8 +83,10 @@ public final class DemoLauncher extends JFrame {
 		introTextPane.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/introduction.txt")));
 		introTextPane.setEditable(false);
 		introTextPane.setPreferredSize(new Dimension(0, 0));
+		introTextPane.setBackground(getBackground());
+		introTextPane.setBorder(BorderFactory.createEmptyBorder());
 		JScrollPane introScrollPane = new JScrollPane(introTextPane);
-		// this.add(introTextPane);
+		introScrollPane.setBorder(BorderFactory.createEmptyBorder());
 		this.add(introScrollPane);
 
 		QuadrantOrganizer quad = new QuadrantOrganizer();
@@ -171,41 +173,41 @@ public final class DemoLauncher extends JFrame {
 			createComponents();
 		}
 
-		JTextPane northwest;
-		JTextPane northeast;
-		JTextPane southwest;
-		JTextPane southeast;
-
 		/**
 		 * Creates all of the components.
 		 */
 		public void createComponents() {
-			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			JTextPane northwest;
+			JTextPane northeast;
+			JTextPane southwest;
+			JTextPane southeast;
+//			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.setLayout(new GridLayout(2, 2, 15, 15));
 
 			northwest = new JTextPane();
 			northwest.setContentType("text/html");
 			northwest.setEditable(false);
 			northwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/backPropagationInfo.txt")));
-			// northwest.setPreferredSize(new Dimension(0,0));
-
+			northwest.setBackground(new Color(245, 245, 245));
+			
 			northeast = new JTextPane();
 			northeast.setContentType("text/html");
 			northeast.setEditable(false);
 			northeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/bruteForceInfo.txt")));
-			// northeast.setPreferredSize(new Dimension(0,0));
-
+			northeast.setBackground(new Color(245, 245, 245));
+			
 			southwest = new JTextPane();
 			southwest.setContentType("text/html");
 			southwest.setEditable(false);
 			southwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/geneticAlgorithmInfo.txt")));
-			// southwest.setPreferredSize(new Dimension(0,0));
-
+			southwest.setBackground(new Color(245, 245, 245));
+			
 			southeast = new JTextPane();
 			southeast.setContentType("text/html");
 			southeast.setEditable(false);
 			southeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/greedyAlgorithmInfo.txt")));
-
+			southeast.setBackground(new Color(245, 245, 245));
+			
 			this.add(northwest);
 			this.add(northeast);
 			this.add(southwest);
