@@ -110,7 +110,7 @@ public class Environment {
 		if (malishList.isEmpty())
 			restart();
 
-		if (random.nextFloat() < foodRegenerationRate) {
+		if (random.nextFloat() < foodRegenerationRate && foodList.size() < initialFood) {
 			foodList.add(new Food(random.nextInt(WIDTH), random.nextInt(HEIGHT)));
 		}
 

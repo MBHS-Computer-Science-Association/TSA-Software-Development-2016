@@ -115,7 +115,7 @@ public class GeneticsLogic {
 		System.err.println(Arrays.toString(l.getResult(y)));
 		float[] z = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
 		System.out.println(Arrays.toString(l.getResult(z)));
-		float[] e = { .0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
+		float[] e = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
 		System.out.println(Arrays.toString(l.getResult(e)));
 
 	}
