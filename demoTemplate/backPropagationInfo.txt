@@ -3,7 +3,7 @@
 	<center>
 		<h3>Backpropagation</h3>
 			<p>
-				Backpropagation is a relatively recent discovery in computer science. The idea is to consider a neural network as a many dimensional function. To change the weights, first the error between the expected and actual output is calculated. Then the derivation of each weight is calculated and multiplied by this error to find the amount each weight should be modifying. This is widely considered to be the best method to teach the neural network and is the method most modern researchers and companies use.
+				Backpropagation is a relatively recent discovery in computer science. The idea is to consider a neural network as a many dimensional function. Weights are changed in O(N) time complexity by the derivation of each weight times the output error. The advantage to this is that it is faster and more accurate than all other learning algorithms. The disadvantage is that it requires clear testcases.
 			</p>
 			</center>
 	</body>
