@@ -102,7 +102,7 @@ public class GeneticsLogic {
 	public void setNetwork(){
 		net = new Network(10, 30, 1, 1, true);
 	}
-
+	
 	// DELETE LATER BECAUS IT NOT GOOD
 	public static void main(String[] args) throws IOException {
 		GeneticsLogic l = new GeneticsLogic();

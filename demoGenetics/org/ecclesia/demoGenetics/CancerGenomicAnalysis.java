@@ -1,20 +1,27 @@
 package org.ecclesia.demoGenetics;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
@@ -78,71 +85,96 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 	class ContentPanel extends JPanel {
 
+		protected char[] ntSequence;
+		
 		public ContentPanel() {
 			createComponents();
+			ntSequence = new char[10];
 		}
 
 		private void createComponents() {
-			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			
-			
-			
-			JLabel norm = new JLabel("Genetic Analysis Pro V2", JLabel.CENTER);
-			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
-			add(norm);
+			// this.setLayout(new BorderLayout(0, 15));
 
-			JTextArea modify = new JTextArea(
-					"Modify these nucleotides to and see what the Neural network will predict: Whether or not this is mutated");
-			
-			modify.setEditable(false);
-			modify.setLineWrap(true);
-			modify.setBackground(this.getBackground());
-			add(modify);
+			JLabel norm = new JLabel("Genetic Oncogene Analysis", JLabel.CENTER);
+			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
+			add(norm, BorderLayout.NORTH);
 
 			add(new JComponent() {
 				{
-					SpringLayout layout = new SpringLayout();
-					setLayout(layout);
-					layout.putConstraint(SpringLayout.WEST, norm, 5, SpringLayout.WEST, this);
-					layout.putConstraint(SpringLayout.NORTH, norm, 5, SpringLayout.NORTH, this);
-
-					JLabel fixed = new JLabel("Normal EGFR gene:");
+					setLayout(new SpringLayout());
+					JLabel fixed = new JLabel("Wild type EGFR gene:");
 					add(fixed);
 
-					JLabel geneSeq = new JLabel("A T G C G A C C C T");
 					for (Character c : "ATGCGACCCT".toCharArray()) {
 						JLabel label = new JLabel(c.toString(), JLabel.CENTER);
 						label.setFont(label.getFont().deriveFont(Font.BOLD));
 						add(label);
 					}
 
-					JLabel user = new JLabel("Editable nucleotide sequence:");
-					JTextField g1 = new JTextField("A");
-					JTextField g2 = new JTextField("T");
-					JTextField g3 = new JTextField("G");
-					JTextField g4 = new JTextField("C");
-					JTextField g5 = new JTextField("G");
-					JTextField g6 = new JTextField("A");
-					JTextField g7 = new JTextField("C");
-					JTextField g8 = new JTextField("C");
-					JTextField g9 = new JTextField("C");
-					JTextField g0 = new JTextField("T");
+					JRadioButton[][] buttonArray = new JRadioButton[4][10];
 
-					add(user);
-					add(g1);
-					add(g2);
-					add(g3);
-					add(g4);
-					add(g5);
-					add(g6);
-					add(g7);
-					add(g8);
-					add(g9);
-					add(g0);
-					SpringUtilities.makeCompactGrid(this, 2, 11, 3, 3, 3, 3);
+					for (int i = 0; i < 10; i++) {
+						ButtonGroup group = new ButtonGroup();
+						for (int j = 0; j < 4; j++) {
+							JRadioButton button = new JRadioButton();
+							buttonArray[j][i] = button;
+							
+							final int index = j;
+							final int seqIndex = i;
+							
+							button.addActionListener(new ActionListener() {
+							
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									char c;
+									
+									switch (index) {
+									case 0:
+										c = 'A';
+										break;
+									case 1:
+										c = 'C';
+										break;
+									case 2:
+										c = 'G';
+										break;
+									case 3:
+									default:
+										c = 'T';
+										break;
+									}
+									
+									ntSequence[seqIndex] = c;
+									geneticsLogic.changeList(ntSequence);
+								}
+								
+							});
+							
+							group.add(button);
+						}
+					}
+					
+					String nts = "ACGT";
+					for (int i = 0; i < 4; i++) {
+						JLabel label = new JLabel("" + nts.charAt(i));
+						this.add(label);
+						
+						for (int j = 0; j < 10; j++) {
+							this.add(buttonArray[i][j]);
+						}
+					}
+
+					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
-			});
+			}, BorderLayout.SOUTH);
 
+			JTextPane modify = new JTextPane();
+			modify.setContentType("text/html");
+			modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
+			modify.setEditable(false);
+			modify.setBackground(this.getBackground());
+			// modify.setPreferredSize(new Dimension(0, 0));
+			add(modify, BorderLayout.CENTER);
 		}
 	}
 
