@@ -1,5 +1,5 @@
 <html>
-	<body style="margin: 3px 1px 3px 8px">
+	<body style="margin: 3px 1px 3px 8px; font-family: arial">
 	<center>
 		<h3>Backpropagation</h3>
 			<p>

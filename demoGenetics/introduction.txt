@@ -1,5 +1,5 @@
 <html>
-	<body style="margin: 3px 1px 3px 8px">
+	<body style="margin: 3px 1px 3px 8px; font-family: arial">
 		<h1>Demonstration Info</h1>
 			<p>This demo displays the use of an Artificial Neural Network in the identification of mutation in the EGFR gene, a gene which
 			frequently mutates and is the baseline cause of lung cancer. For instance, a patient without cancer would have a non-mutated sequence
