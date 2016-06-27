@@ -199,7 +199,7 @@ public final class DemoLauncher extends JFrame {
 			southeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/greedyAlgorithmInfo.txt")));
 //			southeast.setPreferredSize(new Dimension(0,0));
 			
-			this.add(northwest);
+			this.add(northwest);	
 			this.add(northeast);
 			this.add(southwest);
 			this.add(southeast);
