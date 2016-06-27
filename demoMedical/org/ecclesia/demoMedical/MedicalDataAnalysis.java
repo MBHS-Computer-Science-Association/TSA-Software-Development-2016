@@ -2,6 +2,7 @@ package org.ecclesia.demoMedical;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class MedicalDataAnalysis {
 	}
 
 	/**
-	 * Fils the sucess board based on Netowrk n and the data
+	 * Fills the success board based on Network n and the data
 	 * 
 	 * @param n
 	 * @param data
@@ -84,7 +85,7 @@ public class MedicalDataAnalysis {
 
 		boolean learning = true;
 		while (learning) {
-			learning = n.greedyAlgorithmWeightImprovment(testCases);
+			learning = n.greedyAlgorithmWeightImprovement(testCases);
 		}
 	}
 

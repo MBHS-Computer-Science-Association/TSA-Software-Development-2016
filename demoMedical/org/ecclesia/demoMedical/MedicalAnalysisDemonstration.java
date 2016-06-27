@@ -2,7 +2,9 @@ package org.ecclesia.demoMedical;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -49,10 +51,10 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 		 */
 		public void createComponents() {
 			setLayout(new BorderLayout(15, 15));
-			JLabel label = new JLabel("Content panel: Accuracy Grid!");
-			this.add(label, BorderLayout.PAGE_START);
+			JLabel label = new JLabel("Accuracy on 100 Test Cases", JLabel.CENTER);
+			label.setFont(label.getFont().deriveFont(Font.BOLD, 20f));
+			this.add(label, BorderLayout.NORTH);
 			AccuracyGrid grid = new AccuracyGrid();
-			grid.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.add(grid, BorderLayout.CENTER);
 		}
 
@@ -79,13 +81,13 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 			@Override
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
-
-				int size = (getHeight() - 15) / 20;
+				int offset = (getWidth() - getHeight()) / 2;
+				int size = (getHeight()) / 10;
 				
 				for (int i = 0; i < accuracyGrid.length; i++) {
 					for (int j = 0; j < accuracyGrid[i].length; j++) {
 						g.setColor(accuracyGrid[i][j] ? Color.GREEN : Color.RED);
-						g.fillRect(j * size, i * size, size-3, size-3);
+						g.fillRect(offset + j * size, i * size, size-2, size-2);
 					}
 				}
 			}
@@ -102,16 +104,8 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 		 * Creates Java Swing components and adds them to the panel.
 		 */
 		public void createComponents() {
-			JButton trainButton = new JButton("Train");
-			trainButton.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					medicalAnalysis.train();
-				}
-
-			});
 			JButton testButton = new JButton("Test");
+			testButton.setEnabled(false);
 			testButton.addActionListener(new ActionListener() {
 
 				@Override
@@ -120,6 +114,17 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 				}
 			});
 
+			JButton trainButton = new JButton("Train");
+			trainButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					medicalAnalysis.train();
+					testButton.setEnabled(true);
+				}
+				
+			});
+			
 			this.setLayout(new GridLayout(1, 2));
 			this.add(trainButton);
 			this.add(testButton);
