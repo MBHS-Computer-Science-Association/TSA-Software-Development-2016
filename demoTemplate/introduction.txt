@@ -1,7 +1,14 @@
+<html>
+<body>
 <h2><center>
 Learning with Artificial Intelligence using Neural Networks
 <br />Project Ecclesia
 </center></h2>
 
-<p style="margin: 5px 5px 5px 5px; font-family: arial; font-size: 95%">
-Neural networks are artificial intelligence computer programs designed to mimic the natural behavior of the brain. Neural networks are made up of input, hidden and output nodes connected to each other by weighted connections. Input is propagated down from the input nodes, through the hidden nodes and to the output nodes by these weighted connections. The changing of these weights is all that is needed to completely transform the nature of the network. This makes it incredibly versatile; it is here that neural networks differ from traditional programs. Neural networks are "black boxes", the programmers do not directly control, or even know the weights of the neural network. Rather, the beauty of neural networks is that they learn the specific task by itself, independent of humans. This allow computers to perform tasks humans are generally poor at programming computers to do. For example, Google has pioneered the field of artificial intelligence by creating and training neural networks to recognize shapes in images and patterns in text. Additionally, just recently they made the first AI that was able to beat a world class Go player. Before this Go was the last board game that humans were able to outperform computers. There are several ways to train a neural network. This project aims to explore and explain these different methods and their various advantages and disadvantages. They are listed below.
+<center>
+<p style="margin: 5px 5px 5px 5px;">
+Neural networks are artificial intelligence computer programs designed to mimic the natural behavior of the brain. Neural networks are made up of input, hidden and output nodes connected to each other by weighted connections. Input is propagated down from the input nodes, through the hidden nodes and to the output nodes by these weighted connections. The changing of these weights is all that is needed to completely transform the nature of the network. This versatility makes neural networks differ from traditional programs. Neural networks are "black boxes", the programmers do not directly control, or even know the weights of the neural network. Rather, the beauty of neural networks is that they learn the specific task by itself, independent of humans. This allow computers to perform tasks humans are generally poor at programming computers to do. There are several ways to train a neural network. This project aims to explore and explain these different methods and their various advantages and disadvantages. They are listed below.
+/p>
+</center>
+</body>
+</html>
