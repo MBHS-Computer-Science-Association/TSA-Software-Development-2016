@@ -187,19 +187,16 @@ public final class DemoLauncher extends JFrame {
 			northwest.setContentType("text/html");
 			northwest.setEditable(false);
 			northwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/backPropagationInfo.txt")));
-			// northwest.setPreferredSize(new Dimension(0,0));
 
 			northeast = new JTextPane();
 			northeast.setContentType("text/html");
 			northeast.setEditable(false);
 			northeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/bruteForceInfo.txt")));
-			// northeast.setPreferredSize(new Dimension(0,0));
 
 			southwest = new JTextPane();
 			southwest.setContentType("text/html");
 			southwest.setEditable(false);
 			southwest.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/geneticAlgorithmInfo.txt")));
-			// southwest.setPreferredSize(new Dimension(0,0));
 
 			southeast = new JTextPane();
 			southeast.setContentType("text/html");
