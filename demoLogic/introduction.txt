@@ -1,5 +1,5 @@
 <html>
-	<body style="margin: 3px 1px 3px 8px">
+	<body style="margin: 3px 1px 3px 8px; font-family: arial">
 		<h1>Demonstration Info</h1>
 			<p>This demo uses a brute force algorithm to find a weights combination that allows the neural network to output the correct output to input of the XOR operator. Notice how, despite the simplicity of the network, how inefficient this is. It can take up to 40 seconds for this demo to run. It is because of the inefficiency of the algorithm that virtually no one uses brute force in modern artificial neural networks.</p>
 	</body>
