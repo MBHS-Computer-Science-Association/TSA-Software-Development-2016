@@ -1,6 +1,5 @@
 <h2><center>
-Learning with Artificial Intelligence using Neural Networks
-<br />Project Ecclesia
+Project Ecclesia: Artificial Intelligence using Neural Networks
 </center></h2>
 
 <p style="margin: 5px 5px 5px 5px; font-family: arial; font-size: 95%">

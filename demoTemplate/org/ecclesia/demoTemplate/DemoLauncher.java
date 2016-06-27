@@ -3,6 +3,8 @@ package org.ecclesia.demoTemplate;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,11 +68,22 @@ public final class DemoLauncher extends JFrame {
 	 */
 	public DemoLauncher() {
 		super("Ecclesia Launcher");
-		initializeWindow(new Dimension(600, 800));
+		
+		GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Dimension screenSize = environment.getMaximumWindowBounds().getSize();
+		
+		Dimension windowSize = null;
+		if (screenSize.getWidth() > 630 && screenSize.getHeight() > 950) {
+			windowSize = new Dimension(630, 950);
+			this.setResizable(false);
+		} else {
+			windowSize = new Dimension(600, 800);
+			this.setResizable(true);
+			// this.pack();
+		}
+		initializeWindow(windowSize);
 		createComponents();
-		// this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		// this.pack();
 	}
 
 	/**
@@ -85,9 +98,7 @@ public final class DemoLauncher extends JFrame {
 		introTextPane.setPreferredSize(new Dimension(0, 0));
 		introTextPane.setBackground(getBackground());
 		introTextPane.setBorder(BorderFactory.createEmptyBorder());
-		JScrollPane introScrollPane = new JScrollPane(introTextPane);
-		introScrollPane.setBorder(BorderFactory.createEmptyBorder());
-		this.add(introScrollPane);
+		this.add(introTextPane);
 
 		QuadrantOrganizer quad = new QuadrantOrganizer();
 		quad.setMinimumSize(new Dimension(0, 0));
@@ -97,9 +108,11 @@ public final class DemoLauncher extends JFrame {
 			{
 				this.setLayout(new GridLayout(demoList.size() + 1, 1));
 				JLabel label = new JLabel("Select a Demonstration:", JLabel.CENTER);
+				label.setFont(label.getFont().deriveFont(Font.BOLD, 16f));
 				this.add(label);
 				for (Demonstration demo : demoList) {
 					JButton b = new JButton(demo.name);
+					b.setFont(b.getFont().deriveFont(14f));
 
 					// Links the button to the demonstration
 					// start() method.
@@ -181,7 +194,6 @@ public final class DemoLauncher extends JFrame {
 			JTextPane northeast;
 			JTextPane southwest;
 			JTextPane southeast;
-//			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.setLayout(new GridLayout(2, 2, 15, 15));
 
 			northwest = new JTextPane();
