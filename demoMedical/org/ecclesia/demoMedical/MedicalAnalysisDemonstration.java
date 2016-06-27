@@ -1,13 +1,20 @@
 package org.ecclesia.demoMedical;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
@@ -41,8 +48,47 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 		 * Creates Java Swing components and adds them to the panel.
 		 */
 		public void createComponents() {
-			JLabel label = new JLabel("Content panel");
-			this.add(label);
+			setLayout(new BorderLayout(15, 15));
+			JLabel label = new JLabel("Content panel: Accuracy Grid!");
+			this.add(label, BorderLayout.PAGE_START);
+			AccuracyGrid grid = new AccuracyGrid();
+			grid.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			this.add(grid, BorderLayout.CENTER);
+		}
+
+		class AccuracyGrid extends JPanel {
+			boolean[][] accuracyGrid;
+
+			public AccuracyGrid() {
+				update();
+				
+				new Timer(1000 / 60, new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						update();
+						repaint();
+					}
+				}).start();
+			}
+
+			private void update() {
+				accuracyGrid = medicalAnalysis.getAccuracyData();
+			}
+
+			@Override
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+
+				int size = (getHeight() - 15) / 20;
+				
+				for (int i = 0; i < accuracyGrid.length; i++) {
+					for (int j = 0; j < accuracyGrid[i].length; j++) {
+						g.setColor(accuracyGrid[i][j] ? Color.GREEN : Color.RED);
+						g.fillRect(j * size, i * size, size-3, size-3);
+					}
+				}
+			}
 		}
 	}
 
@@ -67,13 +113,13 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 			});
 			JButton testButton = new JButton("Test");
 			testButton.addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					medicalAnalysis.test();
 				}
 			});
-			
+
 			this.setLayout(new GridLayout(1, 2));
 			this.add(trainButton);
 			this.add(testButton);
