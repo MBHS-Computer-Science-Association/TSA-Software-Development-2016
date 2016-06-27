@@ -147,7 +147,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 									ntSequence[seqIndex] = c;
 									geneticsLogic.changeList(ntSequence);
 								}
-								
 							});
 							
 							group.add(button);
