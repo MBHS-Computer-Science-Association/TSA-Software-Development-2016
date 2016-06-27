@@ -205,7 +205,6 @@ public final class DemoLauncher extends JFrame {
 			southeast.setContentType("text/html");
 			southeast.setEditable(false);
 			southeast.setText(Demonstration.getInstructionsFromFile(new File("demoTemplate/greedyAlgorithmInfo.txt")));
-			// southeast.setPreferredSize(new Dimension(0,0));
 
 			this.add(northwest);
 			this.add(northeast);
