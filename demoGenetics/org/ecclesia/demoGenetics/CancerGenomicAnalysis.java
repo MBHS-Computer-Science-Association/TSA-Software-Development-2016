@@ -1,20 +1,24 @@
 package org.ecclesia.demoGenetics;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
@@ -83,66 +87,73 @@ public class CancerGenomicAnalysis extends Demonstration {
 		}
 
 		private void createComponents() {
-			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			this.setLayout(new BorderLayout(0, 15));
 			
 			
-			
-			JLabel norm = new JLabel("Genetic Analysis Pro V2", JLabel.CENTER);
+			JLabel norm = new JLabel("Genetic Oncogene Analysis", JLabel.CENTER);
 			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
-			add(norm);
+			add(norm, BorderLayout.NORTH);
 
-			JTextArea modify = new JTextArea(
-					"Modify these nucleotides to and see what the Neural network will predict: Whether or not this is mutated");
-			
-			modify.setEditable(false);
-			modify.setLineWrap(true);
-			modify.setBackground(this.getBackground());
-			add(modify);
 
 			add(new JComponent() {
 				{
-					SpringLayout layout = new SpringLayout();
-					setLayout(layout);
-					layout.putConstraint(SpringLayout.WEST, norm, 5, SpringLayout.WEST, this);
-					layout.putConstraint(SpringLayout.NORTH, norm, 5, SpringLayout.NORTH, this);
-
-					JLabel fixed = new JLabel("Normal EGFR gene:");
+					setLayout(new SpringLayout());		
+					JLabel fixed = new JLabel("Wild type EGFR gene:");
 					add(fixed);
 
-					JLabel geneSeq = new JLabel("A T G C G A C C C T");
 					for (Character c : "ATGCGACCCT".toCharArray()) {
 						JLabel label = new JLabel(c.toString(), JLabel.CENTER);
 						label.setFont(label.getFont().deriveFont(Font.BOLD));
 						add(label);
 					}
 
-					JLabel user = new JLabel("Editable nucleotide sequence:");
-					JTextField g1 = new JTextField("A");
-					JTextField g2 = new JTextField("T");
-					JTextField g3 = new JTextField("G");
-					JTextField g4 = new JTextField("C");
-					JTextField g5 = new JTextField("G");
-					JTextField g6 = new JTextField("A");
-					JTextField g7 = new JTextField("C");
-					JTextField g8 = new JTextField("C");
-					JTextField g9 = new JTextField("C");
-					JTextField g0 = new JTextField("T");
-
+					JLabel user = new JLabel("Sally Smith's sequence:");
 					add(user);
-					add(g1);
-					add(g2);
-					add(g3);
-					add(g4);
-					add(g5);
-					add(g6);
-					add(g7);
-					add(g8);
-					add(g9);
-					add(g0);
+
+					List<JTextField> fieldList = new ArrayList<>(11);
+					
+					//JRadio
+					
+					for (Character c : "ATGCGACCCT".toCharArray()) {
+						JTextField field = new JTextField(c.toString());
+						fieldList.add(field);
+					}
+					
+					for (int i = 0; i < fieldList.size(); i++) {
+						JTextField field = fieldList.get(i);
+						field.addCaretListener(new CaretListener() {
+
+							@Override
+							public void caretUpdate(CaretEvent e) {
+								String text = field.getText();
+								if (text != null && text.length() != 0) {
+									text = text.substring(0, 1);
+								}
+
+								try {
+									field.getDocument().remove(1, field.getDocument().getLength());
+								} catch (BadLocationException e1) {
+									e1.printStackTrace();
+								}
+							}
+							
+						});
+					}
+					
+					for (JComponent comp : fieldList)
+						add(comp);
+					
 					SpringUtilities.makeCompactGrid(this, 2, 11, 3, 3, 3, 3);
 				}
-			});
+			}, BorderLayout.SOUTH);
 
+			JTextPane modify = new JTextPane();
+			modify.setContentType("text/html");
+			modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
+			modify.setEditable(false);
+			modify.setBackground(this.getBackground());
+//			modify.setPreferredSize(new Dimension(0, 0));
+			add(modify, BorderLayout.CENTER);
 		}
 	}
 
