@@ -1,7 +1,5 @@
 package org.ecclesia.demoGenetics;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +7,8 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
@@ -80,7 +80,21 @@ public class CancerGenomicAnalysis extends Demonstration {
 		}
 		
 		private void createComponents() {
-			
+			 
+		        setLayout(new SpringLayout());
+		 
+		        JTextField g1 = new JTextField();
+		        
+		        add(g1);
+		        add(new JButton("Button 2"));
+		        add(new JButton("Button 3"));
+		        add(new JButton("Long-Named Button 4"));
+		        add(new JButton("5"));
+		        
+		        SpringUtilities.makeCompactGrid(this, 1,
+                        getComponentCount(),
+                        6, 6, 6, 6);
+		 
 		}
 	}
 

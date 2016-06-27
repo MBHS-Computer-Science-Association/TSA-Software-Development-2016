@@ -8,7 +8,7 @@ Learning with Artificial Intelligence using Neural Networks
 <center>
 <p style="margin: 5px 5px 5px 5px;">
 Neural networks are artificial intelligence computer programs designed to mimic the natural behavior of the brain. Neural networks are made up of input, hidden and output nodes connected to each other by weighted connections. Input is propagated down from the input nodes, through the hidden nodes and to the output nodes by these weighted connections. The changing of these weights is all that is needed to completely transform the nature of the network. This versatility makes neural networks differ from traditional programs. Neural networks are "black boxes", the programmers do not directly control, or even know the weights of the neural network. Rather, the beauty of neural networks is that they learn the specific task by itself, independent of humans. This allow computers to perform tasks humans are generally poor at programming computers to do. There are several ways to train a neural network. This project aims to explore and explain these different methods and their various advantages and disadvantages. They are listed below.
-/p>
+</p>
 </center>
 </body>
 </html>
