@@ -9,10 +9,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
@@ -82,22 +85,23 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 	class ContentPanel extends JPanel {
 
+		protected char[] ntSequence;
+		
 		public ContentPanel() {
 			createComponents();
+			ntSequence = new char[10];
 		}
 
 		private void createComponents() {
-			this.setLayout(new BorderLayout(0, 15));
-			
-			
+			// this.setLayout(new BorderLayout(0, 15));
+
 			JLabel norm = new JLabel("Genetic Oncogene Analysis", JLabel.CENTER);
 			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
 			add(norm, BorderLayout.NORTH);
 
-
 			add(new JComponent() {
 				{
-					setLayout(new SpringLayout());		
+					setLayout(new SpringLayout());
 					JLabel fixed = new JLabel("Wild type EGFR gene:");
 					add(fixed);
 
@@ -107,43 +111,60 @@ public class CancerGenomicAnalysis extends Demonstration {
 						add(label);
 					}
 
-					JLabel user = new JLabel("Sally Smith's sequence:");
-					add(user);
+					JRadioButton[][] buttonArray = new JRadioButton[4][10];
 
-					List<JTextField> fieldList = new ArrayList<>(11);
-					
-					//JRadio
-					
-					for (Character c : "ATGCGACCCT".toCharArray()) {
-						JTextField field = new JTextField(c.toString());
-						fieldList.add(field);
-					}
-					
-					for (int i = 0; i < fieldList.size(); i++) {
-						JTextField field = fieldList.get(i);
-						field.addCaretListener(new CaretListener() {
-
-							@Override
-							public void caretUpdate(CaretEvent e) {
-								String text = field.getText();
-								if (text != null && text.length() != 0) {
-									text = text.substring(0, 1);
-								}
-
-								try {
-									field.getDocument().remove(1, field.getDocument().getLength());
-								} catch (BadLocationException e1) {
-									e1.printStackTrace();
-								}
-							}
+					for (int i = 0; i < 10; i++) {
+						ButtonGroup group = new ButtonGroup();
+						for (int j = 0; j < 4; j++) {
+							JRadioButton button = new JRadioButton();
+							buttonArray[j][i] = button;
 							
-						});
+							final int index = j;
+							final int seqIndex = i;
+							
+							button.addActionListener(new ActionListener() {
+							
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									char c;
+									
+									switch (index) {
+									case 0:
+										c = 'A';
+										break;
+									case 1:
+										c = 'C';
+										break;
+									case 2:
+										c = 'G';
+										break;
+									case 3:
+									default:
+										c = 'T';
+										break;
+									}
+									
+									ntSequence[seqIndex] = c;
+									geneticsLogic.changeList(ntSequence);
+								}
+								
+							});
+							
+							group.add(button);
+						}
 					}
 					
-					for (JComponent comp : fieldList)
-						add(comp);
-					
-					SpringUtilities.makeCompactGrid(this, 2, 11, 3, 3, 3, 3);
+					String nts = "ACGT";
+					for (int i = 0; i < 4; i++) {
+						JLabel label = new JLabel("" + nts.charAt(i));
+						this.add(label);
+						
+						for (int j = 0; j < 10; j++) {
+							this.add(buttonArray[i][j]);
+						}
+					}
+
+					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
 			}, BorderLayout.SOUTH);
 
@@ -152,7 +173,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 			modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
 			modify.setEditable(false);
 			modify.setBackground(this.getBackground());
-//			modify.setPreferredSize(new Dimension(0, 0));
+			// modify.setPreferredSize(new Dimension(0, 0));
 			add(modify, BorderLayout.CENTER);
 		}
 	}
