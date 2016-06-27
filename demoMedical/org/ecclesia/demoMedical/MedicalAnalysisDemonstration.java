@@ -29,7 +29,7 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 	MedicalDataAnalysis medicalAnalysis;
 
 	public MedicalAnalysisDemonstration() {
-		super("Medical Data Analysis");
+		super("Medical Datamining");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoMedical/introduction.txt")));
 	}
 
