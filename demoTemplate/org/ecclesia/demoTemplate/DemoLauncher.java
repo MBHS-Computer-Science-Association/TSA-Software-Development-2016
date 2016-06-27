@@ -55,11 +55,11 @@ public final class DemoLauncher extends JFrame {
 	 */
 	static {
 		demoList = new LinkedList<>();
-		demoList.add(new DigitalLogicDemonstration());
-		demoList.add(new MedicalAnalysisDemonstration());
-		demoList.add(new GameIntelligenceSimulation());
 		demoList.add(new LineExtrapolationDemo());
+		demoList.add(new GameIntelligenceSimulation());
+		demoList.add(new MedicalAnalysisDemonstration());
 		demoList.add(new CancerGenomicAnalysis());
+		demoList.add(new DigitalLogicDemonstration());
 	}
 
 	/**

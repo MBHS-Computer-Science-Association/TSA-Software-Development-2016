@@ -30,7 +30,7 @@ public class GameIntelligenceSimulation extends Demonstration {
 	 * an entry in the DemoLauncher. The run() method will start the simulation.
 	 */
 	public GameIntelligenceSimulation() {
-		super("Game Intelligence Simulation");
+		super("Ecological Survival Simulation");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoSurvival/introduction.txt")));
 	}
 	

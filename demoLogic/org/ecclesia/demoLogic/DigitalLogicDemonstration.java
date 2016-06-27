@@ -11,7 +11,7 @@ public class DigitalLogicDemonstration extends Demonstration {
 	XORLogicTrainer logicTrainer;
 	
 	public DigitalLogicDemonstration() {
-		super("Digital Logic Trainer");
+		super("Digital Logic Analysis");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLogic/introduction.txt")));
 	}
 	

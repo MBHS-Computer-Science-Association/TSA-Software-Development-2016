@@ -23,7 +23,7 @@ public class LineExtrapolationDemo extends Demonstration {
 	 * entry in the DemoLauncher. The run() method will start the simulation.
 	 */
 	public LineExtrapolationDemo() {
-		super("Line Extrapolation Demonstration");
+		super("Point Extrapolation");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLines/introduction.txt")));
 	}
 

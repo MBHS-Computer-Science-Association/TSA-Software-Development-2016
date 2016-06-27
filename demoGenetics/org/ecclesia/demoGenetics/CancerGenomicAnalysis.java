@@ -29,7 +29,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 	private GeneticsLogic geneticsLogic;
 
 	public CancerGenomicAnalysis() {
-		super("Artificial Neural Networks in Cancer Genetic Studies");
+		super("Cancer Genetic Studies");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoGenetics/introduction.txt")));
 	}
 
