@@ -2,7 +2,7 @@
 	<body style="margin: 3px 1px 3px 8px">
 		<h3>Brute Force Algorithm</h3>
 			<p>
-				The most naive of algorithms, this works by checked each possible weight combination and chooses the best ones. The advantage to this is that it is guarantined to create a working network. The disadvantage is that it is extremely slow; the time of completion grows exponentially with the complexity of the network. Thus it is only suited for the simplest networks. An addition caveat is that the brute force algorithm can only test weight values of some multiple since they can be any of near infinite arbitrary decimal values. To make up for this the greedy algorithm is run after the brute force algorithm or order to optimize results between the multiple of the weights tested.
+				The most naive of algorithms, this works by checked each possible weight combination and chooses the best ones. The advantage of this is unlike greedy algorithm, it is guaranteed to create the best network. The disadvantage is that it is extremely slow; the time of completion grows exponentially with the complexity of the network. Thus it is only suited for the simplest networks. 
 			</p>
 	</body>
 </html>
