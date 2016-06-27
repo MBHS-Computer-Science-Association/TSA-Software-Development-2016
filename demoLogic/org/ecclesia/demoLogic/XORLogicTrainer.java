@@ -11,33 +11,7 @@ import org.ecclesia.neural.Network;
 public class XORLogicTrainer {
 	private Network n;
 
-	public XORLogicTrainer() {		
-		n = new Network(2, 3, 1, 1, true);
-		float sucessRate = 0;
-		int in = 0;
-		float[][][] testCases = new float[4][2][0];
-		testCases[in][0] = new float[] { 0, 0 };
-		testCases[in++][1] = new float[] { 0 };
-		
-		testCases[in][0] = new float[] { 0, 1f };
-		testCases[in++][1] = new float[] { 1 };
-		
-		testCases[in][0] = new float[] { 1f, 0 };
-		testCases[in++][1] = new float[] { 1 };
-		
-		testCases[in][0] = new float[] { 1f, 1f };
-		testCases[in++][1] = new float[] { 0 };
-		float time = System.nanoTime();
-		System.out.println(n.bruteForceWeightImprovement(testCases));
-		boolean learning = false;
-		while (learning) {
-			System.out.println("Loop");
-			learning = n.greedyAlgorithmWeightImprovment(testCases);
-		}
-		sucessRate = getSucessRate();
-		System.out.println(sucessRate);
-		System.out.println((System.nanoTime() - time) / 1000000000.0f / 60.0f);
-	}
+	public XORLogicTrainer() {}
 	
 	public float getSucessRate() {
 		float right = 0;
@@ -55,6 +29,34 @@ public class XORLogicTrainer {
 			}
 		}
 		return (float) right / 4.0f;
+	}
+	
+	/**
+	 * Trains are returns the outputs of all possible xor inputs to the network 
+	 * @return the output of the network in this order (0,0), (0,1), (1,0), (1,1)
+	 */
+	public float[] getData() {
+		n = new Network(2, 4, 1, 1, true);
+		int in = 0;
+		float[][][] testCases = new float[4][2][0];
+		testCases[in][0] = new float[] { 0, 0 };
+		testCases[in++][1] = new float[] { 0 };
+		
+		testCases[in][0] = new float[] { 0, 1f };
+		testCases[in++][1] = new float[] { 1 };
+		
+		testCases[in][0] = new float[] { 1f, 0 };
+		testCases[in++][1] = new float[] { 1 };
+		
+		testCases[in][0] = new float[] { 1f, 1f };
+		testCases[in++][1] = new float[] { 0 };
+		float time = System.nanoTime();
+		System.out.println(n.bruteForceWeightImprovement(testCases));
+		float[] outputs = new float[testCases.length];
+		for(int i=0; i<outputs.length; i++) {
+			outputs[i] = n.getOutput(testCases[i][0])[0];
+		}
+		return outputs;
 	}
 
 }
