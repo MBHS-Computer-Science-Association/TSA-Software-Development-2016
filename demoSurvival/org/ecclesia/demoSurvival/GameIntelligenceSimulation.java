@@ -102,9 +102,9 @@ public class GameIntelligenceSimulation extends Demonstration {
 				}
 			});
 			
-			sliderLabel = new JLabel("Simulation Speed");
+			sliderLabel = new JLabel("Simulation Speed", JLabel.CENTER);
 			
-			generationLabel = new JLabel("Generation: 0");
+			generationLabel = new JLabel("Generation: 0", JLabel.CENTER);
 			speedSlider = new JSlider(5, 1000, 180);
 			
 			speedSlider.addChangeListener(new ChangeListener() {
@@ -121,7 +121,7 @@ public class GameIntelligenceSimulation extends Demonstration {
 			speedSlider.setMajorTickSpacing(100);
 			speedSlider.setPaintTicks(true);
 
-			restartLabel = new JLabel("Number of Restarts: 0");
+			restartLabel = new JLabel("Number of Restarts: 0", JLabel.CENTER);
 
 			this.setLayout(new GridLayout(3, 2, 10, 10));
 			this.add(restartButton);

@@ -34,6 +34,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 		this.setControlPanel(new ControlPanel());
 	}
 	
+	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
 
 		

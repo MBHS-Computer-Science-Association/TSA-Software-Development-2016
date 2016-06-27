@@ -15,8 +15,8 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class Renderer extends JPanel {
 	/**
-	 * Stores all of the points in the simulation.
-	 * Periodically cleared for each test case.
+	 * Stores all of the points in the simulation. Periodically cleared for each
+	 * test case.
 	 */
 	private List<Point> points = new ArrayList<>();
 
@@ -66,7 +66,15 @@ public class Renderer extends JPanel {
 				Point userPoint = new Point(normX, normY, Point.USER);
 
 				addPoint(userPoint);
-				linePredictor.inputPoint(userPoint);
+
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						linePredictor.inputPoint(userPoint);
+					}
+
+				}).start();
 			}
 		});
 
