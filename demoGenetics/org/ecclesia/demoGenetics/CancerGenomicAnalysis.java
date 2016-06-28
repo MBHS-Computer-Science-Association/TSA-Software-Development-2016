@@ -94,7 +94,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
 			add(norm/*, BorderLayout.NORTH*/);
 
-
 			add(new JComponent() {
 				{
 
@@ -141,7 +140,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 									}
 
 									ntSequence[seqIndex] = c;
-									geneticsLogic.changeList(ntSequence);
+									//geneticsLogic.changeList(ntSequence);
 								}
 							});
 
@@ -205,7 +204,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 				}
 				
 			}/*, BorderLayout.SOUTH*/);
-			
 			
 		}
 	}
