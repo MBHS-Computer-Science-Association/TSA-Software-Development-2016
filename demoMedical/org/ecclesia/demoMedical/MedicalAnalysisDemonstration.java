@@ -42,8 +42,20 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 
 	@SuppressWarnings("serial")
 	class ContentPanel extends JPanel {
+		JLabel label;
+		
 		public ContentPanel() {
 			createComponents();
+			
+
+			new Timer(1000 / 60, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					label.setText("Accuracy: " + medicalAnalysis.getAccuracy() + "%");
+					repaint();
+				}
+			}).start();
 		}
 
 		/**
@@ -51,7 +63,7 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 		 */
 		public void createComponents() {
 			setLayout(new BorderLayout(15, 15));
-			JLabel label = new JLabel("Accuracy on 100 Test Cases", JLabel.CENTER);
+			label = new JLabel("Accuracy on 100 Test Cases", JLabel.CENTER);
 			label.setFont(label.getFont().deriveFont(Font.BOLD, 20f));
 			this.add(label, BorderLayout.NORTH);
 			AccuracyGrid grid = new AccuracyGrid();
@@ -76,6 +88,7 @@ public class MedicalAnalysisDemonstration extends Demonstration {
 
 			private void update() {
 				accuracyGrid = medicalAnalysis.getAccuracyData();
+				
 			}
 
 			@Override
