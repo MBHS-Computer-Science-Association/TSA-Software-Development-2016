@@ -6,23 +6,16 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.text.BadLocationException;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
@@ -94,14 +87,43 @@ public class CancerGenomicAnalysis extends Demonstration {
 		}
 
 		private void createComponents() {
-			// this.setLayout(new BorderLayout(0, 15));
+			this.setLayout(new BorderLayout(0, 15));
 
-			JLabel norm = new JLabel("Genetic Oncogene Analysis", JLabel.CENTER);
+			JLabel norm = new JLabel("Cancer Genetic Analysis", JLabel.CENTER);
 			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
 			add(norm, BorderLayout.NORTH);
 
 			add(new JComponent() {
 				{
+					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
+					this.add(fixed, JLabel.CENTER);
+
+					JLabel label2 = new JLabel("ATGCGACCCT");
+					this.add(label2, JLabel.CENTER);
+
+					JLabel results = new JLabel("Results: ");
+
+					JButton generate = new JButton("Generate");
+
+					generate.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String s = "s";
+							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
+									? "mutated genes" : "non-mutated genes"));
+						}
+					});
+
+					this.add(generate, JButton.CENTER);
+					this.add(results, JLabel.CENTER);
+				}
+
+			}, BorderLayout.CENTER);
+
+			add(new JComponent() {
+				{
+
 					setLayout(new SpringLayout());
 					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
 					add(fixed);
@@ -113,7 +135,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 					}
 
 					JRadioButton[][] buttonArray = new JRadioButton[4][10];
-
 					for (int i = 0; i < 10; i++) {
 						ButtonGroup group = new ButtonGroup();
 						for (int j = 0; j < 4; j++) {
@@ -156,13 +177,24 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 					String nts = "ACGT";
 					for (int i = 0; i < 4; i++) {
-						JLabel label = new JLabel("" + nts.charAt(i));
+						JLabel label = new JLabel("                " + nts.charAt(i));
 						this.add(label);
 
 						for (int j = 0; j < 10; j++) {
 							this.add(buttonArray[i][j]);
 						}
 					}
+
+					buttonArray[0][0].setSelected(true);
+					buttonArray[3][1].setSelected(true);
+					buttonArray[2][2].setSelected(true);
+					buttonArray[1][3].setSelected(true);
+					buttonArray[2][4].setSelected(true);
+					buttonArray[0][5].setSelected(true);
+					buttonArray[1][6].setSelected(true);
+					buttonArray[1][7].setSelected(true);
+					buttonArray[1][8].setSelected(true);
+					buttonArray[3][9].setSelected(true);
 
 					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
@@ -181,13 +213,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 			add(results);
 			add(generate);
-//			JTextPane modify = new JTextPane();
-//			modify.setContentType("text/html");
-//		//	modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
-//			modify.setEditable(false);
-//			modify.setBackground(this.getBackground());
-//			// modify.setPreferredSize(new Dimension(0, 0));
-//			add(modify, BorderLayout.CENTER);
 		}
 	}
 
