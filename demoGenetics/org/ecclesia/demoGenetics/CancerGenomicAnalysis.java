@@ -87,39 +87,13 @@ public class CancerGenomicAnalysis extends Demonstration {
 		}
 
 		private void createComponents() {
-			this.setLayout(new BorderLayout(0, 15));
+//			this.setLayout(new BorderLayout(0, 15));
+			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 			JLabel norm = new JLabel("Cancer Genetic Analysis", JLabel.CENTER);
 			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
-			add(norm, BorderLayout.NORTH);
+			add(norm/*, BorderLayout.NORTH*/);
 
-			add(new JComponent() {
-				{
-					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
-					this.add(fixed, JLabel.CENTER);
-
-					JLabel label2 = new JLabel("ATGCGACCCT");
-					this.add(label2, JLabel.CENTER);
-
-					JLabel results = new JLabel("Results: ");
-
-					JButton generate = new JButton("Generate");
-
-					generate.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							String s = "s";
-							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
-									? "mutated genes" : "non-mutated genes"));
-						}
-					});
-
-					this.add(generate, JButton.CENTER);
-					this.add(results, JLabel.CENTER);
-				}
-
-			}, BorderLayout.CENTER);
 
 			add(new JComponent() {
 				{
@@ -198,21 +172,41 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
-			}, BorderLayout.SOUTH);
+			}/*, BorderLayout.CENTER*/);
 			
-			JLabel results = new JLabel("Results: ");
-			JButton generate = new JButton("Generate");
-			
-			
-			generate.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					results.setText("Results: "+ Arrays.toString(geneticsLogic.changeList(ntSequence)));
-				}
-			});
+			add(new JComponent() {
+				{
+					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-			add(results);
-			add(generate);
+					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
+					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+					this.add(fixed, JLabel.CENTER);
+					
+					JLabel label2 = new JLabel("ATGCGACCCT");
+					label2.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+					this.add(label2, JLabel.CENTER);
+					
+					JLabel results = new JLabel("Results: ");
+					results.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+					this.add(results);
+					
+					JButton generate = new JButton("Generate");
+					generate.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+					this.add(generate);
+					
+					generate.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+//							String s = "s";
+							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
+									? "mutated genes" : "non-mutated genes"));
+						}
+					});
+				}
+				
+			}/*, BorderLayout.SOUTH*/);
+			
+			
 		}
 	}
 
