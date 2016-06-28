@@ -80,6 +80,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 	}
 
+	@SuppressWarnings("serial")
 	class ContentPanel extends JPanel {
 
 		protected char[] ntSequence;
@@ -143,12 +144,13 @@ public class CancerGenomicAnalysis extends Demonstration {
 			gbc.weightx = .5;
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			
+			JRadioButton[][] buttonArray = new JRadioButton[4][10];
+
 			add(new JComponent() {
 			{
 
 				setLayout(new SpringLayout());
 				
-				JRadioButton[][] buttonArray = new JRadioButton[4][10];
 				
 				for (int i = 0; i < 10; i++) {
 					ButtonGroup group = new ButtonGroup();
@@ -270,12 +272,33 @@ public class CancerGenomicAnalysis extends Demonstration {
 					guess.setText("ANN's Guess:   " + ((geneticsLogic.changeList(ntSequence)[0] > .555f)?"Mutated (Cancer)":"Non-mutated(No Cancer)"));
 					geneticsLogic.train();
 					ans.setText("Real Answer:   " + ((geneticsLogic.changeList(ntSequence)[0] > .555f)?"Mutated (Cancer)":"Non-mutated(No Cancer)"));
-					train.setText("ANN Trained:   " + trained);
+					train.setText("ANN Trained:   " + (trained?"True":"False"));
 				}
 			});
 
 			add(results, gbc);
 			
+			JButton refresh = new JButton("Refresh");
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(360, 500, 0, 0);
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			refresh.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					guess.setText("ANN's Guess:   ");
+					ans.setText("Real Answer:   ");
+					train.setText("ANN Trained:   ");
+					
+				}
+			});
+			
+			add(refresh, gbc);
 			
 			
 		}

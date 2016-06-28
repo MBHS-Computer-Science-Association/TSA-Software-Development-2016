@@ -35,7 +35,6 @@ public class GeneticsLogic {
 	 */
 	public float[] getResult(float[] seq) {
 		float[] ans = net.getOutput(seq);
-		System.out.println(Arrays.toString(net.getOutput(seq)));
 		return ans;
 	}
 
@@ -97,7 +96,6 @@ public class GeneticsLogic {
 				data[i] = 3.0F;
 			}
 		}
-		//System.out.println(Arrays.toString(data));
 		return getResult(data);
 	}
 	
@@ -105,21 +103,4 @@ public class GeneticsLogic {
 		net = new Network(10, 30, 1, 1, true);
 	}
 	
-	// DELETE LATER BECAUS IT NOT GOOD
-	public static void main(String[] args) throws IOException {
-		GeneticsLogic l = new GeneticsLogic();
-		// l.readTrainCases();
-
-		
-		
-		float[] x = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
-		System.out.println("The non-mutated set without trained network = "+Arrays.toString(l.getResult(x)));
-		l.train();
-		float[] y = { 3.0F, 0.0F, 1.0F, 0.0F, 2.0F, 3.0F, 3.0F, 2.0F, 2.0F, 1.0F };
-		System.err.println("Mutated set with trained network = "+Arrays.toString(l.getResult(y)));
-		float[] z = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
-		System.out.println("Non-mutated with trained network = " + Arrays.toString(l.getResult(z)));
-		
-
-	}
 }
