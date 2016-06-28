@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -86,8 +87,8 @@ public class CancerGenomicAnalysis extends Demonstration {
 		protected char[] ntSequence;
 
 		public ContentPanel() {
-			createComponents();
 			ntSequence = new char[10];
+			createComponents();
 		}
 
 		private void createComponents() {
@@ -145,7 +146,22 @@ public class CancerGenomicAnalysis extends Demonstration {
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			
 			JRadioButton[][] buttonArray = new JRadioButton[4][10];
-
+			
+			ntSequence[0] = 'A';
+			ntSequence[1] = 'T';
+			ntSequence[2] = 'G';
+			ntSequence[3] = 'C';
+			ntSequence[4] = 'G';
+			ntSequence[5] = 'A';
+			ntSequence[6] = 'C';
+			ntSequence[7] = 'C';
+			ntSequence[8] = 'C';
+			ntSequence[9] = 'T';
+			
+			JLabel ngene = new JLabel("" + ntSequence[0] + " " + ntSequence[1] + " " + ntSequence[2] + " " + ntSequence[3] + " " + ntSequence[4] +
+					" " + ntSequence[5] + " " + ntSequence[6] + " "+ ntSequence[7] + " " + ntSequence[8] + " " +ntSequence[9]);
+					
+					
 			add(new JComponent() {
 			{
 
@@ -167,6 +183,9 @@ public class CancerGenomicAnalysis extends Demonstration {
 							public void actionPerformed(ActionEvent e) {
 								char c;
 
+								ngene.setText("" + ntSequence[0] + " " + ntSequence[1] + " " + ntSequence[2] + " " + ntSequence[3] + " " + ntSequence[4] +
+									" " + ntSequence[5] + " " + ntSequence[6] + " "+ ntSequence[7] + " " + ntSequence[8] + " " +ntSequence[9]);
+								
 								switch (index) {
 								case 0:
 									c = 'A';
@@ -184,13 +203,26 @@ public class CancerGenomicAnalysis extends Demonstration {
 								}
 
 								ntSequence[seqIndex] = c;
+								
 							}
+							
 						});
-
 						group.add(button); 
 						
 					}
 				}
+				
+				buttonArray[0][0].setSelected(true);
+				buttonArray[3][1].setSelected(true);
+				buttonArray[2][2].setSelected(true);
+				buttonArray[1][3].setSelected(true);
+				buttonArray[2][4].setSelected(true);
+				buttonArray[0][5].setSelected(true);
+				buttonArray[1][6].setSelected(true);
+				buttonArray[1][7].setSelected(true);
+				buttonArray[1][8].setSelected(true);
+				buttonArray[3][9].setSelected(true);
+				
 
 				String nts = "ACGT";
 				for (int i = 0; i < 4; i++) {
@@ -217,6 +249,17 @@ public class CancerGenomicAnalysis extends Demonstration {
 			gbc.fill = GridBagConstraints.NONE;
 			
 			add(gene, gbc);
+			
+			
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 0, 0, 100);
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			add(ngene, gbc);
+			
 
 			JLabel guess = new JLabel("ANN's Guess:   ");
 
