@@ -17,7 +17,7 @@ public class Network {
 	float[] output;
 	final static float backpropagationLearningRate = 0.25f;
 	final static float greedyAlgorithmRate = 0.05f;
-	final static float bruteForceLearningRate = 2.5f;
+	final static float bruteForceLearningRate = 3.33f;
 	final static float weightsMax = 10;
 	boolean allowsNegativeWeights;
 
@@ -357,6 +357,17 @@ public class Network {
 			return Mathematics.getSigmoidValue(v);
 		} else {
 			return Mathematics.getSigmoidValue(v);
+		}
+	}
+	
+	/**
+	 * Set all Neuron weights to Zero
+	 */
+	public void setAllWeightsToZero() {
+		for(int r=0; r<network.length; r++) {
+			for(int c=0; c<network[r].length; c++) {
+				network[r][c].setsWeightsToZero();
+			}
 		}
 	}
 }

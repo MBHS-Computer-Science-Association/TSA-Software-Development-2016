@@ -136,4 +136,14 @@ public class Neuron {
 			return Mathematics.getSigmoidValue(v);
 		}
 	}
+	
+	/**
+	 * Sets weights to zero
+	 */
+	public void setsWeightsToZero() {
+		for(int i=0; i<weights.length; i++) {
+			weights[i] = 0;
+		}
+		
+	}
 }

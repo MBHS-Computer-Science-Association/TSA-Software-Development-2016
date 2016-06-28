@@ -105,4 +105,22 @@ public class MedicalDataAnalysis {
 	public boolean[][] getAccuracyData() {
 		return board;
 	}
+	
+	/**
+	 * Gets the accuracy in a percent from 0 to 100 based on the number
+	 * of test cases correct.
+	 * @return total true values in the board array
+	 */
+	public int getAccuracy() {
+		int total = 0;
+		
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (board[i][j])
+					total ++;
+			}
+		}
+		
+		return total;
+	}
 }

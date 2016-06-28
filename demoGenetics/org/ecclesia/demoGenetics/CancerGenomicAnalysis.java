@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -125,8 +126,9 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 					setLayout(new SpringLayout());
 
-					JLabel wildType = new JLabel("Wild type (non-mutated) EGFR gene");
-					add(wildType);
+					
+					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
+					add(fixed);
 
 					for (Character c : "ATGCGACCCT".toCharArray()) {
 						JLabel label = new JLabel(c.toString(), JLabel.CENTER);
@@ -199,15 +201,20 @@ public class CancerGenomicAnalysis extends Demonstration {
 					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
 			}, BorderLayout.SOUTH);
+			
+			JLabel results = new JLabel("Results: ");
+			JButton generate = new JButton("Generate");
+			
+			
+			generate.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					results.setText("Results: "+ Arrays.toString(geneticsLogic.changeList(ntSequence)));
+				}
+			});
 
-			// JTextPane modify = new JTextPane();
-			// modify.setContentType("text/html");
-			// // modify.setText(Demonstration.getInstructionsFromFile(new
-			// File("demoGenetics/profile.txt")));
-			// modify.setEditable(false);
-			// modify.setBackground(this.getBackground());
-			// // modify.setPreferredSize(new Dimension(0, 0));
-			// add(modify, BorderLayout.CENTER);
+			add(results);
+			add(generate);
 		}
 	}
 
