@@ -40,6 +40,7 @@ public class GeneticsLogic {
 
 	/**
 	 * Reads from a file of mutated genes and trains the network with them as well as the normal gene
+	 * A returned output > .5 denotes a mutated EGFR gene while < .5 denotes non-mutated gene
 	 */
 	public void train() {
 		float[] mutatedOutput = { 1.0F }; 
@@ -95,7 +96,7 @@ public class GeneticsLogic {
 				data[i] = 3.0F;
 			}
 		}
-		System.out.println(Arrays.toString(data));
+		//System.out.println(Arrays.toString(data));
 		return getResult(data);
 	}
 	
@@ -108,15 +109,16 @@ public class GeneticsLogic {
 		GeneticsLogic l = new GeneticsLogic();
 		// l.readTrainCases();
 
+		
+		
 		float[] x = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
-		System.out.println(Arrays.toString(l.getResult(x)));
+		System.out.println("The non-mutated set without trained network = "+Arrays.toString(l.getResult(x)));
 		l.train();
 		float[] y = { 3.0F, 0.0F, 1.0F, 0.0F, 2.0F, 3.0F, 3.0F, 2.0F, 2.0F, 1.0F };
-		System.err.println(Arrays.toString(l.getResult(y)));
+		System.err.println("Mutated set with trained network = "+Arrays.toString(l.getResult(y)));
 		float[] z = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
-		System.out.println(Arrays.toString(l.getResult(z)));
-		float[] e = { 0.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 1.0F, 3.0F };
-		System.out.println(Arrays.toString(l.getResult(e)));
+		System.out.println("Non-mutated with trained network = " + Arrays.toString(l.getResult(z)));
+		
 
 	}
 }

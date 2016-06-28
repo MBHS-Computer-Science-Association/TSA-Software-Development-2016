@@ -5,7 +5,7 @@
 			frequently mutates and is the baseline cause of lung cancer. For instance, a patient without cancer would have a non-mutated sequence
 			of nucleotides in the EGFR gene, while a patient with lung cancer would have a mutated nucleotide sequence.<br><br><p>In this demo
 			you can modify the sequence of nucleotides in the EGFR gene of a "patient" and a neural network will try to find the pattern in the nucleotide 
-			sequence and identify if he has a mutated set of nucleotides or a non-mutated set. Furthermore, you can train the neural network
+			sequence and identify if the "patient" has a mutated set of nucleotides or a non-mutated set. Furthermore, you can train the neural network
 			to better identify whether or not the patient does have mutations in the EGFR gene.
 	</body>
 </html>
