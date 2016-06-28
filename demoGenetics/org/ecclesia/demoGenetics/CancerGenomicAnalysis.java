@@ -28,6 +28,7 @@ import org.ecclesia.demoTemplate.Demonstration;
  */
 public class CancerGenomicAnalysis extends Demonstration {
 	private GeneticsLogic geneticsLogic;
+	boolean trained = false;
 
 	public CancerGenomicAnalysis() {
 		super("Cancer Genetic Studies");
@@ -60,6 +61,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					geneticsLogic.train();
+					trained = true;
 				}
 			});
 
@@ -67,6 +69,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					geneticsLogic.setNetwork();
+					trained = false;
 				}
 			});
 
@@ -88,38 +91,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 
 		private void createComponents() {
 
-//			add(new JComponent() {
-//				{
-//					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//
-//					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
-//					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-//					this.add(fixed, JLabel.CENTER);
-//					
-//					JLabel label2 = new JLabel("ATGCGACCCT");
-//					label2.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-//					this.add(label2, JLabel.CENTER);
-//					
-//					JLabel results = new JLabel("Results: ");
-//					results.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-//					this.add(results);
-//					
-//					JButton generate = new JButton("Generate");
-//					generate.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-//					this.add(generate);
-//					
-//					generate.addActionListener(new ActionListener() {
-//						@Override
-//						public void actionPerformed(ActionEvent e) {
-//							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] >= 0.5555F
-//									? "mutated genes" : "non-mutated genes"));
-//						}
-//					});
-//				}
-//				
-//			}/*, BorderLayout.SOUTH*/);
-//			
-//		}
 			setLayout(new GridBagLayout());
 			GridBagConstraints gbc = new GridBagConstraints();
 			
@@ -137,26 +108,37 @@ public class CancerGenomicAnalysis extends Demonstration {
 			gbc.gridx = 0;
 			gbc.gridy = 1;
 			gbc.ipady = 0;
-			gbc.insets = new Insets(0, 20, 375, 0);
+			gbc.insets = new Insets(0, 20, 365, 0);
 			gbc.weighty = .5;
 			gbc.weightx = .5;
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			add(explain, gbc);
 			
-			JLabel nonmutated = new JLabel("EGFR non-mutated gene: A T G C G A C C C T");
+			JLabel nonmutated = new JLabel("EGFR Non-Mutated Gene: ");
 			gbc.gridx = 0;
 			gbc.gridy = 1;
 			gbc.ipady = 0;
-			gbc.insets = new Insets(0, 150, 330, 0);
+			gbc.insets = new Insets(50, 15, 0, 0);//0 150 330 0
 			gbc.weighty = .5;
 			gbc.weightx = .5;
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			add(nonmutated, gbc);
+			
+			JLabel nonmutated1 = new JLabel("A T G C G A C C C T");
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(50, 188, 0, 0);//0 150 330 0
+			gbc.weighty = .5;
+			gbc.weightx = .5;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			add(nonmutated1, gbc);
+			 
 		
 			gbc.gridx = 0;
 			gbc.gridy = 1;
 			gbc.ipady = 0;
-			gbc.insets = new Insets(0, 75, 175, 0);
+			gbc.insets = new Insets(0, 75, 190, 0);
 			gbc.weighty = .5;
 			gbc.weightx = .5;
 			gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -167,6 +149,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 				setLayout(new SpringLayout());
 				
 				JRadioButton[][] buttonArray = new JRadioButton[4][10];
+				
 				for (int i = 0; i < 10; i++) {
 					ButtonGroup group = new ButtonGroup();
 					for (int j = 0; j < 4; j++) {
@@ -202,7 +185,8 @@ public class CancerGenomicAnalysis extends Demonstration {
 							}
 						});
 
-						group.add(button);
+						group.add(button); 
+						
 					}
 				}
 
@@ -220,7 +204,79 @@ public class CancerGenomicAnalysis extends Demonstration {
 			}
 		}, gbc);
 		
+			JLabel gene = new JLabel("Current Modified Gene: ");
 
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 0, 0, 390);
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			add(gene, gbc);
+
+			JLabel guess = new JLabel("ANN's Guess:   ");
+
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(150, 0, 0, 335);//210
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			add(guess, gbc);
+			
+			JLabel ans = new JLabel("Real Answer:   ");
+
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(200, 0, 0, 329);//204
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			add(ans, gbc);
+			
+			JLabel train = new JLabel("ANN Trained:   ");
+
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(250, 0, 0, 330); //205
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			add(train, gbc);
+			
+			
+			JButton results = new JButton("Results");
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 330, 0, 0);
+			gbc.weighty = 0;
+			gbc.weightx = 0;
+			gbc.fill = GridBagConstraints.NONE;
+			
+		
+			
+			results.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					guess.setText("ANN's Guess:   " + ((geneticsLogic.changeList(ntSequence)[0] > .555f)?"Mutated (Cancer)":"Non-mutated(No Cancer)"));
+					geneticsLogic.train();
+					ans.setText("Real Answer:   " + ((geneticsLogic.changeList(ntSequence)[0] > .555f)?"Mutated (Cancer)":"Non-mutated(No Cancer)"));
+					train.setText("ANN Trained:   " + trained);
+				}
+			});
+
+			add(results, gbc);
+			
+			
 			
 		}
 	}
