@@ -164,7 +164,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 			
 			add(new JComponent() {
 				{
-					setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
 					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
@@ -185,7 +185,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 					generate.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
+							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] >= 0.5555F
 									? "mutated genes" : "non-mutated genes"));
 						}
 					});
