@@ -140,7 +140,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 									}
 
 									ntSequence[seqIndex] = c;
-									//geneticsLogic.changeList(ntSequence);
+									geneticsLogic.changeList(ntSequence);
 								}
 							});
 
@@ -158,24 +158,13 @@ public class CancerGenomicAnalysis extends Demonstration {
 						}
 					}
 
-					buttonArray[0][0].setSelected(true);
-					buttonArray[3][1].setSelected(true);
-					buttonArray[2][2].setSelected(true);
-					buttonArray[1][3].setSelected(true);
-					buttonArray[2][4].setSelected(true);
-					buttonArray[0][5].setSelected(true);
-					buttonArray[1][6].setSelected(true);
-					buttonArray[1][7].setSelected(true);
-					buttonArray[1][8].setSelected(true);
-					buttonArray[3][9].setSelected(true);
-
 					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
 			}/*, BorderLayout.CENTER*/);
 			
 			add(new JComponent() {
 				{
-					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+					setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
 					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
@@ -196,7 +185,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 					generate.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-//							String s = "s";
 							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
 									? "mutated genes" : "non-mutated genes"));
 						}
