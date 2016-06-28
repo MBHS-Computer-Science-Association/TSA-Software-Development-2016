@@ -58,8 +58,8 @@ public final class DemoLauncher extends JFrame {
 		demoList.add(new LineExtrapolationDemo());
 		demoList.add(new GameIntelligenceSimulation());
 		demoList.add(new MedicalAnalysisDemonstration());
-		demoList.add(new CancerGenomicAnalysis());
 		demoList.add(new DigitalLogicDemonstration());
+		demoList.add(new CancerGenomicAnalysis());
 	}
 
 	/**
