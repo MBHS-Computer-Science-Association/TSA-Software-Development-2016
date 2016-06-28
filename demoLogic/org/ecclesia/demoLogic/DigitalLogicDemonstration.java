@@ -61,9 +61,8 @@ public class DigitalLogicDemonstration extends Demonstration {
 	JTextField cor3;
 	JTextField cor4;
 	List<JTextField> JTextFields = new ArrayList<>();
-	
-	List<JLabel> JLabels = new ArrayList<>();
 
+	List<JLabel> JLabels = new ArrayList<>();
 
 	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
@@ -74,7 +73,8 @@ public class DigitalLogicDemonstration extends Demonstration {
 		public void createComponents() {
 			JButton train = new JButton("Train");
 			JProgressBar bar = new JProgressBar();
-
+			GridLayout gl = new GridLayout(2,1);
+			this.setLayout(gl);
 			new Timer(1000 / 60, new ActionListener() {
 
 				@Override
@@ -180,7 +180,7 @@ public class DigitalLogicDemonstration extends Demonstration {
 			gl.setVgap(35);
 			gl.setHgap(25);
 			this.setLayout(gl);
-			in = new JLabel("Input",JLabel.CENTER);
+			in = new JLabel("Input", JLabel.CENTER);
 			in1 = new JLabel("0,0", JLabel.CENTER);
 			in2 = new JLabel("0,1", JLabel.CENTER);
 			in3 = new JLabel("1,0", JLabel.CENTER);
@@ -228,8 +228,8 @@ public class DigitalLogicDemonstration extends Demonstration {
 				JTextField jtf = JTextFields.get(i);
 				jtf.setHorizontalAlignment(JTextField.CENTER);
 			}
-			
-			for(int i=0; i<JLabels.size(); i++) {
+
+			for (int i = 0; i < JLabels.size(); i++) {
 				JLabel jl = JLabels.get(i);
 				jl.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 			}
