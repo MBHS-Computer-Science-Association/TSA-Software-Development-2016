@@ -1,6 +1,12 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px; font-family: arial">
 		<h1>Instructions</h1>
-			<p>Click within the area to the right! By placing a blue point, you are giving an initial input to the neural network. The red point represents the neural network's prediction of your next point placement. It is constantly By clicking repeatedly from any random point and back again to the same point, you are training the neural network. The green dots are the random points you have inputted into the network, and the orangedot is the predicted output of the whole program after constant training of the component.<br><br><p>Although this demonstration shows our neural network, it is implementing a slow learning curve for accurate   results therefore it would take time to train our program. We have a second demonstration that has a lower learning curve therefore learns faster</p>
+			<p>Click within the area to the right! By placing a blue point, you are giving an initial input to the neural network. The red point represents the neural network's prediction of your next point placement. It is continuously being calculated and each time the position of the prediction updates, the red point will move accordingly. Over time, the neural network's prediction will reach a stability.
+
+			<p>By clicking to place a second blue dot, you are telling the neural network to learn to associate that position with the first blue dot, forming a link between them in an input/output relationship. The neural network will train itself using backpropagation in order to adjust network weights in order to take this new information into account. Sometimes, the network can not quickly find stability in the system, and the red dot appears to move rapidly across the screen or "tremble" in place. As the network performs the backpropagation algorithm, the new predicted location will update as the weights are changed.
+
+			<p>To prepare the network for the next test case, click once more. The neural network will take into account all of the previous data points and try to decrease the error margin on all cases of inputs in order to maximize accuracy. In order to reset changes made to the network rates and clear all history of previous test cases, a reset button has been provided.
+
+			<p>Although this demonstration shows the neural network's capacity to learn, it is not the best example of the amazing work that neural networks can do because of its slow learning curve.</p>
 	</body>
 </html>
