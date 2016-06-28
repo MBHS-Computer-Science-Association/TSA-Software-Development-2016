@@ -125,8 +125,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 				{
 
 					setLayout(new SpringLayout());
-
-					
 					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
 					add(fixed);
 
