@@ -35,6 +35,7 @@ public class GeneticsLogic {
 	 */
 	public float[] getResult(float[] seq) {
 		float[] ans = net.getOutput(seq);
+		System.out.println(Arrays.toString(net.getOutput(seq)));
 		return ans;
 	}
 
