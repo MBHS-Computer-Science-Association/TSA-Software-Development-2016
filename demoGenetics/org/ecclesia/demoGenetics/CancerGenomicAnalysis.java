@@ -1,14 +1,14 @@
 package org.ecclesia.demoGenetics;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -87,111 +87,140 @@ public class CancerGenomicAnalysis extends Demonstration {
 		}
 
 		private void createComponents() {
-//			this.setLayout(new BorderLayout(0, 15));
-			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-			JLabel norm = new JLabel("Cancer Genetic Analysis", JLabel.CENTER);
-			norm.setFont(norm.getFont().deriveFont(Font.BOLD, 20f));
-			add(norm/*, BorderLayout.NORTH*/);
-
-			add(new JComponent() {
-				{
-
-					setLayout(new SpringLayout());
-					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
-					add(fixed);
-
-					for (Character c : "ATGCGACCCT".toCharArray()) {
-						JLabel label = new JLabel(c.toString(), JLabel.CENTER);
-						label.setFont(label.getFont().deriveFont(Font.BOLD));
-						add(label);
-					}
-
-					JRadioButton[][] buttonArray = new JRadioButton[4][10];
-					for (int i = 0; i < 10; i++) {
-						ButtonGroup group = new ButtonGroup();
-						for (int j = 0; j < 4; j++) {
-							JRadioButton button = new JRadioButton();
-							buttonArray[j][i] = button;
-
-							final int index = j;
-							final int seqIndex = i;
-
-							button.addActionListener(new ActionListener() {
-
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									char c;
-
-									switch (index) {
-									case 0:
-										c = 'A';
-										break;
-									case 1:
-										c = 'C';
-										break;
-									case 2:
-										c = 'G';
-										break;
-									case 3:
-									default:
-										c = 'T';
-										break;
-									}
-
-									ntSequence[seqIndex] = c;
-									geneticsLogic.changeList(ntSequence);
-								}
-							});
-
-							group.add(button);
-						}
-					}
-
-					String nts = "ACGT";
-					for (int i = 0; i < 4; i++) {
-						JLabel label = new JLabel("                " + nts.charAt(i));
-						this.add(label);
-
-						for (int j = 0; j < 10; j++) {
-							this.add(buttonArray[i][j]);
-						}
-					}
-
-					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
-				}
-			}/*, BorderLayout.CENTER*/);
+//			add(new JComponent() {
+//				{
+//					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+//
+//					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
+//					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+//					this.add(fixed, JLabel.CENTER);
+//					
+//					JLabel label2 = new JLabel("ATGCGACCCT");
+//					label2.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+//					this.add(label2, JLabel.CENTER);
+//					
+//					JLabel results = new JLabel("Results: ");
+//					results.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+//					this.add(results);
+//					
+//					JButton generate = new JButton("Generate");
+//					generate.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
+//					this.add(generate);
+//					
+//					generate.addActionListener(new ActionListener() {
+//						@Override
+//						public void actionPerformed(ActionEvent e) {
+//							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] >= 0.5555F
+//									? "mutated genes" : "non-mutated genes"));
+//						}
+//					});
+//				}
+//				
+//			}/*, BorderLayout.SOUTH*/);
+//			
+//		}
+			setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.weightx = 0;
+			//gbc.ipady = 10;
+			gbc.insets = new Insets(5, 20, 0, 0);
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			JLabel title = new JLabel("Cancer Genetic Analysis:");
+			title.setFont(title.getFont().deriveFont(Font.BOLD, 20f));
+			add(title, gbc);
+			
+			JLabel explain = new JLabel("Modify the gene below and test to see if the network will predict it as mutated or not");
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 20, 375, 0);
+			gbc.weighty = .5;
+			gbc.weightx = .5;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			add(explain, gbc);
+			
+			JLabel nonmutated = new JLabel("EGFR non-mutated gene: A T G C G A C C C T");
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 150, 330, 0);
+			gbc.weighty = .5;
+			gbc.weightx = .5;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			add(nonmutated, gbc);
+		
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.ipady = 0;
+			gbc.insets = new Insets(0, 75, 175, 0);
+			gbc.weighty = .5;
+			gbc.weightx = .5;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
 			
 			add(new JComponent() {
-				{
-					setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			{
 
-					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
-					fixed.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-					this.add(fixed, JLabel.CENTER);
-					
-					JLabel label2 = new JLabel("ATGCGACCCT");
-					label2.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-					this.add(label2, JLabel.CENTER);
-					
-					JLabel results = new JLabel("Results: ");
-					results.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-					this.add(results);
-					
-					JButton generate = new JButton("Generate");
-					generate.setFont(fixed.getFont().deriveFont(Font.BOLD, 20f));
-					this.add(generate);
-					
-					generate.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] >= 0.5555F
-									? "mutated genes" : "non-mutated genes"));
-						}
-					});
-				}
+				setLayout(new SpringLayout());
 				
-			}/*, BorderLayout.SOUTH*/);
+				JRadioButton[][] buttonArray = new JRadioButton[4][10];
+				for (int i = 0; i < 10; i++) {
+					ButtonGroup group = new ButtonGroup();
+					for (int j = 0; j < 4; j++) {
+						JRadioButton button = new JRadioButton();
+						buttonArray[j][i] = button;
+
+						final int index = j;
+						final int seqIndex = i;
+
+						button.addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								char c;
+
+								switch (index) {
+								case 0:
+									c = 'A';
+									break;
+								case 1:
+									c = 'C';
+									break;
+								case 2:
+									c = 'G';
+									break;
+								case 3:
+								default:
+									c = 'T';
+									break;
+								}
+
+								ntSequence[seqIndex] = c;
+							}
+						});
+
+						group.add(button);
+					}
+				}
+
+				String nts = "ACGT";
+				for (int i = 0; i < 4; i++) {
+					JLabel label = new JLabel("                " + nts.charAt(i));
+					this.add(label);
+
+					for (int j = 0; j < 10; j++) {
+						this.add(buttonArray[i][j]);
+					}
+				}
+
+				SpringUtilities.makeCompactGrid(this, 4, 11, 3, 3, 3, 3);
+			}
+		}, gbc);
+		
+
 			
 		}
 	}
