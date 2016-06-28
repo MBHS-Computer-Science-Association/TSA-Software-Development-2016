@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -65,21 +66,35 @@ public class LineExtrapolationDemo extends Demonstration {
 		 * component.
 		 */
 		public void createComponents() {
-			this.setLayout(new GridLayout(6, 0));
-			this.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-			JLabel l1 = new JLabel("User Point:", JLabel.CENTER);
-			l1.setFont(l1.getFont().deriveFont(Font.BOLD, 12f));
-			JLabel l2 = new JLabel("Predicted Point:", JLabel.CENTER);
-			l2.setFont(l2.getFont().deriveFont(Font.BOLD, 12f));
-			JLabel l3 = new JLabel("Actual Point:", JLabel.CENTER);
-			l3.setFont(l3.getFont().deriveFont(Font.BOLD, 12f));
+			this.add(new JComponent() {
+				{
+					this.setLayout(new GridLayout(6, 0));
+					JLabel l1 = new JLabel("User Point:", JLabel.CENTER);
+					l1.setFont(l1.getFont().deriveFont(Font.BOLD, 12f));
+					JLabel l2 = new JLabel("Predicted Point:", JLabel.CENTER);
+					l2.setFont(l2.getFont().deriveFont(Font.BOLD, 12f));
+					JLabel l3 = new JLabel("Actual Point:", JLabel.CENTER);
+					l3.setFont(l3.getFont().deriveFont(Font.BOLD, 12f));
+					
+					this.add(l1);
+					this.add(d1);
+					this.add(l2);
+					this.add(d2);
+					this.add(l3);
+					this.add(d3);
+				}
+			});
+			
+			JButton reset = new JButton("Reset Network");
+			reset.addActionListener(new ActionListener() {
 
-			this.add(l1);
-			this.add(d1);
-			this.add(l2);
-			this.add(d2);
-			this.add(l3);
-			this.add(d3);
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					linePredictor.generateNetwork();
+				}
+				
+			});
+			this.add(reset);
 		}
 
 		/**
