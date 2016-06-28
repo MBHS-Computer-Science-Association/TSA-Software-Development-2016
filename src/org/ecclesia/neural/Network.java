@@ -361,12 +361,12 @@ public class Network {
 	}
 	
 	/**
-	 * Set all Neuron weights to Zero
+	 * Set all Neuron weights to one
 	 */
-	public void setAllWeightsToZero() {
+	public void setAllWeightsToOne() {
 		for(int r=0; r<network.length; r++) {
 			for(int c=0; c<network[r].length; c++) {
-				network[r][c].setsWeightsToZero();
+				network[r][c].setsWeightsToOne();
 			}
 		}
 	}
