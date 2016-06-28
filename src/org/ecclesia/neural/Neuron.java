@@ -3,6 +3,7 @@ package org.ecclesia.neural;
 import java.util.Random;
 
 import org.ecclesia.neural.util.Mathematics;
+
 /**
  * 
  * @author Sammy Shin, Trevor Thai Kim Nguyen, Christian Duffee
@@ -32,7 +33,8 @@ public class Neuron {
 		Random random = new Random();
 		weights = new float[width];
 		for (int i = 0; i < weights.length; i++) {
-			weights[i] = random.nextFloat() * (allowsNegativeWeights && random.nextBoolean() ? -Network.weightsMax : Network.weightsMax);
+			weights[i] = random.nextFloat()
+					* (allowsNegativeWeights && random.nextBoolean() ? -Network.weightsMax : Network.weightsMax);
 		}
 	}
 
@@ -47,7 +49,8 @@ public class Neuron {
 		weights = parent.getWeights().clone();
 		for (int i = 0; i < weights.length; i++) {
 			if (random.nextFloat() <= mutationChance) {
-				weights[i] = weights[i] + (random.nextBoolean() ? Network.weightsMax : -Network.weightsMax) * changeFactor * random.nextFloat();
+				weights[i] = weights[i] + (random.nextBoolean() ? Network.weightsMax : -Network.weightsMax)
+						* changeFactor * random.nextFloat();
 				weights[i] = truent(weights[i]);
 			}
 		}
@@ -136,14 +139,13 @@ public class Neuron {
 			return Mathematics.getSigmoidValue(v);
 		}
 	}
-	
+
 	/**
-	 * Sets weights to zero
+	 * Sets weights to one
 	 */
-	public void setsWeightsToZero() {
-		for(int i=0; i<weights.length; i++) {
-			weights[i] = 0;
+	public void setsWeightsToOne() {
+		for (int i = 0; i < weights.length; i++) {
+			weights[i] = 1;
 		}
-		
 	}
 }
