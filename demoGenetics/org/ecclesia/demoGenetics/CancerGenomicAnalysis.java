@@ -109,7 +109,6 @@ public class CancerGenomicAnalysis extends Demonstration {
 					generate.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							String s = "s";
 							results.setText("Results: " + (geneticsLogic.changeList(ntSequence)[0] > .5F
 									? "mutated genes" : "non-mutated genes"));
 						}
@@ -167,7 +166,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 									}
 
 									ntSequence[seqIndex] = c;
-									geneticsLogic.changeList(ntSequence);
+									//geneticsLogic.changeList(ntSequence);
 								}
 							});
 
@@ -200,19 +199,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 				}
 			}, BorderLayout.SOUTH);
 			
-			JLabel results = new JLabel("Results: ");
-			JButton generate = new JButton("Generate");
 			
-			
-			generate.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					results.setText("Results: "+ Arrays.toString(geneticsLogic.changeList(ntSequence)));
-				}
-			});
-
-			add(results);
-			add(generate);
 		}
 	}
 
