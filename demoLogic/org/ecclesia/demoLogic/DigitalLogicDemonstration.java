@@ -1,9 +1,12 @@
 package org.ecclesia.demoLogic;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -56,6 +59,7 @@ public class DigitalLogicDemonstration extends Demonstration {
 	JTextField cor2;
 	JTextField cor3;
 	JTextField cor4;
+	List<JTextField> td = new ArrayList<>();
 
 	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
@@ -168,52 +172,75 @@ public class DigitalLogicDemonstration extends Demonstration {
 		}
 
 		public void createComponents() {
-			in = new JLabel("Input:");
+			GridLayout gl = new GridLayout(5, 4);
+			gl.setVgap(35);
+			gl.setHgap(25);
+			this.setLayout(gl);
+			in = new JLabel("Input");
 			in1 = new JLabel("0,0");
 			in2 = new JLabel("0,1");
 			in3 = new JLabel("1,0");
 			in4 = new JLabel("1,1");
 
-			ou = new JLabel("Output:");
+			ou = new JLabel("Output");
 			ou1 = new JTextField("");
 			ou2 = new JTextField("");
 			ou3 = new JTextField("");
 			ou4 = new JTextField("");
+			td.add(ou1);
+			td.add(ou2);
+			td.add(ou3);
+			td.add(ou4);
 
-			rou = new JLabel("Rounded Output:");
+			rou = new JLabel("Rounded Output");
 			rou1 = new JTextField("");
 			rou2 = new JTextField("");
 			rou3 = new JTextField("");
 			rou4 = new JTextField("");
+			td.add(rou1);
+			td.add(rou2);
+			td.add(rou3);
+			td.add(rou4);
 
-			cor = new JLabel("Correct?");
+			cor = new JLabel("Correct");
 			cor1 = new JTextField("");
 			cor2 = new JTextField("");
 			cor3 = new JTextField("");
 			cor4 = new JTextField("");
+			td.add(cor1);
+			td.add(cor2);
+			td.add(cor3);
+			td.add(cor4);
+
+			for (int i = 0; i < td.size(); i++) {
+				JTextField jtf = td.get(i);
+				jtf.setHorizontalAlignment(JTextField.CENTER);
+			}
 			this.add(in);
-			this.add(in1);
-			this.add(in2);
-			this.add(in3);
-			this.add(in4);
-
 			this.add(ou);
-			this.add(ou1);
-			this.add(ou2);
-			this.add(ou3);
-			this.add(ou4);
-
 			this.add(rou);
-			this.add(rou1);
-			this.add(rou2);
-			this.add(rou3);
-			this.add(rou4);
-
 			this.add(cor);
+
+			this.add(in1);
+			this.add(ou1);
+			this.add(rou1);
 			this.add(cor1);
+
+			this.add(in2);
+			this.add(ou2);
+			this.add(rou2);
 			this.add(cor2);
+
+			this.add(in3);
+			this.add(ou3);
+			this.add(rou3);
 			this.add(cor3);
+
+			this.add(in4);
+			this.add(ou4);
+			this.add(rou4);
 			this.add(cor4);
+
 		}
 	}
 }
