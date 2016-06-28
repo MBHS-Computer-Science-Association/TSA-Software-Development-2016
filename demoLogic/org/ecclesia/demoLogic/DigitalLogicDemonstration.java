@@ -10,12 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import org.ecclesia.demoTemplate.Demonstration;
 
 public class DigitalLogicDemonstration extends Demonstration {
 	XORLogicTrainer logicTrainer;
 	ContentPanel content;
+	ControlPanel control;
+
 	public DigitalLogicDemonstration() {
 		super("Digital Logic Analysis");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLogic/introduction.txt")));
@@ -25,8 +28,9 @@ public class DigitalLogicDemonstration extends Demonstration {
 	public void run() {
 		logicTrainer = new XORLogicTrainer();
 		content = new ContentPanel();
+		control = new ControlPanel();
 		this.setContentPanel(content);
-		this.setControlPanel(new ControlPanel());
+		this.setControlPanel(control);
 	}
 
 	JLabel in;
@@ -62,65 +66,85 @@ public class DigitalLogicDemonstration extends Demonstration {
 		public void createComponents() {
 			JButton train = new JButton("Train");
 			JProgressBar bar = new JProgressBar();
+
+			new Timer(1000 / 60, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					bar.validate();
+					bar.repaint();
+				}
+
+			}).start();
+
 			this.add(train);
 			this.add(bar);
 			train.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("PRESSED");
-					bar.setIndeterminate(true);
-					
+					control.validate();
+					control.repaint();
 					XORLogicTrainer xor = new XORLogicTrainer();
-					xor.trainXor();
-					float[] data = xor.getOutput();
-					System.out.println("DONE");
-					ou1.setText(round(data[0]));
-					ou2.setText(round(data[1]));
-					ou3.setText(round(data[2]));
-					ou4.setText(round(data[3]));
 
-					rou1.setText("" + Math.round(data[0]));
-					rou2.setText("" + Math.round(data[1]));
-					rou3.setText("" + Math.round(data[2]));
-					rou4.setText("" + Math.round(data[3]));
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							bar.setIndeterminate(true);
+							xor.trainXor();
+							bar.setIndeterminate(false);
 
-					if (Math.round(data[0]) == 0) {
-						cor1.setText("Correct");
-						System.out.println(cor1.getText());
-						cor1.setForeground(Color.GREEN);
-					} else {
-						System.out.println("Incorrect");
-						cor1.setText("Incorrect");
-						cor1.setForeground(Color.RED);
-					}
+							float[] data = xor.getOutput();
+							ou1.setText(round(data[0]));
+							ou2.setText(round(data[1]));
+							ou3.setText(round(data[2]));
+							ou4.setText(round(data[3]));
 
-					if (Math.round(data[1]) == 1) {
-						cor2.setText("Correct");
-						cor2.setForeground(Color.GREEN);
-					} else {
-						cor2.setText("Incorrect");
-						cor2.setForeground(Color.RED);
-					}
+							rou1.setText("" + Math.round(data[0]));
+							rou2.setText("" + Math.round(data[1]));
+							rou3.setText("" + Math.round(data[2]));
+							rou4.setText("" + Math.round(data[3]));
 
-					if (Math.round(data[2]) == 1) {
-						cor3.setText("Correct");
-						cor3.setForeground(Color.GREEN);
-					} else {
-						cor3.setText("Incorrect");
-						cor3.setForeground(Color.RED);
-					}
+							if (Math.round(data[0]) == 0) {
+								cor1.setText("Correct");
+								cor1.setForeground(Color.GREEN);
+							} else {
+								System.out.println("Incorrect");
+								cor1.setText("Incorrect");
+								cor1.setForeground(Color.RED);
+							}
 
-					if (Math.round(data[3]) == 0) {
-						cor4.setText("Correct");
-						cor4.setForeground(Color.GREEN);
-					} else {
-						cor4.setText("Incorrect");
-						cor4.setForeground(Color.RED);
-					}
-					bar.setIndeterminate(false);
+							if (Math.round(data[1]) == 1) {
+								cor2.setText("Correct");
+								cor2.setForeground(Color.GREEN);
+							} else {
+								cor2.setText("Incorrect");
+								cor2.setForeground(Color.RED);
+							}
 
-					//content.repaint();
+							if (Math.round(data[2]) == 1) {
+								cor3.setText("Correct");
+								cor3.setForeground(Color.GREEN);
+							} else {
+								cor3.setText("Incorrect");
+								cor3.setForeground(Color.RED);
+							}
+
+							if (Math.round(data[3]) == 0) {
+								cor4.setText("Correct");
+								cor4.setForeground(Color.GREEN);
+							} else {
+								cor4.setText("Incorrect");
+								cor4.setForeground(Color.RED);
+							}
+
+							content.validate();
+							content.repaint();
+							control.validate();
+							control.repaint();
+						}
+					}).start();
+
 				}
 			});
 
