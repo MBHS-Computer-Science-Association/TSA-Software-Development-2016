@@ -1,6 +1,7 @@
 package org.ecclesia.demoLogic;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +60,10 @@ public class DigitalLogicDemonstration extends Demonstration {
 	JTextField cor2;
 	JTextField cor3;
 	JTextField cor4;
-	List<JTextField> td = new ArrayList<>();
+	List<JTextField> JTextFields = new ArrayList<>();
+	
+	List<JLabel> JLabels = new ArrayList<>();
+
 
 	@SuppressWarnings("serial")
 	class ControlPanel extends JPanel {
@@ -176,45 +180,58 @@ public class DigitalLogicDemonstration extends Demonstration {
 			gl.setVgap(35);
 			gl.setHgap(25);
 			this.setLayout(gl);
-			in = new JLabel("Input");
-			in1 = new JLabel("0,0");
-			in2 = new JLabel("0,1");
-			in3 = new JLabel("1,0");
-			in4 = new JLabel("1,1");
+			in = new JLabel("Input",JLabel.CENTER);
+			in1 = new JLabel("0,0", JLabel.CENTER);
+			in2 = new JLabel("0,1", JLabel.CENTER);
+			in3 = new JLabel("1,0", JLabel.CENTER);
+			in4 = new JLabel("1,1", JLabel.CENTER);
+			JLabels.add(in);
+			JLabels.add(in1);
+			JLabels.add(in2);
+			JLabels.add(in3);
+			JLabels.add(in4);
 
-			ou = new JLabel("Output");
+			ou = new JLabel("Output", JLabel.CENTER);
+			JLabels.add(ou);
 			ou1 = new JTextField("");
 			ou2 = new JTextField("");
 			ou3 = new JTextField("");
 			ou4 = new JTextField("");
-			td.add(ou1);
-			td.add(ou2);
-			td.add(ou3);
-			td.add(ou4);
+			JTextFields.add(ou1);
+			JTextFields.add(ou2);
+			JTextFields.add(ou3);
+			JTextFields.add(ou4);
 
-			rou = new JLabel("Rounded Output");
+			rou = new JLabel("Rounded Output", JLabel.CENTER);
+			JLabels.add(rou);
 			rou1 = new JTextField("");
 			rou2 = new JTextField("");
 			rou3 = new JTextField("");
 			rou4 = new JTextField("");
-			td.add(rou1);
-			td.add(rou2);
-			td.add(rou3);
-			td.add(rou4);
+			JTextFields.add(rou1);
+			JTextFields.add(rou2);
+			JTextFields.add(rou3);
+			JTextFields.add(rou4);
 
-			cor = new JLabel("Correct");
+			cor = new JLabel("Correct", JLabel.CENTER);
+			JLabels.add(cor);
 			cor1 = new JTextField("");
 			cor2 = new JTextField("");
 			cor3 = new JTextField("");
 			cor4 = new JTextField("");
-			td.add(cor1);
-			td.add(cor2);
-			td.add(cor3);
-			td.add(cor4);
+			JTextFields.add(cor1);
+			JTextFields.add(cor2);
+			JTextFields.add(cor3);
+			JTextFields.add(cor4);
 
-			for (int i = 0; i < td.size(); i++) {
-				JTextField jtf = td.get(i);
+			for (int i = 0; i < JTextFields.size(); i++) {
+				JTextField jtf = JTextFields.get(i);
 				jtf.setHorizontalAlignment(JTextField.CENTER);
+			}
+			
+			for(int i=0; i<JLabels.size(); i++) {
+				JLabel jl = JLabels.get(i);
+				jl.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 			}
 			this.add(in);
 			this.add(ou);
