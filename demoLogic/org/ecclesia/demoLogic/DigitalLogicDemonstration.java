@@ -16,6 +16,8 @@ import org.ecclesia.demoTemplate.Demonstration;
 public class DigitalLogicDemonstration extends Demonstration {
 	XORLogicTrainer logicTrainer;
 	ContentPanel content;
+	ControlPanel control;
+
 	public DigitalLogicDemonstration() {
 		super("Digital Logic Analysis");
 		this.setIntroduction(Demonstration.getInstructionsFromFile(new File("demoLogic/introduction.txt")));
@@ -25,8 +27,9 @@ public class DigitalLogicDemonstration extends Demonstration {
 	public void run() {
 		logicTrainer = new XORLogicTrainer();
 		content = new ContentPanel();
+		control = new ControlPanel();
 		this.setContentPanel(content);
-		this.setControlPanel(new ControlPanel());
+		this.setControlPanel(control);
 	}
 
 	JLabel in;
@@ -68,13 +71,18 @@ public class DigitalLogicDemonstration extends Demonstration {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("PRESSED");
 					bar.setIndeterminate(true);
-					
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					control.validate();
+					control.repaint();
 					XORLogicTrainer xor = new XORLogicTrainer();
 					xor.trainXor();
 					float[] data = xor.getOutput();
-					System.out.println("DONE");
 					ou1.setText(round(data[0]));
 					ou2.setText(round(data[1]));
 					ou3.setText(round(data[2]));
@@ -87,7 +95,6 @@ public class DigitalLogicDemonstration extends Demonstration {
 
 					if (Math.round(data[0]) == 0) {
 						cor1.setText("Correct");
-						System.out.println(cor1.getText());
 						cor1.setForeground(Color.GREEN);
 					} else {
 						System.out.println("Incorrect");
@@ -120,7 +127,10 @@ public class DigitalLogicDemonstration extends Demonstration {
 					}
 					bar.setIndeterminate(false);
 
-					//content.repaint();
+					content.validate();
+					content.repaint();
+					control.validate();
+					control.repaint();
 				}
 			});
 

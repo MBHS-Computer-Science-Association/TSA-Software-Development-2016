@@ -10,7 +10,7 @@ import org.ecclesia.neural.Network;
  */
 public class XORLogicTrainer {
 	private Network n;
-	private float[] output = new float[4];;
+	private float[] output = new float[4];
 	
 	public XORLogicTrainer() {
 	}
@@ -40,7 +40,7 @@ public class XORLogicTrainer {
 	 *         (1,1)
 	 */
 	public void trainXor() {
-		n = new Network(2, 3, 1, 1, true);
+		n = new Network(2, 4, 1, 1, true);
 		int in = 0;
 		float[][][] testCases = new float[4][2][0];
 		testCases[in][0] = new float[] { 0, 0 };
