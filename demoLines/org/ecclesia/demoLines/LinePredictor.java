@@ -14,7 +14,7 @@ public class LinePredictor {
 	private Renderer renderer;
 
 	public LinePredictor() {
-		net = new Network(2, 2, 2, 2, true);
+		generateNetwork();
 		userPoints = new LinkedList<>();
 		renderer = new Renderer(this);
 	}
@@ -73,19 +73,30 @@ public class LinePredictor {
 			testCases.add(testCase);
 			// Feeds in the input vs the desired and will correct
 			// based on the error.
-			for (int i = 0; i < 10000; i++) {
+			for (int i = 0; i < 1000; i++) {
 				for (int k = 0; k < testCases.size(); k++) {
-					Float[] objInput = testCases.get(k)[0];
-					Float[] objOutput = testCases.get(k)[1];
-					float[] in = new float[objInput.length];
-					for (int j = 0; j < objInput.length; j++) {
-						in[j] = objInput[j];
+					try {
+						Thread.sleep(0, 100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-					float[] out = new float[objOutput.length];
-					for (int j = 0; j < objOutput.length; j++) {
-						out[j] = objOutput[j];
+					
+					try{
+						Float[] objInput = testCases.get(k)[0];
+						Float[] objOutput = testCases.get(k)[1];
+						float[] in = new float[objInput.length];
+						for (int j = 0; j < objInput.length; j++) {
+							in[j] = objInput[j];
+						}
+						float[] out = new float[objOutput.length];
+						for (int j = 0; j < objOutput.length; j++) {
+							out[j] = objOutput[j];
+						}
+						net.backPropagation(in, out);						
+					} catch (IndexOutOfBoundsException e) {
+						// Do nothing.
+						System.out.print("");
 					}
-					net.backPropagation(in, out);
 				}
 			}
 		} else {
@@ -100,6 +111,14 @@ public class LinePredictor {
 		}
 	}
 
+	/**
+	 * Generates a new neural network.
+	 */
+	public void generateNetwork() {
+		net = new Network(2, 2, 2, 2, true);
+		testCases.clear();
+	}
+	
 	/**
 	 * Accesses this simulation's graphical renderer panel
 	 * 

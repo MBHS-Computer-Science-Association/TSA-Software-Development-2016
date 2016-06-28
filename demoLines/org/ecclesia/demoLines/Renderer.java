@@ -81,7 +81,7 @@ public class Renderer extends JPanel {
 		/**
 		 * Refreshes at 60 FPS
 		 */
-		new Timer(1000 / 60, new ActionListener() {
+		new Timer(1000 / 24, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -101,25 +101,52 @@ public class Renderer extends JPanel {
 		int componentWidth = this.getWidth();
 		int componentHeight = this.getHeight();
 
-		for (Point p : points) {
-			int x = (int) (p.getX() * componentWidth);
-			int y = (int) (p.getY() * componentHeight);
+		float[][] coordsData = linePredictor.getCoordsData();
+		
+		int[] sequence = {0, 2, 1};
+		
+		for (int i : sequence) {
+			float[] point = coordsData[i];
+			if (point == null)
+				continue;
+			
+			int x = (int) (point[0] * componentWidth);
+			int y = (int) (point[1] * componentHeight);
 			int diameter = 10;
-
-			switch (p.getType()) {
-			case Point.USER:
+			
+			switch (i) {
+			case 0:
+			case 2:
 				g.setColor(Color.BLUE);
 				break;
-			case Point.PREDICTED:
+			case 1:
 				g.setColor(Color.RED);
-				break;
-			case Point.DEBUG:
-				g.setColor(Color.MAGENTA);
 				break;
 			}
 
 			g.fillOval(x - diameter / 2, y - diameter / 2, diameter, diameter);
 		}
+		
+		
+//		for (Point p : points) {
+//			int x = (int) (p.getX() * componentWidth);
+//			int y = (int) (p.getY() * componentHeight);
+//			int diameter = 10;
+//
+//			switch (p.getType()) {
+//			case Point.USER:
+//				g.setColor(Color.BLUE);
+//				break;
+//			case Point.PREDICTED:
+//				g.setColor(Color.RED);
+//				break;
+//			case Point.DEBUG:
+//				g.setColor(Color.MAGENTA);
+//				break;
+//			}
+//
+//			g.fillOval(x - diameter / 2, y - diameter / 2, diameter, diameter);
+//		}
 	}
 
 	/**
