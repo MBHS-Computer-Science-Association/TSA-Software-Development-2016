@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -86,7 +87,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 	class ContentPanel extends JPanel {
 
 		protected char[] ntSequence;
-		
+
 		public ContentPanel() {
 			createComponents();
 			ntSequence = new char[10];
@@ -102,7 +103,7 @@ public class CancerGenomicAnalysis extends Demonstration {
 			add(new JComponent() {
 				{
 					setLayout(new SpringLayout());
-					JLabel fixed = new JLabel("Wild type EGFR gene:");
+					JLabel fixed = new JLabel("Non-mutated EGFR gene:");
 					add(fixed);
 
 					for (Character c : "ATGCGACCCT".toCharArray()) {
@@ -118,16 +119,16 @@ public class CancerGenomicAnalysis extends Demonstration {
 						for (int j = 0; j < 4; j++) {
 							JRadioButton button = new JRadioButton();
 							buttonArray[j][i] = button;
-							
+
 							final int index = j;
 							final int seqIndex = i;
-							
+
 							button.addActionListener(new ActionListener() {
-							
+
 								@Override
 								public void actionPerformed(ActionEvent e) {
 									char c;
-									
+
 									switch (index) {
 									case 0:
 										c = 'A';
@@ -143,21 +144,21 @@ public class CancerGenomicAnalysis extends Demonstration {
 										c = 'T';
 										break;
 									}
-									
+
 									ntSequence[seqIndex] = c;
 									geneticsLogic.changeList(ntSequence);
 								}
 							});
-							
+
 							group.add(button);
 						}
 					}
-					
+
 					String nts = "ACGT";
 					for (int i = 0; i < 4; i++) {
 						JLabel label = new JLabel("" + nts.charAt(i));
 						this.add(label);
-						
+
 						for (int j = 0; j < 10; j++) {
 							this.add(buttonArray[i][j]);
 						}
@@ -166,14 +167,27 @@ public class CancerGenomicAnalysis extends Demonstration {
 					SpringUtilities.makeCompactGrid(this, 5, 11, 3, 3, 3, 3);
 				}
 			}, BorderLayout.SOUTH);
+			
+			JLabel results = new JLabel("Results: ");
+			JButton generate = new JButton("Generate");
+			
+			
+			generate.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					results.setText("Results: "+ Arrays.toString(geneticsLogic.changeList(ntSequence)));
+				}
+			});
 
-			JTextPane modify = new JTextPane();
-			modify.setContentType("text/html");
-			modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
-			modify.setEditable(false);
-			modify.setBackground(this.getBackground());
-			// modify.setPreferredSize(new Dimension(0, 0));
-			add(modify, BorderLayout.CENTER);
+			add(results);
+			add(generate);
+//			JTextPane modify = new JTextPane();
+//			modify.setContentType("text/html");
+//		//	modify.setText(Demonstration.getInstructionsFromFile(new File("demoGenetics/profile.txt")));
+//			modify.setEditable(false);
+//			modify.setBackground(this.getBackground());
+//			// modify.setPreferredSize(new Dimension(0, 0));
+//			add(modify, BorderLayout.CENTER);
 		}
 	}
 
