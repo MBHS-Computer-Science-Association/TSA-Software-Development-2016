@@ -86,7 +86,7 @@ public class GameIntelligenceSimulation extends Demonstration {
 
 			});
 
-			optimizeButton = new JButton("Load Optimized NNs");
+			optimizeButton = new JButton("Enable Backpropagation");
 			optimizeButton.addActionListener(new ActionListener() {
 				
 				@Override
@@ -96,9 +96,9 @@ public class GameIntelligenceSimulation extends Demonstration {
 					
 					// Was enabled before
 					if (enabled)
-						optimizeButton.setText("Load Optimized NNs");
+						optimizeButton.setText("Enable Backpropagation");
 					else
-						optimizeButton.setText("Disable Optimized NNs");
+						optimizeButton.setText("Disable Backpropagation");
 				}
 			});
 			

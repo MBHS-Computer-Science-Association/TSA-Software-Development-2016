@@ -1,6 +1,6 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px; font-family: arial">
-		<h1>Demonstration Info</h1>
+		<h1>Instructions</h1>
 			<p>This program uses a greedy algorithm to train the neural network based on publicly available medical data. This medical data shows various conditions (age, date of treatment, etc.) of patients and whether, after removal, cancer tumors regrew. After training with the "Train" button, users can test the network's efficiency with the "Test" button on different test cases than it was trained with. Green squares represent correct prediction of test cases, and red false. This shows how neural networks can learn from some data and be able to predict the output of input it was never exposed to. This is the true strength and application of neural networks; to be able to predict what it has not been exposed to.
 	</body>
 </html>

@@ -3,6 +3,8 @@
 		<h1>Instructions</h1>
 			<p><font color="green">Malishes</font> are creatures that must search for <font color="blue">food</font> in order to survive. The ability to find <font color="blue">food</font> will determine if a <font color="green">Malish</font> will be able to spread its characteristics.
 
-			<p>Primitive food-seeking models will just travel in a straight line. Others will spin in circles in hopes of finding food. However, in every once in a whileSince this is a genetic algorithm, the <font color="green">Malishes</font> are prone to getting stuck at local minimums (going straight no matter what), however eventually they will learn to search for food. Since this can take several minutes, we have made a button to load this state immediately. </p>
+			<p>Primitive food-seeking models will just travel in a straight line. Others will spin in circles in hopes of finding <font color="blue">food</font>. Others will actually turn in response to food. The population eventually evolves into efficient eaters or it will completely die out.
+
+			<p><strong>Backpropagation will increase the efficiency of evolving the networks.</strong> Enable it to see the difference with effective error minimization.
 	</body>
 </html>

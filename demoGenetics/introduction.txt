@@ -1,11 +1,11 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px; font-family: arial">
-		<h1>Demonstration Info</h1>
-			<p>This demo displays the use of an Artificial Neural Network in the identification of mutation in the EGFR gene, a gene which
-			frequently mutates and is the baseline cause of lung cancer. For instance, a patient without cancer would have a non-mutated sequence
-			of nucleotides in the EGFR gene, while a patient with lung cancer would have a mutated nucleotide sequence.<br><br><p>In this demo
-			you can modify the sequence of nucleotides in the EGFR gene of a "patient" and a neural network will try to find the pattern in the nucleotide 
-			sequence and identify if the "patient" has a mutated set of nucleotides or a non-mutated set. Furthermore, you can train the neural network
+		<h1>Instructions</h1>
+			<p>ANNs are used to identify mutation in genes. A mutated EGFR gene is a baseline cause of lung cancer and is a relatively common mutation. Some minor mutations may not result in lung cancer, so doctors need to determine which mutations may be harmful.
+
+			<p>Doctors would be able to enter in the nucleotide sequence at the locus of EGFR for one of their patients. Training the neural network will expose the network to a file of known malignant mutations and let it discover patterns. Hitting the results button will return the network's prediction on whether the gene will be cancerous. Furthermore, you can train the neural network
 			to better identify whether or not the patient does have mutations in the EGFR gene.
+
+			<p><strong>Note:</strong> Do not use this as professional medical advice. It is not perfect 100% of the time.
 	</body>
 </html>
