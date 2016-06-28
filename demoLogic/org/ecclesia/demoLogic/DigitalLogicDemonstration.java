@@ -73,7 +73,8 @@ public class DigitalLogicDemonstration extends Demonstration {
 		public void createComponents() {
 			JButton train = new JButton("Train");
 			JProgressBar bar = new JProgressBar();
-
+			GridLayout gl = new GridLayout(2,1);
+			this.setLayout(gl);
 			new Timer(1000 / 60, new ActionListener() {
 
 				@Override
