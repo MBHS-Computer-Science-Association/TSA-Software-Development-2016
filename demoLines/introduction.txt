@@ -1,7 +1,7 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px; font-family: arial">
 		<h1>Instructions</h1>
-			<p>Click within the area to the right! By placing a blue point, you are giving an initial input to the neural network. The red point represents the neural network's prediction of your next point placement. It is continuously being calculated and each time the position of the prediction updates, the red point will move accordingly. Over time, the neural network's prediction will reach a stability.
+			<p>Click on the area to the right! Placing a blue point gives the ANN an initial input. The ANN predicts . It is continuously being calculated and each time the position of the prediction updates, the red point will move accordingly. Over time, the neural network's prediction will reach a stability.
 
 			<p>By clicking to place a second blue dot, you are telling the neural network to learn to associate that position with the first blue dot, forming a link between them in an input/output relationship. The neural network will train itself using backpropagation in order to adjust network weights in order to take this new information into account. Sometimes, the network can not quickly find stability in the system, and the red dot appears to move rapidly across the screen or "tremble" in place. As the network performs the backpropagation algorithm, the new predicted location will update as the weights are changed.
 

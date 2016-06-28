@@ -1,8 +1,8 @@
 <html>
 	<body style="margin: 3px 1px 3px 8px; font-family: arial">
-	<center>
-		<h1>Demonstration Info</h1>
-			<p>This demo presents you with the training of a neural network. In this presentation we have created creatures dubbed <font color="green">Malishes (the green circles)</font> which need to find <font color="blue">food (the squares)</font> to stay alive and reproduce. If they are bad at finding food, they die, as in the Darwinian evolution model. The angle of the  <font color="blue">food </font> in the <font color="green">Malishes'</font> line of sight is passed into the neural network as the input, and whether the <font color="green">Malishes</font> turn is the output. Since this is a genetic algorithm, the <font color="green">Malishes</font> are prone to getting stuck at local minimums (going straight no matter what), however eventually they will learn to search for food. Since this can take several minutes, we have made a button to load this state immediately. </p>
-			</center>
+		<h1>Instructions</h1>
+			<p><font color="green">Malishes</font> are creatures that must search for <font color="blue">food</font> in order to survive. The ability to find <font color="blue">food</font> will determine if a <font color="green">Malish</font> will be able to spread its characteristics.
+
+			<p>Primitive food-seeking models will just travel in a straight line. Others will spin in circles in hopes of finding food. However, in every once in a whileSince this is a genetic algorithm, the <font color="green">Malishes</font> are prone to getting stuck at local minimums (going straight no matter what), however eventually they will learn to search for food. Since this can take several minutes, we have made a button to load this state immediately. </p>
 	</body>
 </html>
