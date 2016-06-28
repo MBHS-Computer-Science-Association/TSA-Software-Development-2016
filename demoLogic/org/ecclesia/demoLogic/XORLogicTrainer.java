@@ -54,6 +54,7 @@ public class XORLogicTrainer {
 
 		testCases[in][0] = new float[] { 1f, 1f };
 		testCases[in++][1] = new float[] { 0 };
+		n.setAllWeightsToOne();
 		n.bruteForceWeightImprovement(testCases);
 		for (int i = 0; i < output.length; i++) {
 			output[i] = n.getOutput(testCases[i][0])[0];
