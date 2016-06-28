@@ -77,9 +77,8 @@ public final class DemoLauncher extends JFrame {
 			windowSize = new Dimension(630, 950);
 			this.setResizable(false);
 		} else {
-			windowSize = new Dimension(600, 800);
+			windowSize = new Dimension(975, 750);
 			this.setResizable(true);
-			// this.pack();
 		}
 		initializeWindow(windowSize);
 		createComponents();
